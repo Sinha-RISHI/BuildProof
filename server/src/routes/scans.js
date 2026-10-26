@@ -30,7 +30,7 @@
 
 import { Router } from 'express';
 import path from 'path';
-import { rm, unlink, mkdir } from 'fs/promises';
+import { rm, unlink, mkdir, readFile } from 'fs/promises';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
@@ -38,6 +38,7 @@ import { uploadMiddleware } from '../services/upload.js';
 import { extractZip } from '../services/extract.js';
 import { createScan, updateScan, getScan } from '../services/scanStore.js';
 import { scanProject } from '../services/scanner.js';
+import { runDockerRunner } from '../services/dockerRunner.js';
 
 const router = Router();
 
@@ -151,6 +152,16 @@ router.post('/', (req, res, next) => {
         scanResult,
       });
 
+      // Trigger restricted Docker runner in background (Milestone M3)
+      if (req.headers['x-skip-docker'] !== 'true') {
+        // Small delay to allow immediate status query to observe static_scan_complete
+        setTimeout(() => {
+          runDockerRunner(scanId, projectDir, scanResult, { scanDir }).catch((err) => {
+            console.error(`Background Docker runner error on scan ${scanId}:`, err);
+          });
+        }, 100);
+      }
+
       // Respond with 202 Accepted (ARCHITECTURE.md §7)
       return res.status(202).json({
         scanId,
@@ -195,10 +206,35 @@ router.get('/:id', (req, res) => {
     status: scan.status,
     stage: scan.stage ?? null,
     projectName: scan.projectName ?? null,
+    verdict: scan.verdict ?? null,
     checks: scan.checks ?? [],
     scanResult: scan.scanResult ?? null,
     createdAt: scan.createdAt,
   });
+});
+
+// ── GET /api/scans/:id/logs/:checkId ─────────────────────────────────────────
+// Returns raw log text for a specific check (ARCHITECTURE.md §7).
+router.get('/:id/logs/:checkId', async (req, res) => {
+  const { id, checkId } = req.params;
+  const scan = getScan(id);
+  if (!scan) {
+    return res.status(404).json({ error: 'Scan not found' });
+  }
+
+  // 1. Check in-memory logs
+  if (scan.logs && scan.logs[checkId]) {
+    return res.type('text/plain').send(scan.logs[checkId]);
+  }
+
+  // 2. Fallback to logs/<checkId>.log on disk
+  const logFile = path.join(SCANS_DATA_DIR, id, 'logs', `${checkId}.log`);
+  try {
+    const content = await readFile(logFile, 'utf8');
+    return res.type('text/plain').send(content);
+  } catch (_) {
+    return res.status(404).json({ error: `Log for check "${checkId}" not found` });
+  }
 });
 
 export default router;
