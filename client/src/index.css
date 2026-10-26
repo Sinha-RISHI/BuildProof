@@ -1,0 +1,14 @@
+/*
+ * index.css
+ *
+ * What this file does:
+ *   Loads Tailwind CSS v4 into the project.
+ *   This single line replaces all the old @tailwind base/components/utilities
+ *   directives from earlier Tailwind versions.
+ *
+ * How it fits into BuildProof:
+ *   Every Tailwind utility class we use in our components (e.g. bg-gray-900,
+ *   text-white, rounded-xl) is made available through this import.
+ */
+
+@import "tailwindcss";
