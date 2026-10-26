@@ -37,6 +37,7 @@ import { writeFile, mkdir } from 'fs/promises';
 import { checkDocker } from './dockerCheck.js';
 import { updateScan, getScan } from './scanStore.js';
 import { checkContainment } from './scanner.js';
+import { generateReports } from './report.js';
 
 // ── Default configuration ────────────────────────────────────────────────────
 const DEFAULT_IMAGE              = 'node:20-alpine';
@@ -751,6 +752,25 @@ export async function runDockerRunner(scanId, projectDir, scanResult, options = 
       installCheck: dockerOutcome.install,
       testsCheck: dockerOutcome.tests,
     });
+
+    // Stage 3: Generate report.json and report.html (Milestone M4)
+    const scanDir = options.scanDir || path.dirname(path.resolve(projectDir));
+    const updatedRecord = getScan(scanId) || {
+      scanId,
+      projectName: scanResult?.metadata?.projectName,
+      ...dockerOutcome,
+    };
+
+    try {
+      await generateReports(scanId, scanDir, updatedRecord);
+    } catch (reportErr) {
+      updateScan(scanId, {
+        status: 'error',
+        stage: 'error',
+        error: `Report generation failed: ${reportErr.message}`,
+      });
+      throw reportErr;
+    }
 
     return dockerOutcome;
   } catch (err) {

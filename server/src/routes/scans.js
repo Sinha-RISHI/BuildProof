@@ -237,4 +237,54 @@ router.get('/:id/logs/:checkId', async (req, res) => {
   }
 });
 
+// ── GET /api/scans/:id/report.json ───────────────────────────────────────────
+// Downloads the structured machine-readable JSON report (ARCHITECTURE.md §7).
+router.get('/:id/report.json', async (req, res) => {
+  const { id } = req.params;
+  if (!id || id.includes('..') || id.includes('/') || id.includes('\\')) {
+    return res.status(400).json({ error: 'Invalid scan ID' });
+  }
+
+  const scan = getScan(id);
+  const reportPath = path.join(SCANS_DATA_DIR, id, 'report.json');
+
+  try {
+    const content = await readFile(reportPath, 'utf8');
+    const safeName = (scan?.projectName || 'project').replace(/[^a-zA-Z0-9_-]/g, '_');
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Disposition', `attachment; filename="buildproof-report-${safeName}-${id.slice(0, 8)}.json"`);
+    return res.send(content);
+  } catch (_) {
+    if (!scan) {
+      return res.status(404).json({ error: 'Scan not found' });
+    }
+    return res.status(409).json({ error: 'Report is not ready yet or scan is still in progress' });
+  }
+});
+
+// ── GET /api/scans/:id/report.html ───────────────────────────────────────────
+// Opens or downloads the self-contained standalone HTML report (ARCHITECTURE.md §7).
+router.get('/:id/report.html', async (req, res) => {
+  const { id } = req.params;
+  if (!id || id.includes('..') || id.includes('/') || id.includes('\\')) {
+    return res.status(400).json({ error: 'Invalid scan ID' });
+  }
+
+  const scan = getScan(id);
+  const reportPath = path.join(SCANS_DATA_DIR, id, 'report.html');
+
+  try {
+    const content = await readFile(reportPath, 'utf8');
+    const safeName = (scan?.projectName || 'project').replace(/[^a-zA-Z0-9_-]/g, '_');
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Content-Disposition', `inline; filename="buildproof-report-${safeName}-${id.slice(0, 8)}.html"`);
+    return res.send(content);
+  } catch (_) {
+    if (!scan) {
+      return res.status(404).json({ error: 'Scan not found' });
+    }
+    return res.status(409).json({ error: 'Report is not ready yet or scan is still in progress' });
+  }
+});
+
 export default router;

@@ -438,7 +438,7 @@ Update this table as work progresses. Do not mark something done until it has be
 | M1 Upload and safe extract | Done (Step 4 — 15 automated tests passed, all security rules verified) |
 | M2 Scanner | Done (Step 5 — 20 automated tests passed, all static checks & security rules verified) |
 | M3 Docker runner | Done (Step 6 — 21 automated tests passed, real Docker execution on node:20-alpine verified) |
-| M4 Report generator | Planned |
+| M4 Report generator | Done (Step 7 — 26 automated tests passed, JSON/HTML generation & API verified) |
 | M5 React dashboard | Done (Step 2 commit `2c96bcd`, health endpoint + status cards working) |
 | M6 Demo rehearsal | Planned |
 

@@ -638,7 +638,7 @@ test('D21 – API: Background Docker run completes, GET /api/scans/:id and GET /
     }
   }
 
-  assert.equal(finalStatus, 'reporting');
+  assert.ok(finalStatus === 'reporting' || finalStatus === 'done', 'Final status must be reporting or done');
   assert.equal(pollBody.verdict, 'ready');
 
   const installCheck = pollBody.checks.find((c) => c.id === 'install');
