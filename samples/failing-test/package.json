@@ -1,0 +1,14 @@
+{
+  "name": "failing-test",
+  "version": "1.0.0",
+  "description": "A sample project used to demonstrate a test failure in BuildProof.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

@@ -433,11 +433,20 @@ Update this table as work progresses. Do not mark something done until it has be
 | Item | Status |
 |---|---|
 | Docker installed and working on dev laptop | Done (hello-world ran) |
-| Repo and folders created | Planned |
-| Sample projects | Planned |
+| Repo and folders created | Done (Step 1 commit `9319a61`) |
+| Sample projects | Done (Step 3 — all 4 created, Docker-verified, ZIPs inspected) |
 | M1 Upload and safe extract | Planned |
 | M2 Scanner | Planned |
 | M3 Docker runner | Planned |
 | M4 Report generator | Planned |
-| M5 React dashboard | Planned |
+| M5 React dashboard | Done (Step 2 commit `2c96bcd`, health endpoint + status cards working) |
 | M6 Demo rehearsal | Planned |
+
+**Sample Docker verification results (Step 3):**
+
+| Sample | Install exit | Tests exit | Verdict |
+|---|---|---|---|
+| `good-app` | 0 (pass) | 0 (6/6 pass) | Ready for handover |
+| `lockfile-mismatch` | 1 (fail — `Missing: left-pad@1.3.0 from lock file`) | Not Verified | Not ready |
+| `failing-test` | 0 (pass) | 1 (4 pass, 1 fail — `'Hello' !== 'HELLO'`) | Not ready |
+| `no-tests-no-readme` | 0 (pass) | Not Verified (placeholder script) | Partially verified |
