@@ -10,6 +10,10 @@
  *   Every HTTP request from the browser (or from curl during testing) comes
  *   here first. Express then forwards it to the right route handler.
  *
+ * Exports:
+ *   The `app` object is exported so that test files can import it and start
+ *   the server on a random port without touching port 4000.
+ *
  * Run with:
  *   npm run dev   — starts the server and auto-restarts when files change
  *   npm start     — starts the server once, no auto-restart
@@ -17,9 +21,11 @@
 
 import express from 'express';
 import cors from 'cors';
+import { fileURLToPath } from 'url';
 
 // Import our route modules
 import healthRouter from './routes/health.js';
+import scansRouter  from './routes/scans.js';
 
 // -------------------------------------------------------------------
 // Create the Express application
@@ -40,6 +46,9 @@ app.use(express.json());
 
 // Health check: GET /api/health
 app.use('/api/health', healthRouter);
+
+// Scan lifecycle: POST /api/scans  (Step 4: upload + extraction)
+app.use('/api/scans', scansRouter);
 
 // -------------------------------------------------------------------
 // 404 handler
@@ -66,10 +75,19 @@ app.use((err, req, res, next) => {
 });
 
 // -------------------------------------------------------------------
-// Start listening
+// Start listening — only when this file is run directly (not imported
+// by the test suite, which starts its own server on a random port).
 // -------------------------------------------------------------------
-const PORT = process.env.PORT ?? 4000;
+const __filename = fileURLToPath(import.meta.url);
 
-app.listen(PORT, () => {
-  console.log(`BuildProof server running on http://localhost:${PORT}`);
-});
+// import.meta.url gives the URL of this file; process.argv[1] gives the
+// path of the entry-point file Node.js was asked to run.
+// They match when this IS the entry point, and differ when it is imported.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const PORT = process.env.PORT ?? 4000;
+  app.listen(PORT, () => {
+    console.log(`BuildProof server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

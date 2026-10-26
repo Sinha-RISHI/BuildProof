@@ -435,7 +435,7 @@ Update this table as work progresses. Do not mark something done until it has be
 | Docker installed and working on dev laptop | Done (hello-world ran) |
 | Repo and folders created | Done (Step 1 commit `9319a61`) |
 | Sample projects | Done (Step 3 — all 4 created, Docker-verified, ZIPs inspected) |
-| M1 Upload and safe extract | Planned |
+| M1 Upload and safe extract | Done (Step 4 — 15 automated tests passed, all security rules verified) |
 | M2 Scanner | Planned |
 | M3 Docker runner | Planned |
 | M4 Report generator | Planned |

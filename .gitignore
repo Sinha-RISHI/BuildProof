@@ -15,3 +15,8 @@ dist/
 # BUT keep the .gitkeep file so Git tracks the empty folder
 server/data/scans/*
 !server/data/scans/.gitkeep
+
+# Ignore the temporary upload folder where multer stores ZIPs before extraction
+server/data/uploads/*
+!server/data/uploads/.gitkeep
+
