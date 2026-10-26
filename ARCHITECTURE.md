@@ -436,7 +436,7 @@ Update this table as work progresses. Do not mark something done until it has be
 | Repo and folders created | Done (Step 1 commit `9319a61`) |
 | Sample projects | Done (Step 3 — all 4 created, Docker-verified, ZIPs inspected) |
 | M1 Upload and safe extract | Done (Step 4 — 15 automated tests passed, all security rules verified) |
-| M2 Scanner | Planned |
+| M2 Scanner | Done (Step 5 — 20 automated tests passed, all static checks & security rules verified) |
 | M3 Docker runner | Planned |
 | M4 Report generator | Planned |
 | M5 React dashboard | Done (Step 2 commit `2c96bcd`, health endpoint + status cards working) |

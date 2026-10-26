@@ -36,7 +36,8 @@ import { fileURLToPath } from 'url';
 
 import { uploadMiddleware } from '../services/upload.js';
 import { extractZip } from '../services/extract.js';
-import { createScan, updateScan } from '../services/scanStore.js';
+import { createScan, updateScan, getScan } from '../services/scanStore.js';
+import { scanProject } from '../services/scanner.js';
 
 const router = Router();
 
@@ -138,8 +139,17 @@ router.post('/', (req, res, next) => {
       // Clean up the temp upload now that extraction is done
       await safeDelete(tempFilePath);
 
-      // Advance the scan state to 'queued' (ready for the scanner in Step 5)
-      updateScan(scanId, { status: 'queued' });
+      // Advance scan state to 'scanning' and run the static scanner (Milestone M2)
+      updateScan(scanId, { status: 'scanning' });
+      const scanResult = await scanProject(projectDir);
+
+      // Store static findings and advance to 'installing' (Milestone M3 Docker runner)
+      updateScan(scanId, {
+        status: 'installing',
+        stage: 'static_scan_complete',
+        checks: scanResult.checks,
+        scanResult,
+      });
 
       // Respond with 202 Accepted (ARCHITECTURE.md §7)
       return res.status(202).json({
@@ -155,7 +165,7 @@ router.post('/', (req, res, next) => {
         },
       });
     } catch (extractErr) {
-      // Extraction failed — clean up everything we created
+      // Extraction or scan failed — clean up everything we created
       await safeDelete(tempFilePath);
       await safeDelete(scanDir, true); // remove the partial scan directory
 
@@ -169,6 +179,25 @@ router.post('/', (req, res, next) => {
 
       return next(extractErr);
     }
+  });
+});
+
+// ── GET /api/scans/:id ───────────────────────────────────────────────────────
+// Returns current scan status and checks accumulated so far (ARCHITECTURE.md §7).
+router.get('/:id', (req, res) => {
+  const scan = getScan(req.params.id);
+  if (!scan) {
+    return res.status(404).json({ error: 'Scan not found' });
+  }
+
+  return res.json({
+    scanId: scan.scanId,
+    status: scan.status,
+    stage: scan.stage ?? null,
+    projectName: scan.projectName ?? null,
+    checks: scan.checks ?? [],
+    scanResult: scan.scanResult ?? null,
+    createdAt: scan.createdAt,
   });
 });
 
