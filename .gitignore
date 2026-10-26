@@ -1,0 +1,17 @@
+# Ignore all installed packages (these are downloaded by npm, not stored in Git)
+node_modules/
+
+# Ignore production build output
+dist/
+
+# Ignore environment variable files (they contain secrets)
+.env
+.env.*
+
+# Ignore all log files
+*.log
+
+# Ignore everything inside the scans folder (runtime data created during scanning)
+# BUT keep the .gitkeep file so Git tracks the empty folder
+server/data/scans/*
+!server/data/scans/.gitkeep
