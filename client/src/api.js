@@ -2,35 +2,152 @@
  * api.js
  *
  * What this file does:
- *   This is the ONLY place in the frontend that communicates with the
- *   BuildProof backend server. All fetch() calls live here.
+ *   Centralized API client for all BuildProof backend communications.
+ *   Provides clean, typed-like helper functions for:
+ *     - Health check (GET /api/health)
+ *     - Scan upload (POST /api/scans)
+ *     - Scan status polling (GET /api/scans/:id)
+ *     - Check log fetching (GET /api/scans/:id/logs/:checkId)
+ *     - Report URLs (GET /api/scans/:id/report.json and report.html)
  *
- * How it fits into BuildProof:
- *   Other components (like App.jsx) call these functions instead of
- *   calling fetch() directly. That way, if the API ever changes, we only
- *   have to update one file, not hunt through every component.
- *
- * Note on the URL:
- *   We use "/api/health" (a path, not a full URL). Vite's dev-server proxy
- *   (configured in vite.config.js) automatically forwards any /api request
- *   to the backend at http://localhost:4000. In production, the real server
- *   would serve both the frontend and the API from the same host.
+ * Security & Reliability:
+ *   - Uses relative paths (/api/...) proxied by Vite in dev and served
+ *     directly in production.
+ *   - Parses JSON error bodies from the backend (e.g. { error: "..." }).
+ *   - Never evaluates or executes uploaded content.
  */
 
 /**
  * getHealth()
- *
- * Calls GET /api/health on the backend.
- * Returns the parsed JSON object on success.
- * Throws a clear Error on network failure or non-OK HTTP status.
+ * Checks backend server and Docker sandbox connectivity.
+ * @returns {Promise<{ ok: boolean, service: string, time: string, docker: { reachable: boolean, version: string|null, error: string|null } }>}
  */
 export async function getHealth() {
-  const response = await fetch('/api/health');
+  try {
+    const res = await fetch('/api/health');
+    if (!res.ok) {
+      throw new Error(`Server returned HTTP ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    return {
+      ok: false,
+      service: 'buildproof-server',
+      time: new Date().toISOString(),
+      docker: {
+        reachable: false,
+        version: null,
+        error: err.message || 'Cannot reach BuildProof server',
+      },
+    };
+  }
+}
 
-  if (!response.ok) {
-    // response.ok is false for status codes like 404, 500, etc.
-    throw new Error(`Backend returned status ${response.status}`);
+/**
+ * uploadScan(file)
+ * Sends a ZIP archive to POST /api/scans using multipart/form-data.
+ * Field name is strictly "project" as required by ARCHITECTURE.md §7.
+ *
+ * @param {File} file
+ * @returns {Promise<{ scanId: string, status: string, message: string, projectName: string, scanPath: string, meta: object }>}
+ */
+export async function uploadScan(file) {
+  if (!file) {
+    throw new Error('Please select a ZIP file to upload.');
   }
 
-  return response.json();
+  if (!file.name.toLowerCase().endsWith('.zip')) {
+    throw new Error('Only .zip archives are supported.');
+  }
+
+  // 50 MB client-side limit check
+  const MAX_BYTES = 50 * 1024 * 1024;
+  if (file.size > MAX_BYTES) {
+    throw new Error('File exceeds the 50 MB size limit.');
+  }
+
+  const formData = new FormData();
+  formData.append('project', file);
+
+  const res = await fetch('/api/scans', {
+    method: 'POST',
+    body: formData,
+  });
+
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error(`Upload failed with status ${res.status}`);
+  }
+
+  if (!res.ok) {
+    throw new Error(data.error || `Upload failed with status ${res.status}`);
+  }
+
+  return data;
+}
+
+/**
+ * getScan(scanId)
+ * Fetches current scan record from GET /api/scans/:id.
+ *
+ * @param {string} scanId
+ * @returns {Promise<{ scanId: string, status: string, stage: string|null, projectName: string|null, verdict: string|null, checks: Array, scanResult: object|null, createdAt: string }>}
+ */
+export async function getScan(scanId) {
+  if (!scanId) {
+    throw new Error('Scan ID is required');
+  }
+
+  const res = await fetch(`/api/scans/${encodeURIComponent(scanId)}`);
+
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error(`Failed to load scan with status ${res.status}`);
+  }
+
+  if (!res.ok) {
+    throw new Error(data.error || `Failed to fetch scan (HTTP ${res.status})`);
+  }
+
+  return data;
+}
+
+/**
+ * getScanLog(scanId, checkId)
+ * Fetches raw plain text log for a given check (e.g. 'install' or 'tests').
+ *
+ * @param {string} scanId
+ * @param {string} checkId
+ * @returns {Promise<string>}
+ */
+export async function getScanLog(scanId, checkId) {
+  if (!scanId || !checkId) return '';
+
+  try {
+    const res = await fetch(`/api/scans/${encodeURIComponent(scanId)}/logs/${encodeURIComponent(checkId)}`);
+    if (!res.ok) {
+      return `[No log available for check "${checkId}" (HTTP ${res.status})]`;
+    }
+    return await res.text();
+  } catch (err) {
+    return `[Failed to retrieve log: ${err.message}]`;
+  }
+}
+
+/**
+ * Helper to get the download URL for JSON report
+ */
+export function getReportJsonUrl(scanId) {
+  return `/api/scans/${encodeURIComponent(scanId)}/report.json`;
+}
+
+/**
+ * Helper to get the URL for HTML report (viewable or downloadable)
+ */
+export function getReportHtmlUrl(scanId) {
+  return `/api/scans/${encodeURIComponent(scanId)}/report.html`;
 }

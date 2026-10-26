@@ -1,14 +1,65 @@
-/*
- * index.css
- *
- * What this file does:
- *   Loads Tailwind CSS v4 into the project.
- *   This single line replaces all the old @tailwind base/components/utilities
- *   directives from earlier Tailwind versions.
- *
- * How it fits into BuildProof:
- *   Every Tailwind utility class we use in our components (e.g. bg-gray-900,
- *   text-white, rounded-xl) is made available through this import.
- */
-
 @import "tailwindcss";
+
+@theme {
+  --color-surface-container-lowest: #0a0e16;
+  --color-surface-container-low: #181c24;
+  --color-surface-container: #1c2028;
+  --color-surface-container-high: #262a33;
+  --color-surface-container-highest: #31353e;
+  --color-surface-dim: #0f131c;
+  --color-surface: #0f131c;
+  --color-surface-variant: #31353e;
+  --color-background: #0f131c;
+
+  --color-primary: #adc6ff;
+  --color-primary-container: #4d8eff;
+  --color-primary-fixed: #d8e2ff;
+  --color-primary-fixed-dim: #adc6ff;
+  --color-on-primary: #002e6a;
+  --color-on-primary-container: #00285d;
+
+  --color-secondary: #c0c1ff;
+  --color-secondary-container: #3131c0;
+  --color-on-secondary: #1000a9;
+
+  --color-tertiary: #4edea3;
+  --color-tertiary-container: #00a572;
+  --color-on-tertiary: #003824;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+
+  --color-on-surface: #dfe2ee;
+  --color-on-surface-variant: #c2c6d6;
+  --color-outline: #8c909f;
+  --color-outline-variant: #424754;
+
+  --font-headline-xl: Inter, system-ui, sans-serif;
+  --font-headline-lg: Inter, system-ui, sans-serif;
+  --font-headline-md: Inter, system-ui, sans-serif;
+  --font-headline-sm: Inter, system-ui, sans-serif;
+  --font-body-lg: Inter, system-ui, sans-serif;
+  --font-body-md: Inter, system-ui, sans-serif;
+  --font-body-sm: Inter, system-ui, sans-serif;
+  --font-label-ui: Inter, system-ui, sans-serif;
+  --font-label-code-md: "JetBrains Mono", monospace;
+  --font-label-code-sm: "JetBrains Mono", monospace;
+}
+
+/* Custom Stitch styling utilities */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

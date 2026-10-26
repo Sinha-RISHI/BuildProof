@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed": "#002113", "outline": "#8c909f", "on-primary-fixed": "#001a42", "secondary": "#c0c1ff", "on-primary-container": "#00285d", "surface-dim": "#0f131c", "on-primary-fixed-variant": "#004395", "primary": "#adc6ff", "primary-container": "#4d8eff", "surface-container-low": "#181c24", "on-secondary-container": "#b0b2ff", "background": "#0f131c", "on-error": "#690005", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "secondary-fixed": "#e1e0ff", "secondary-container": "#3131c0", "primary-fixed": "#d8e2ff", "error": "#ffb4ab", "tertiary-fixed": "#6ffbbe", "on-tertiary-container": "#00311f", "surface-bright": "#353942", "surface-container-lowest": "#0a0e16", "inverse-surface": "#dfe2ee", "on-tertiary-fixed-variant": "#005236", "secondary-fixed-dim": "#c0c1ff", "on-secondary-fixed-variant": "#2f2ebe", "surface": "#0f131c", "tertiary-fixed-dim": "#4edea3", "surface-container-high": "#262a33", "tertiary": "#4edea3", "on-error-container": "#ffdad6", "outline-variant": "#424754", "on-primary": "#002e6a", "on-tertiary": "#003824", "on-background": "#dfe2ee", "primary-fixed-dim": "#adc6ff", "on-surface-variant": "#c2c6d6", "surface-container": "#1c2028", "on-surface": "#dfe2ee", "on-secondary-fixed": "#07006c", "error-container": "#93000a", "tertiary-container": "#00a572", "on-secondary": "#1000a9", "surface-container-highest": "#31353e", "surface-tint": "#adc6ff", "inverse-primary": "#005ac2" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-desktop": "1.5rem", "margin-desktop": "2rem", "gutter": "1rem", "space-md": "1rem", "space-xl": "2rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin": "1rem" }, "fontFamily": { "headline-lg": [ "Inter" ], "label-code-md": [ "JetBrains Mono" ], "body-md": [ "Inter" ], "headline-xl": [ "Inter" ], "headline-md": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "label-ui": [ "Inter" ], "headline-xl-mobile": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-code-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "headline-xl": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "label-ui": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "headline-xl-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-60 bg-surface-container-lowest border-r border-outline-variant/30 z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm border-b border-outline-variant/20"><img alt="BuildProof Shield Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XG2hv5D9C8pAMcwRw1saPD9dHkU2SqTNXPJ1ZF1eKFlejRxTYN5gNMVztkMDxXfTGZaMM6K7eoYEHOFkFFxaNndhMsGHjNcNeXAOOA_slPfYllaz7GNd7DsBxmQ3KEopFJYd2gZ8Zvl1jM47x_NoHmQNOI4GrgiTHwR8prnG7cdK1P3r3MzvNsHjBmCqYzWdUkSAASM0AE3eQhVzjfszRhu4y-zUP_Z57eMW2EHgHlINaLg6OpdC3kgQA"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate leading-tight">BuildProof</span><span class="font-label-code-sm text-label-code-sm text-primary tracking-widest uppercase">Handover Checker</span></div></div><div class="px-space-md py-space-sm"><div class="font-label-ui text-label-ui uppercase tracking-wider text-outline px-space-sm py-space-xs font-semibold">Audit Suite</div><nav class="flex flex-col gap-1 mt-1" data-active-classes="bg-surface-container-high text-primary border-l-2 border-primary font-semibold"><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">terminal</span><span class="font-body-sm text-body-sm">Dashboard</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="scan-history" href="#"><span class="material-symbols-outlined text-[18px]">commit</span><span class="font-body-sm text-body-sm">Scan History</span></a><a aria-current="page" class="flex items-center gap-3 px-space-sm py-2 rounded-lg transition-colors bg-surface-container-high text-primary border-l-2 border-primary font-semibold" data-path="how-it-works" href="#"><span class="material-symbols-outlined text-[18px]">menu_book</span><span class="font-body-sm text-body-sm">How It Works</span></a></nav></div></div><div class="p-space-md border-t border-outline-variant/20 flex flex-col gap-3 bg-surface-dim/40"><div class="flex flex-col gap-2 rounded-lg bg-surface-container-low/80 p-2.5 border border-outline-variant/20"><div class="flex items-center justify-between"><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">API Status</span><div class="flex items-center gap-1.5"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">Connected</span></div></div><div class="flex items-center justify-between pt-1 border-t border-outline-variant/20"><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Runtime Engine</span><div class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-tertiary">token</span><span class="font-label-code-sm text-label-code-sm font-medium">Docker OK</span></div></div></div><div class="flex items-center justify-between px-1 text-outline font-label-code-sm text-label-code-sm"><span>BuildProof CLI</span><span class="text-on-surface-variant font-mono">v0.1.0</span></div></div></aside><div class="pl-60"><header class="fixed top-0 left-60 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 z-40 px-space-xl flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-outline text-[18px]">developer_board</span><div class="flex items-center gap-1.5 font-label-code-md text-label-code-md text-outline"><span class="hover:text-on-surface-variant transition-colors cursor-pointer">Workspace</span><span class="text-outline-variant">/</span><span class="text-on-surface font-medium">Dashboard</span></div></div><div class="flex items-center gap-4"><div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30"><span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(78,222,163,0.6)]"></span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Backend: <span class="text-tertiary">Connected :4000</span></span></div><a class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">help_outline</span></a><div class="flex items-center gap-2.5 pl-2 border-l border-outline-variant/30"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzhuoxt4GdP3Yz9HMsry82CZicwFD1nBSuAL0jCRhaKGHe95m2S3rp_TQ6faC4Qk0hyfZXP8g9Ov9fvdCZSLyZaCZ76h6RzhaMlP2GU17cL8mfywoep04rMcaUiBsF7uDaekKljpvLktGN-YhZJbDSySSQ10o3D9czkEfqqKTI76KySfjficjQ123gU8ImK6aTI5jxRW9rzwnbyOAiX0LqksILeX8yh_PgTkj3xHKBDNvSzto78o-G"/><div class="hidden md:flex flex-col"><span class="font-label-ui text-label-ui text-on-surface leading-tight font-medium">Lead Engineer</span><span class="font-label-code-sm text-label-code-sm text-outline leading-tight">node_sec</span></div></div></div></header><main class="relative pt-16 min-h-screen bg-surface-container-lowest"><div class="max-w-6xl mx-auto p-8"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-xl pb-16">
+<!-- Header Block with Monospaced Metadata Ribbon -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-0.5 rounded bg-surface-container font-label-code-sm text-label-code-sm text-primary uppercase tracking-widest">
+          SPECIFICATION // DOC-042
+        </span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-code-sm text-label-code-sm text-outline">
+          AUDIT ENGINE SPEC v0.1.0
+        </span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<div class="flex items-center gap-1.5 text-tertiary">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span class="font-label-code-sm text-label-code-sm">SANDBOX HARDENED</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">
+            How BuildProof Works
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-1">
+            Understanding our 4-stage evidence-based handover verification process.
+          </p>
+</div>
+<!-- Terminal Status Pill Quick-link -->
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface self-start md:self-auto" data-path="dashboard" href="#">
+<span class="material-symbols-outlined text-primary text-[18px]">terminal</span>
+<span class="font-label-code-sm text-label-code-sm font-medium">Launch CLI Runner</span>
+<span class="material-symbols-outlined text-outline text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Architectural Pipeline Ribbon Visualization -->
+<div class="p-5 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-outline uppercase tracking-wider">
+          Determinism Flow // Automated Pipeline
+        </span>
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Zero Host Execution</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 relative">
+<div class="p-3.5 rounded-lg bg-surface-container flex items-center gap-3">
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.5 rounded bg-surface-dim text-primary">01</span>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Unpack &amp; Cleanse</span>
+<span class="font-label-code-sm text-label-code-sm text-outline truncate">Zip-Slip Mitigation</span>
+</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container flex items-center gap-3">
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.5 rounded bg-surface-dim text-primary">02</span>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">AST &amp; Manifest</span>
+<span class="font-label-code-sm text-label-code-sm text-outline truncate">Entrypoint Traversal</span>
+</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container flex items-center gap-3">
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.5 rounded bg-surface-dim text-tertiary">03</span>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Docker Ephemeral</span>
+<span class="font-label-code-sm text-label-code-sm text-outline truncate">Cgroups v2 512MB</span>
+</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container flex items-center gap-3">
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.5 rounded bg-surface-dim text-secondary">04</span>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Immutable Proof</span>
+<span class="font-label-code-sm text-label-code-sm text-outline truncate">Cryptographic Attest</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4-Step Deep Dive Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- STEP 1 -->
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">archive</span>
+</div>
+<div>
+<span class="font-label-code-sm text-label-code-sm text-primary uppercase font-medium">Stage 01 // Input Isolation</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">1. Archive Validation &amp; Safe Extraction</h2>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-outline">
+            ~120ms
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Strict extraction routine preventing rogue path overwrites and guaranteeing archive file header integrity prior to any computation.
+        </p>
+<ul class="flex flex-col gap-2.5">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Inspects project ZIP archive integrity and checks byte header checksums.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Prevents zip-slip and path traversal vulnerabilities during unpacking into an isolated directory.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Parses <code class="px-1.5 py-0.5 rounded bg-surface-container-lowest font-label-code-sm text-label-code-sm text-secondary">package.json</code> and verifies dependency manifests without executing arbitrary scripts.</span>
+</li>
+</ul>
+<!-- Visual Terminal Snippet -->
+<div class="rounded-lg bg-surface-container-lowest p-3.5 font-label-code-sm text-label-code-sm flex flex-col gap-1 text-outline">
+<div class="flex items-center justify-between text-outline-variant pb-1">
+<span>EXTRACTION LOG</span>
+<span>SEC_SAFE_UNZIP</span>
+</div>
+<p><span class="text-tertiary">PASS</span> archive.zip crc32 validated (482 files, 3.8MB)</p>
+<p><span class="text-tertiary">PASS</span> canonical path checks: 0 traversal attempts detected</p>
+<p><span class="text-primary">INFO</span> safe staging path: /tmp/buildproof-sec-7f9a2/</p>
+</div>
+</div>
+<!-- STEP 2 -->
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">account_tree</span>
+</div>
+<div>
+<span class="font-label-code-sm text-label-code-sm text-primary uppercase font-medium">Stage 02 // Static Discovery</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">2. Static Manifest &amp; Structure Inspection</h2>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-outline">
+            ~340ms
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Analyzes project footprint, module declarations, and execution vectors to map the exact testing and build profile required.
+        </p>
+<ul class="flex flex-col gap-2.5">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Validates existence of recognized project entry points (<code class="font-label-code-sm text-label-code-sm text-secondary">index.js</code>, <code class="font-label-code-sm text-label-code-sm text-secondary">server.ts</code>, <code class="font-label-code-sm text-label-code-sm text-secondary">app.js</code>).</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Detects package managers (<code class="font-label-code-sm text-label-code-sm text-primary">npm</code>, <code class="font-label-code-sm text-label-code-sm text-primary">yarn</code>, <code class="font-label-code-sm text-label-code-sm text-primary">pnpm</code>) and asserts presence of committed lockfiles.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Inspects package lifecycle scripts for explicit <code class="font-label-code-sm text-label-code-sm text-on-surface">build</code> and <code class="font-label-code-sm text-label-code-sm text-on-surface">test</code> target definitions.</span>
+</li>
+</ul>
+<!-- Visual Static Analysis Pill Block -->
+<div class="rounded-lg bg-surface-container-lowest p-3.5 flex flex-col gap-2 font-label-code-sm text-label-code-sm">
+<div class="flex items-center justify-between text-outline-variant">
+<span>DETECTED TOPOLOGY</span>
+<span class="text-tertiary">NODE_ENV: TEST</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-surface-container p-2 rounded flex flex-col">
+<span class="text-outline">Engine</span>
+<span class="text-on-surface font-medium">Node v20.12 LTS</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col">
+<span class="text-outline">Manager</span>
+<span class="text-primary font-medium">pnpm-lock.yaml</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col">
+<span class="text-outline">Framework</span>
+<span class="text-secondary font-medium">NestJS / Fastify</span>
+</div>
+</div>
+</div>
+</div>
+<!-- STEP 3 -->
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">deployed_code</span>
+</div>
+<div>
+<span class="font-label-code-sm text-label-code-sm text-tertiary uppercase font-medium">Stage 03 // Execution Guard</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">3. Ephemeral Docker Sandboxing</h2>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-tertiary">
+            ~120s limit
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Complete hardware &amp; socket isolation. Code is run with zero internet access, non-root privileges, and constrained resource boundaries.
+        </p>
+<ul class="flex flex-col gap-2.5">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Mounts source into a locked-down, unprivileged Docker container (<code class="font-label-code-sm text-label-code-sm text-outline">uid: 10001</code>).</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Applies strict limits: 512MB RAM, 1 vCPU ceiling, read-only rootfs, and 120s execution watchdog.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Executes <code class="font-label-code-sm text-label-code-sm text-primary">npm ci</code> and <code class="font-label-code-sm text-label-code-sm text-primary">npm test</code>, capturing unbuffered raw stdout/stderr and process exit codes.</span>
+</li>
+</ul>
+<!-- Docker Isolation Graphic Bar -->
+<div class="rounded-lg bg-surface-container-lowest p-3.5 flex flex-col gap-2">
+<div class="flex justify-between font-label-code-sm text-label-code-sm">
+<span class="text-outline">CGROUP ALLOCATION: 512MB</span>
+<span class="text-tertiary font-mono">184MB / 512MB PEAK</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 36%"></div>
+</div>
+<div class="flex justify-between items-center text-outline font-label-code-sm text-label-code-sm pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-tertiary">lock</span> Read-Only FS</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-tertiary">network_check</span> Net: None</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-tertiary">timer</span> Hard Kill: 120s</span>
+</div>
+</div>
+</div>
+<!-- STEP 4 -->
+<div class="p-6 rounded-xl bg-surface-container flex flex-col gap-5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">assignment_turned_in</span>
+</div>
+<div>
+<span class="font-label-code-sm text-label-code-sm text-secondary uppercase font-medium">Stage 04 // Audit Artifact</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">4. Evidence-Based Report Generation</h2>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-secondary">
+            Deterministic
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          No heuristics or ambiguous evaluations. Every score is directly mapped from verified compiler outputs, test exit codes, and hashes.
+        </p>
+<ul class="flex flex-col gap-2.5">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Compiles observed exit codes, file verifications, and test suites into an immutable ledger.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Labels checks objectively: <span class="text-tertiary font-semibold">Passed</span>, <span class="text-error font-semibold">Failed</span>, or <span class="text-outline font-semibold">Not Verified</span>.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Produces self-contained, offline-auditable standalone HTML reports and standard JSON exports.</span>
+</li>
+</ul>
+<!-- Report Status Demo Badges -->
+<div class="rounded-lg bg-surface-container-lowest p-3.5 flex items-center justify-between font-label-code-sm text-label-code-sm">
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-tertiary-container/30 text-tertiary font-mono font-medium">PASSED [Exit 0]</span>
+<span class="px-2 py-1 rounded bg-error-container/30 text-error font-mono font-medium">FAILED [Exit 1]</span>
+<span class="px-2 py-1 rounded bg-surface-variant text-outline font-mono font-medium">NOT VERIFIED</span>
+</div>
+<span class="text-outline font-mono">.html + .json</span>
+</div>
+</div>
+</div>
+<!-- Security & Integrity Commitments (Callout Box) -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-6 md:p-8 shadow-sm flex flex-col gap-6">
+<div class="flex items-center justify-between flex-wrap gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">shield</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">
+              Security Boundaries &amp; Guarantees
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Engineered from the ground up for strict confidentiality and host environment protection.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest">
+<span class="material-symbols-outlined text-tertiary text-[16px]">lock</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface font-medium">Zero Leak Protocol</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 rounded-lg bg-surface-container flex items-start gap-3.5">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">terminal</span>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Host System Isolation</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Uploaded code never executes directly on your host operating system. All build hooks and npm post-install scripts run exclusively within jail-confined container cgroups.
+            </p>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-surface-container flex items-start gap-3.5">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">delete_forever</span>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Immediate Teardown</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Ephemeral containers, virtual volumes, and temporary unzipped directories are strictly destroyed immediately upon audit completion or execution timeout.
+            </p>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-surface-container flex items-start gap-3.5">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">rule</span>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Strict 'Not Verified' Semantics</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              'Not Verified' strictly signals missing empirical evidence or unconfigured test scripts. BuildProof never falsely passes unexercised or untestable codebase components.
+            </p>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-surface-container flex items-start gap-3.5">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">cloud_off</span>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">No Third-Party Transmission</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              No code or project files are transmitted to external cloud services or third-party servers. Audits are calculated entirely on your designated local or on-prem execution daemon.
+            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Supported Environments & Matrix -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Supported Environments &amp; Backends</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Native detection and containerization compatibility profiles.</p>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-outline">AUTO-DISCOVERY ENABLED</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Node Versions -->
+<div class="p-5 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">javascript</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Node.js Runtimes</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Official hardened Alpine and Debian base containers ready with LTS toolchains:
+          </p>
+<div class="flex flex-wrap gap-2 mt-auto pt-2">
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">v18.x LTS (Hydrogen)</span>
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">v20.x LTS (Iron)</span>
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">v22.x LTS (Jod)</span>
+</div>
+</div>
+<!-- Test Runners -->
+<div class="p-5 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">science</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Test Runners</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Native parsing for standard stdout log emitters and exit codes across modern frameworks:
+          </p>
+<div class="flex flex-wrap gap-2 mt-auto pt-2">
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">Vitest</span>
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">Jest</span>
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">Mocha</span>
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">Node Test Runner</span>
+</div>
+</div>
+<!-- Package Managers -->
+<div class="p-5 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Package Managers</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Lockfile validation and reproducible offline caching verification:
+          </p>
+<div class="flex flex-wrap gap-2 mt-auto pt-2">
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">npm (package-lock.json)</span>
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">yarn (yarn.lock)</span>
+<span class="px-2.5 py-1 rounded bg-surface-dim font-label-code-sm text-label-code-sm text-on-surface font-mono">pnpm (pnpm-lock.yaml)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom CTA Banner -->
+<div class="rounded-xl bg-gradient-to-r from-surface-container via-surface-container-high to-surface-container p-8 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[28px]">speed</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Ready to verify your project?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+            Drop your ZIP codebase package and obtain an objective audit verdict in under 60 seconds.
+          </p>
+</div>
+</div>
+<a class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-headline-sm text-headline-sm font-semibold transition-all" data-path="dashboard" href="#">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+<span>Go to Dashboard &amp; Upload ZIP</span>
+</a>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic navigation micro-interactions for the internal links
+  document.querySelectorAll('a[data-path]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = link.getAttribute('data-path');
+      const sidebarLink = document.querySelector(`aside a[data-path="${target}"]`);
+      if (sidebarLink) {
+        sidebarLink.click();
+      }
+    });
+  });
+</script></div></main></div></body></html>

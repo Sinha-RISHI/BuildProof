@@ -439,7 +439,7 @@ Update this table as work progresses. Do not mark something done until it has be
 | M2 Scanner | Done (Step 5 — 20 automated tests passed, all static checks & security rules verified) |
 | M3 Docker runner | Done (Step 6 — 21 automated tests passed, real Docker execution on node:20-alpine verified) |
 | M4 Report generator | Done (Step 7 — 26 automated tests passed, JSON/HTML generation & API verified) |
-| M5 React dashboard | Done (Step 2 commit `2c96bcd`, health endpoint + status cards working) |
+| M5 React dashboard | Done (Step 8 — complete Stitch dark navy UI integration, upload dropzone, live progress, results & reports, 11 tests passed) |
 | M6 Demo rehearsal | Planned |
 
 **Sample Docker verification results (Step 3):**

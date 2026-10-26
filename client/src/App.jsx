@@ -2,144 +2,177 @@
  * App.jsx
  *
  * What this file does:
- *   The main page of BuildProof. It shows two status cards:
- *     1. Backend — is the Express server reachable?
- *     2. Docker  — is Docker running and what version is it?
- *
- * How it fits into BuildProof:
- *   This is Step 2 of the build: just the system-status skeleton.
- *   File upload, scan results and report views come in later steps.
- *
- * How the data flows:
- *   1. Page loads → useEffect runs → calls getHealth() from api.js
- *   2. getHealth() fetches /api/health (Vite proxies it to port 4000)
- *   3. Result is saved in React state → cards re-render with real data
- *   4. "Check again" button repeats step 1 on demand
+ *   Root component for the BuildProof interactive frontend.
+ *   Coordinates:
+ *     - Navigation between views ('dashboard', 'progress', 'result', 'how-it-works')
+ *     - System health polling for real-time API and Docker reachability
+ *     - Upload initiation to POST /api/scans
+ *     - Progress tracking and polling transition to final scan results
+ *     - Full visual integration of Google Stitch dark navy UI designs
  */
 
-import { useState, useEffect } from 'react';
-import { getHealth } from './api.js';
-import StatusCard from './components/StatusCard.jsx';
+import React, { useState, useEffect } from 'react';
+import AppSidebar from './components/AppSidebar.jsx';
+import AppHeader from './components/AppHeader.jsx';
+import UploadZone from './components/UploadZone.jsx';
+import ScanProgress from './components/ScanProgress.jsx';
+import ScanResult from './components/ScanResult.jsx';
+import HowItWorks from './components/HowItWorks.jsx';
+import { getHealth, uploadScan } from './api.js';
 
 export default function App() {
-  // "loading" | "ok" | "error" — tracks the overall request state
-  const [status, setStatus] = useState('loading');
-
-  // Holds the JSON object returned by /api/health (or null while loading / on error)
+  const [currentView, setCurrentView] = useState('dashboard');
   const [health, setHealth] = useState(null);
+  const [healthLoading, setHealthLoading] = useState(true);
 
-  // A human-readable message about why the backend call failed (if it did)
-  const [backendError, setBackendError] = useState(null);
+  // Active scan state
+  const [activeScanId, setActiveScanId] = useState(null);
+  const [activeProjectName, setActiveProjectName] = useState('');
+  const [completedScanRecord, setCompletedScanRecord] = useState(null);
+  const [scanErrorMessage, setScanErrorMessage] = useState(null);
 
-  /**
-   * runCheck()
-   * Fetches /api/health and updates state.
-   * All failures are caught here — no unhandled promise rejections.
-   */
-  async function runCheck() {
-    setStatus('loading');
-    setHealth(null);
-    setBackendError(null);
+  // Health check on mount and interval
+  useEffect(() => {
+    let mounted = true;
 
-    try {
-      const data = await getHealth();
-      setHealth(data);
-      setStatus('ok');
-    } catch (err) {
-      setBackendError(err.message);
-      setStatus('error');
+    async function loadHealth() {
+      try {
+        const data = await getHealth();
+        if (mounted) {
+          setHealth(data);
+          setHealthLoading(false);
+        }
+      } catch {
+        if (mounted) {
+          setHealth({
+            ok: false,
+            service: 'buildproof-server',
+            time: new Date().toISOString(),
+            docker: { reachable: false, version: null, error: 'Cannot connect to server' },
+          });
+          setHealthLoading(false);
+        }
+      }
     }
+
+    loadHealth();
+    const interval = setInterval(loadHealth, 10000); // Check every 10s
+
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
+  // Handle upload initiation from UploadZone
+  async function handleScanStarted(file) {
+    setScanErrorMessage(null);
+    const result = await uploadScan(file);
+    setActiveScanId(result.scanId);
+    setActiveProjectName(result.projectName || file.name.replace(/\.zip$/i, ''));
+    setCurrentView('progress');
   }
 
-  // Run the check automatically when the page first loads
-  useEffect(() => {
-    runCheck();
-  }, []); // Empty array means "run once on mount"
+  // Handle scan completion from ScanProgress
+  function handleScanCompleted(record) {
+    setCompletedScanRecord(record);
+    setCurrentView('result');
+  }
 
-  // --- Derive the props for each StatusCard from state ---
+  // Handle scan failure from ScanProgress
+  function handleScanFailed(error) {
+    setScanErrorMessage(error);
+    setCurrentView('dashboard');
+  }
 
-  // Backend card
-  const backendCard = (() => {
-    if (status === 'loading') {
-      return { state: 'loading', message: 'Contacting server...' };
-    }
-    if (status === 'error') {
-      return {
-        state: 'error',
-        message: 'Backend not reachable. Start it with:  cd server  →  npm run dev',
-      };
-    }
-    return { state: 'ok', message: 'Server is running' };
-  })();
-
-  // Docker card
-  const dockerCard = (() => {
-    if (status === 'loading') {
-      return { state: 'loading', message: 'Contacting server...' };
-    }
-    if (status === 'error') {
-      return {
-        state: 'error',
-        message: 'Unknown — backend is not reachable',
-      };
-    }
-    // Backend responded; inspect the docker sub-object
-    const docker = health?.docker;
-    if (docker?.reachable) {
-      return {
-        state: 'ok',
-        message: 'Docker is running',
-        detail: `Version ${docker.version}`,
-      };
-    }
-    return {
-      state: 'error',
-      message: docker?.error ?? 'Docker is not reachable',
-    };
-  })();
+  // Reset journey to upload another project
+  function handleReset() {
+    setActiveScanId(null);
+    setActiveProjectName('');
+    setCompletedScanRecord(null);
+    setScanErrorMessage(null);
+    setCurrentView('dashboard');
+  }
 
   return (
-    // Full-height dark navy page background
-    <div className="min-h-screen bg-gray-950 text-gray-100 flex flex-col items-center px-4 py-16">
+    <div className="min-h-screen bg-surface-container-lowest text-on-surface antialiased flex">
+      {/* Fixed Left Sidebar */}
+      <AppSidebar
+        currentView={currentView}
+        onNavigate={(view) => {
+          setScanErrorMessage(null);
+          setCurrentView(view);
+        }}
+        health={health}
+        healthLoading={healthLoading}
+      />
 
-      {/* ── Header ── */}
-      <header className="mb-12 text-center">
-        {/* Blue accent on the title */}
-        <h1 className="text-5xl font-bold tracking-tight text-blue-400 mb-2">
-          BuildProof
-        </h1>
-        <p className="text-gray-400 text-lg">
-          Project Handover Readiness Checker
-        </p>
-      </header>
+      {/* Main Content Area (offset by sidebar width: 15rem / 60px) */}
+      <div className="pl-60 w-full flex flex-col min-h-screen">
+        {/* Top Header */}
+        <AppHeader
+          currentView={currentView}
+          projectName={activeProjectName}
+          onNavigate={(view) => {
+            setScanErrorMessage(null);
+            setCurrentView(view);
+          }}
+          health={health}
+        />
 
-      {/* ── Status cards ── */}
-      <main className="w-full max-w-lg flex flex-col gap-4">
-        <StatusCard title="Backend" {...backendCard} />
-        <StatusCard title="Docker"  {...dockerCard}  />
+        {/* Page Content Body (pt-16 for header clearance) */}
+        <main className="relative pt-20 p-8 min-h-screen bg-surface-container-lowest">
+          <div className="max-w-6xl mx-auto">
+            {/* Global Error Banner if scan failed */}
+            {scanErrorMessage && (
+              <div className="mb-6 p-4 rounded-xl bg-error-container/20 border border-error/30 text-error flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[20px]">error</span>
+                  <span className="text-sm font-medium">Scan Error: {scanErrorMessage}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setScanErrorMessage(null)}
+                  className="p-1 rounded hover:bg-error-container/30 text-error cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[16px]">close</span>
+                </button>
+              </div>
+            )}
 
-        {/* "Check again" button — disabled while a request is in flight */}
-        <div className="flex justify-center mt-4">
-          <button
-            onClick={runCheck}
-            disabled={status === 'loading'}
-            className="
-              rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white
-              hover:bg-blue-500 active:bg-blue-700
-              disabled:opacity-50 disabled:cursor-not-allowed
-              transition-colors duration-150
-            "
-          >
-            {status === 'loading' ? 'Checking…' : 'Check again'}
-          </button>
-        </div>
-      </main>
+            {/* View Switcher */}
+            {currentView === 'dashboard' && (
+              <UploadZone
+                onScanStarted={handleScanStarted}
+                onNavigateHowItWorks={() => setCurrentView('how-it-works')}
+                health={health}
+              />
+            )}
 
-      {/* ── Footer ── */}
-      <footer className="mt-16 text-center text-gray-600 text-xs">
-        Step 2 skeleton — upload and verification come in later steps.
-      </footer>
+            {currentView === 'progress' && activeScanId && (
+              <ScanProgress
+                scanId={activeScanId}
+                initialProjectName={activeProjectName}
+                onScanCompleted={handleScanCompleted}
+                onScanFailed={handleScanFailed}
+              />
+            )}
 
+            {currentView === 'result' && completedScanRecord && (
+              <ScanResult
+                scanRecord={completedScanRecord}
+                onReset={handleReset}
+              />
+            )}
+
+            {currentView === 'how-it-works' && (
+              <HowItWorks
+                onNavigateDashboard={() => setCurrentView('dashboard')}
+              />
+            )}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
