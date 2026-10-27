@@ -220,15 +220,27 @@ test('T09 – ZIP with duplicate paths is rejected with 400', async () => {
 });
 
 test('T10 – ZIP with more than MAX_ENTRIES entries is rejected with 400', async () => {
-  // MAX_ENTRIES is 1000. Build a ZIP with 1001 entries.
-  const entries = Array.from({ length: 1001 }, (_, i) => ({
-    name: `file${i}.txt`,
-    data: Buffer.from(`content ${i}`),
+  // MAX_ENTRIES is 10000. Build a ZIP with 10001 entries.
+  const entries = Array.from({ length: 10001 }, (_, i) => ({
+    name: `f${i}.txt`,
+    data: Buffer.alloc(0),
   }));
   const buf = buildZip(entries);
   const { status, body } = await postZip(buf);
   assert.equal(status, 400);
   assert.match(body.error, /too many entries/i);
+  assert.match(body.error, /10000/);
+});
+
+test('T10b – ZIP with 1200 entries (exceeding old 1000 limit) is accepted with 202', async () => {
+  const entries = Array.from({ length: 1200 }, (_, i) => ({
+    name: `f${i}.txt`,
+    data: Buffer.alloc(0),
+  }));
+  const buf = buildZip(entries);
+  const { status, body } = await postZip(buf, 'many-entries.zip');
+  assert.equal(status, 202);
+  assert.equal(body.meta.filesExtracted, 1200);
 });
 
 test('T11 – ZIP entry exceeding per-file size limit is rejected with 400', async () => {

@@ -38,7 +38,7 @@ import { isSafePath } from '../utils/paths.js';
 // ── Limits (documented here and enforced below) ───────────────────────────────
 
 /** Maximum number of entries in a ZIP. Prevents pathological archives. */
-const MAX_ENTRIES = 1000;
+const MAX_ENTRIES = 10000;
 
 /**
  * Maximum uncompressed size of a single entry (50 MB).
