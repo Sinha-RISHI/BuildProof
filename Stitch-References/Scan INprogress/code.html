@@ -1,322 +1,329 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed": "#002113", "outline": "#8c909f", "on-primary-fixed": "#001a42", "secondary": "#c0c1ff", "on-primary-container": "#00285d", "surface-dim": "#0f131c", "on-primary-fixed-variant": "#004395", "primary": "#adc6ff", "primary-container": "#4d8eff", "surface-container-low": "#181c24", "on-secondary-container": "#b0b2ff", "background": "#0f131c", "on-error": "#690005", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "secondary-fixed": "#e1e0ff", "secondary-container": "#3131c0", "primary-fixed": "#d8e2ff", "error": "#ffb4ab", "tertiary-fixed": "#6ffbbe", "on-tertiary-container": "#00311f", "surface-bright": "#353942", "surface-container-lowest": "#0a0e16", "inverse-surface": "#dfe2ee", "on-tertiary-fixed-variant": "#005236", "secondary-fixed-dim": "#c0c1ff", "on-secondary-fixed-variant": "#2f2ebe", "surface": "#0f131c", "tertiary-fixed-dim": "#4edea3", "surface-container-high": "#262a33", "tertiary": "#4edea3", "on-error-container": "#ffdad6", "outline-variant": "#424754", "on-primary": "#002e6a", "on-tertiary": "#003824", "on-background": "#dfe2ee", "primary-fixed-dim": "#adc6ff", "on-surface-variant": "#c2c6d6", "surface-container": "#1c2028", "on-surface": "#dfe2ee", "on-secondary-fixed": "#07006c", "error-container": "#93000a", "tertiary-container": "#00a572", "on-secondary": "#1000a9", "surface-container-highest": "#31353e", "surface-tint": "#adc6ff", "inverse-primary": "#005ac2" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-desktop": "1.5rem", "margin-desktop": "2rem", "gutter": "1rem", "space-md": "1rem", "space-xl": "2rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin": "1rem" }, "fontFamily": { "headline-lg": [ "Inter" ], "label-code-md": [ "JetBrains Mono" ], "body-md": [ "Inter" ], "headline-xl": [ "Inter" ], "headline-md": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "label-ui": [ "Inter" ], "headline-xl-mobile": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-code-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "headline-xl": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "label-ui": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "headline-xl-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-60 bg-surface-container-lowest border-r border-outline-variant/30 z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm border-b border-outline-variant/20"><img alt="BuildProof Shield Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XG2hv5D9C8pAMcwRw1saPD9dHkU2SqTNXPJ1ZF1eKFlejRxTYN5gNMVztkMDxXfTGZaMM6K7eoYEHOFkFFxaNndhMsGHjNcNeXAOOA_slPfYllaz7GNd7DsBxmQ3KEopFJYd2gZ8Zvl1jM47x_NoHmQNOI4GrgiTHwR8prnG7cdK1P3r3MzvNsHjBmCqYzWdUkSAASM0AE3eQhVzjfszRhu4y-zUP_Z57eMW2EHgHlINaLg6OpdC3kgQA"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate leading-tight">BuildProof</span><span class="font-label-code-sm text-label-code-sm text-primary tracking-widest uppercase">Handover Checker</span></div></div><div class="px-space-md py-space-sm"><div class="font-label-ui text-label-ui uppercase tracking-wider text-outline px-space-sm py-space-xs font-semibold">Audit Suite</div><nav class="flex flex-col gap-1 mt-1" data-active-classes="bg-surface-container-high text-primary border-l-2 border-primary font-semibold"><a aria-current="page" class="flex items-center gap-3 px-space-sm py-2 rounded-lg transition-colors bg-surface-container-high text-primary border-l-2 border-primary font-semibold" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">terminal</span><span class="font-body-sm text-body-sm">Dashboard</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="scan-history" href="#"><span class="material-symbols-outlined text-[18px]">commit</span><span class="font-body-sm text-body-sm">Scan History</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="how-it-works" href="#"><span class="material-symbols-outlined text-[18px]">menu_book</span><span class="font-body-sm text-body-sm">How It Works</span></a></nav></div></div><div class="p-space-md border-t border-outline-variant/20 flex flex-col gap-3 bg-surface-dim/40"><div class="flex flex-col gap-2 rounded-lg bg-surface-container-low/80 p-2.5 border border-outline-variant/20"><div class="flex items-center justify-between"><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">API Status</span><div class="flex items-center gap-1.5"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">Connected</span></div></div><div class="flex items-center justify-between pt-1 border-t border-outline-variant/20"><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Runtime Engine</span><div class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-tertiary">token</span><span class="font-label-code-sm text-label-code-sm font-medium">Docker OK</span></div></div></div><div class="flex items-center justify-between px-1 text-outline font-label-code-sm text-label-code-sm"><span>BuildProof CLI</span><span class="text-on-surface-variant font-mono">v0.1.0</span></div></div></aside><div class="pl-60"><header class="fixed top-0 left-60 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 z-40 px-space-xl flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-outline text-[18px]">developer_board</span><div class="flex items-center gap-1.5 font-label-code-md text-label-code-md text-outline"><span class="hover:text-on-surface-variant transition-colors cursor-pointer">Workspace</span><span class="text-outline-variant">/</span><span class="text-on-surface font-medium">Dashboard</span></div></div><div class="flex items-center gap-4"><div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30"><span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(78,222,163,0.6)]"></span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Backend: <span class="text-tertiary">Connected :4000</span></span></div><a class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">help_outline</span></a><div class="flex items-center gap-2.5 pl-2 border-l border-outline-variant/30"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzhuoxt4GdP3Yz9HMsry82CZicwFD1nBSuAL0jCRhaKGHe95m2S3rp_TQ6faC4Qk0hyfZXP8g9Ov9fvdCZSLyZaCZ76h6RzhaMlP2GU17cL8mfywoep04rMcaUiBsF7uDaekKljpvLktGN-YhZJbDSySSQ10o3D9czkEfqqKTI76KySfjficjQ123gU8ImK6aTI5jxRW9rzwnbyOAiX0LqksILeX8yh_PgTkj3xHKBDNvSzto78o-G"/><div class="hidden md:flex flex-col"><span class="font-label-ui text-label-ui text-on-surface leading-tight font-medium">Lead Engineer</span><span class="font-label-code-sm text-label-code-sm text-outline leading-tight">node_sec</span></div></div></div></header><main class="relative pt-16 min-h-screen bg-surface-container-lowest"><div class="max-w-6xl mx-auto p-8"><div class="flex flex-col w-full gap-space-lg select-none">
-<!-- Top Project Summary Card -->
-<div class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
-<div class="flex items-start gap-4">
-<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0 shadow-inner">
-<span class="material-symbols-outlined text-[28px]">folder_zip</span>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>BuildProof // Project Handover Readiness Checker</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-variant": "#e0e2e6", "primary-container": "#1a1c1e", "inverse-primary": "#c6c6c9", "on-background": "#191c1f", "secondary-fixed-dim": "#91db2a", "on-surface-variant": "#45474a", "primary": "#000000", "surface-container-lowest": "#ffffff", "inverse-on-surface": "#eff1f5", "error": "#ba1a1a", "on-secondary-container": "#457000", "on-primary-fixed": "#1a1c1e", "tertiary": "#000000", "on-secondary-fixed-variant": "#304f00", "on-error": "#ffffff", "secondary": "#416900", "secondary-container": "#acf847", "outline": "#75777a", "primary-fixed-dim": "#c6c6c9", "surface-container-high": "#e6e8ec", "outline-variant": "#c5c6ca", "inverse-surface": "#2d3134", "on-tertiary-container": "#609126", "on-secondary": "#ffffff", "tertiary-container": "#0f2000", "surface-tint": "#5d5e61", "on-primary-fixed-variant": "#454749", "surface-container": "#eceef2", "surface-container-low": "#f2f4f8", "on-tertiary-fixed": "#0f2000", "surface-dim": "#d8dade", "tertiary-fixed-dim": "#a0d663", "surface": "#f7f9fd", "error-container": "#ffdad6", "on-surface": "#191c1f", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#2e4f00", "primary-fixed": "#e2e2e5", "on-secondary-fixed": "#102000", "surface-bright": "#f7f9fd", "tertiary-fixed": "#bbf37c", "surface-container-highest": "#e0e2e6", "on-tertiary": "#ffffff", "secondary-fixed": "#acf847", "background": "#f7f9fd", "on-primary-container": "#838486", "on-error-container": "#93000a" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "1.5rem", "space-xs": "0.25rem", "margin-mobile": "1.25rem", "margin": "3rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem", "space-md": "1rem", "space-xl": "2.5rem" }, "fontFamily": { "label-technical": [ "JetBrains Mono" ], "headline-sm": [ "Hanken Grotesk" ], "caption-caps": [ "JetBrains Mono" ], "body-sm": [ "Hanken Grotesk" ], "headline-xl": [ "Hanken Grotesk" ], "headline-lg": [ "Hanken Grotesk" ], "headline-md": [ "Hanken Grotesk" ], "body-lg": [ "Hanken Grotesk" ], "headline-lg-mobile": [ "Hanken Grotesk" ], "label-code": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Hanken Grotesk" ], "body-md": [ "Hanken Grotesk" ] }, "fontSize": { "label-technical": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-sm": [ "1.25rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "caption-caps": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.08em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "400" } ], "headline-xl": [ "3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.035em", "fontWeight": "700" } ], "headline-lg": [ "2.5rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "600" } ], "headline-md": [ "1.75rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.025em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-lg-mobile": [ "1.75rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-code": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "400" } ], "headline-xl-mobile": [ "2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-xs" data-path="overview" href="#"><span class="font-headline-sm text-headline-sm text-primary uppercase tracking-tight">BuildProof</span><span class="font-caption-caps text-caption-caps px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">[SPEC 25010]</span></a><div class="hidden xl:flex items-center gap-2 pl-space-md"><span class="inline-block w-2 h-2 rounded-full bg-secondary-container ring-2 ring-secondary-container/30"></span><span class="font-caption-caps text-caption-caps text-on-surface-variant">Node v20 LTS · Sandbox Isolated</span></div></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-on-surface font-semibold"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="overview" href="#">Overview</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="how-it-works" href="#">How It Works</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="scan-history" href="#">Scan History</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="compliance-spec" href="#">Compliance Spec</a></nav><div class="flex items-center gap-space-md"><a class="font-label-technical text-label-technical px-space-md py-2 rounded bg-primary text-on-primary hover:bg-secondary-container hover:text-on-secondary-fixed transition-colors duration-150 inline-flex items-center gap-1.5" data-path="scan-execution" href="#"><span class="material-symbols-outlined text-[16px]">terminal</span><span>Start Scan</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-16rem)]"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-space-lg space-y-space-lg">
+<!-- Top Context & Live Operational Header -->
+<div class="w-full bg-surface-container-lowest p-space-md lg:p-space-lg shadow-sm rounded-xl">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-md">
+<div class="space-y-space-xs min-w-0">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-caption-caps text-caption-caps px-2 py-0.5 rounded bg-surface-container text-on-surface-variant uppercase tracking-wider">Active Handover Audit</span>
+<span class="font-label-technical text-label-technical text-on-surface-variant flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+              SESSION: RT-DAEMON-ONLINE
+            </span>
 </div>
-<div class="flex flex-col min-w-0">
-<div class="flex flex-wrap items-center gap-2.5">
-<h2 class="font-headline-md text-headline-md text-on-surface truncate tracking-tight">api-service-handover-v2.0.zip</h2>
-<span class="font-label-code-sm text-label-code-sm text-outline bg-surface-container-highest px-2 py-0.5 rounded">6.4 MB</span>
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-label-code-sm text-label-code-sm font-medium">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-</span>
-            SCAN IN PROGRESS
-          </span>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight truncate">
+            scanning: <span class="font-label-technical text-headline-sm text-primary">checkout-microservice-v2.1.zip</span>
+</h1>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
-          Running Docker sandbox verification for Node.js project structure, manifests, and automated tests.
-        </p>
-<div class="flex items-center gap-3 font-label-code-sm text-label-code-sm text-outline mt-2">
-<span class="flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">schedule</span>
-            Uploaded 42s ago
-          </span>
-<span>•</span>
-<span class="text-tertiary flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">verified_user</span>
-            Automated Audit Protocol v2.4
-          </span>
-</div>
-</div>
-</div>
-<!-- Progress Ring Gauge -->
-<div class="flex items-center gap-4 shrink-0 bg-surface-container-low px-4 py-2.5 rounded-lg">
-<div class="relative w-12 h-12 flex items-center justify-center">
-<svg class="w-12 h-12 transform -rotate-90" viewbox="0 0 48 48">
-<circle class="text-surface-container-highest" cx="24" cy="24" fill="transparent" r="19" stroke="currentColor" stroke-width="3"></circle>
-<circle class="text-primary transition-all duration-700 ease-out" cx="24" cy="24" fill="transparent" r="19" stroke="currentColor" stroke-dasharray="119.38" stroke-dashoffset="35.8" stroke-linecap="round" stroke-width="3"></circle>
-</svg>
-<span class="absolute font-label-code-sm text-label-code-sm font-semibold text-primary">70%</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-ui text-label-ui uppercase tracking-wider text-outline">Status</span>
-<span class="font-headline-sm text-headline-sm text-on-surface">Phase 6 / 7</span>
-</div>
-</div>
-</div>
-<!-- Main Grid: Stepper & Log Stream Split -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
-<!-- Left Column: Multi-Stage Execution Stepper (5 Cols) -->
-<div class="lg:col-span-5 bg-surface-container rounded-xl p-space-md shadow-sm flex flex-col">
-<div class="flex items-center justify-between pb-3 mb-3 bg-surface-container-low/60 -mx-space-md -mt-space-md px-space-md pt-space-md rounded-t-xl">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-primary">account_tree</span>
-<span class="font-headline-sm text-headline-sm text-on-surface">Execution Sequence</span>
-</div>
-<span class="font-label-code-sm text-label-code-sm text-outline">Deterministic Engine</span>
-</div>
-<!-- Stepper List -->
-<div class="flex flex-col relative py-1">
-<!-- Connecting Line background -->
-<div class="absolute left-[17px] top-4 bottom-4 w-[2px] bg-surface-variant"></div>
-<!-- Stage 1 -->
-<div class="relative flex items-start gap-3 py-2.5">
-<div class="z-10 w-9 h-9 rounded-full bg-tertiary-container/30 text-tertiary flex items-center justify-center shrink-0 shadow-sm">
-<span class="material-symbols-outlined text-[18px]">check</span>
-</div>
-<div class="flex flex-col min-w-0 pt-0.5">
-<div class="flex items-center justify-between gap-2">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate">Validating ZIP archive</span>
-<span class="font-label-code-sm text-label-code-sm text-tertiary shrink-0">COMPLETED</span>
-</div>
-<p class="font-label-code-sm text-label-code-sm text-on-surface-variant mt-0.5">Archive verified, no path traversal detected (0.12s)</p>
-</div>
-</div>
-<!-- Stage 2 -->
-<div class="relative flex items-start gap-3 py-2.5">
-<div class="z-10 w-9 h-9 rounded-full bg-tertiary-container/30 text-tertiary flex items-center justify-center shrink-0 shadow-sm">
-<span class="material-symbols-outlined text-[18px]">check</span>
-</div>
-<div class="flex flex-col min-w-0 pt-0.5">
-<div class="flex items-center justify-between gap-2">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate">Extracting project files safely</span>
-<span class="font-label-code-sm text-label-code-sm text-tertiary shrink-0">COMPLETED</span>
-</div>
-<p class="font-label-code-sm text-label-code-sm text-on-surface-variant mt-0.5">142 files extracted into sandbox /workspace (0.34s)</p>
-</div>
-</div>
-<!-- Stage 3 -->
-<div class="relative flex items-start gap-3 py-2.5">
-<div class="z-10 w-9 h-9 rounded-full bg-tertiary-container/30 text-tertiary flex items-center justify-center shrink-0 shadow-sm">
-<span class="material-symbols-outlined text-[18px]">check</span>
-</div>
-<div class="flex flex-col min-w-0 pt-0.5">
-<div class="flex items-center justify-between gap-2">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate">Inspecting project structure</span>
-<span class="font-label-code-sm text-label-code-sm text-tertiary shrink-0">COMPLETED</span>
-</div>
-<p class="font-label-code-sm text-label-code-sm text-on-surface-variant mt-0.5">Found package.json, src/index.ts, tsconfig.json (0.18s)</p>
-</div>
-</div>
-<!-- Stage 4 -->
-<div class="relative flex items-start gap-3 py-2.5">
-<div class="z-10 w-9 h-9 rounded-full bg-tertiary-container/30 text-tertiary flex items-center justify-center shrink-0 shadow-sm">
-<span class="material-symbols-outlined text-[18px]">check</span>
-</div>
-<div class="flex flex-col min-w-0 pt-0.5">
-<div class="flex items-center justify-between gap-2">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate">Checking dependency files</span>
-<span class="font-label-code-sm text-label-code-sm text-tertiary shrink-0">COMPLETED</span>
-</div>
-<p class="font-label-code-sm text-label-code-sm text-on-surface-variant mt-0.5">package-lock.json v3 detected, 24 dependencies (0.22s)</p>
-</div>
-</div>
-<!-- Stage 5 -->
-<div class="relative flex items-start gap-3 py-2.5">
-<div class="z-10 w-9 h-9 rounded-full bg-tertiary-container/30 text-tertiary flex items-center justify-center shrink-0 shadow-sm">
-<span class="material-symbols-outlined text-[18px]">check</span>
-</div>
-<div class="flex flex-col min-w-0 pt-0.5">
-<div class="flex items-center justify-between gap-2">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate">Installing dependencies in Docker</span>
-<span class="font-label-code-sm text-label-code-sm text-tertiary shrink-0">COMPLETED</span>
-</div>
-<p class="font-label-code-sm text-label-code-sm text-on-surface-variant mt-0.5">npm ci executed successfully in container (14.2s)</p>
-</div>
-</div>
-<!-- Stage 6 (ACTIVE) -->
-<div class="relative flex items-start gap-3 py-2.5 bg-surface-container-high/40 rounded-lg px-2 -mx-2">
-<div class="z-10 w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-md">
-<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span>
-</div>
-<div class="flex flex-col min-w-0 pt-0.5 flex-1">
-<div class="flex items-center justify-between gap-2">
-<span class="font-headline-sm text-headline-sm text-primary font-semibold truncate">Running available tests in Docker</span>
-<span class="font-label-code-sm text-label-code-sm text-primary shrink-0 font-medium">IN PROGRESS</span>
-</div>
-<p class="font-label-code-sm text-label-code-sm text-on-surface mt-0.5">
-              Executing "npm test" inside ephemeral container <code class="text-secondary font-semibold">bp-scan-8f92a</code>... (running 18s)
-            </p>
-</div>
-</div>
-<!-- Stage 7 -->
-<div class="relative flex items-start gap-3 py-2.5 opacity-60">
-<div class="z-10 w-9 h-9 rounded-full bg-surface-variant text-outline flex items-center justify-center shrink-0 shadow-sm">
-<span class="material-symbols-outlined text-[18px]">schedule</span>
-</div>
-<div class="flex flex-col min-w-0 pt-0.5">
-<div class="flex items-center justify-between gap-2">
-<span class="font-headline-sm text-headline-sm text-outline truncate">Generating handover report</span>
-<span class="font-label-code-sm text-label-code-sm text-outline shrink-0">PENDING</span>
-</div>
-<p class="font-label-code-sm text-label-code-sm text-outline mt-0.5">Waiting for test run completion</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Right Column: Live Monospace Execution Log Terminal (7 Cols) -->
-<div class="lg:col-span-7 bg-surface-container rounded-xl overflow-hidden shadow-sm flex flex-col">
-<!-- Terminal Header Bar -->
-<div class="bg-surface-container-high px-4 py-3 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="flex items-center gap-1.5">
-<div class="w-3 h-3 rounded-full bg-[#ef4444]"></div>
-<div class="w-3 h-3 rounded-full bg-[#f59e0b]"></div>
-<div class="w-3 h-3 rounded-full bg-[#10b981]"></div>
-</div>
-<div class="flex items-center gap-1.5 ml-2 font-label-code-sm text-label-code-sm text-on-surface">
-<span class="material-symbols-outlined text-[16px] text-tertiary">terminal</span>
-<span>Docker Execution Logs (live stream)</span>
-</div>
-</div>
-<div class="flex items-center gap-2">
-<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-tertiary font-label-code-sm text-label-code-sm">
-<span class="h-1.5 w-1.5 rounded-full bg-tertiary animate-pulse"></span>
-            Auto-scroll: ON
-          </span>
-<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-variant hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm transition-colors" id="copy-log-btn">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-<span>Copy Logs</span>
-</button>
-</div>
-</div>
-<!-- Terminal Body -->
-<div class="p-4 bg-[#07090e] font-label-code-sm text-label-code-sm text-on-surface font-mono overflow-y-auto max-h-[460px] flex flex-col gap-1.5 leading-relaxed" id="terminal-body">
-<div class="flex items-start gap-2">
-<span class="text-outline select-none w-7 text-right">01</span>
-<span class="text-primary font-semibold">[INFO]</span>
-<span class="text-outline">14:32:01.102</span>
-<span class="text-on-surface-variant">Initializing sandboxed runner container ID: bp-sandbox-9a7f</span>
-</div>
-<div class="flex items-start gap-2">
-<span class="text-outline select-none w-7 text-right">02</span>
-<span class="text-primary font-semibold">[INFO]</span>
-<span class="text-outline">14:32:01.340</span>
-<span class="text-on-surface-variant">Memory limit: 512MB | CPU quota: 1.0 core | Network: restricted</span>
-</div>
-<div class="flex items-start gap-2">
-<span class="text-outline select-none w-7 text-right">03</span>
-<span class="text-primary font-semibold">[INFO]</span>
-<span class="text-outline">14:32:02.012</span>
-<span class="text-on-surface-variant">Verifying package.json scripts: "test": "jest --runInBand"</span>
-</div>
-<div class="flex items-start gap-2">
-<span class="text-outline select-none w-7 text-right">04</span>
-<span class="text-tertiary font-semibold">[INFO]</span>
-<span class="text-outline">14:32:16.890</span>
-<span class="text-tertiary">Dependencies installed cleanly via npm ci (exit code 0)</span>
-</div>
-<div class="flex items-start gap-2">
-<span class="text-outline select-none w-7 text-right">05</span>
-<span class="text-secondary font-semibold">[STDOUT]</span>
-<span class="text-outline">14:32:17.200</span>
-<span class="text-secondary">&gt; jest --runInBand</span>
-</div>
-<div class="flex items-start gap-2 bg-tertiary-container/10 -mx-4 px-4 py-0.5">
-<span class="text-outline select-none w-7 text-right">06</span>
-<span class="text-secondary font-semibold">[STDOUT]</span>
-<span class="text-outline">14:32:19.412</span>
-<span class="text-tertiary font-medium">PASS tests/unit/auth.service.test.ts (2.1s)</span>
-</div>
-<div class="flex items-start gap-2 bg-tertiary-container/10 -mx-4 px-4 py-0.5">
-<span class="text-outline select-none w-7 text-right">07</span>
-<span class="text-secondary font-semibold">[STDOUT]</span>
-<span class="text-outline">14:32:23.890</span>
-<span class="text-tertiary font-medium">PASS tests/unit/payment.calculator.test.ts (1.8s)</span>
-</div>
-<div class="flex items-start gap-2 animate-pulse bg-primary/5 -mx-4 px-4 py-0.5">
-<span class="text-outline select-none w-7 text-right">08</span>
-<span class="text-primary font-semibold">[INFO]</span>
-<span class="text-outline">14:32:28.100</span>
-<span class="text-primary">Running test suite 3 of 4: tests/integration/order.flow.test.ts...</span>
-</div>
-<div class="flex items-start gap-2 mt-2 pt-2 text-outline font-label-code-sm text-label-code-sm">
-<span class="text-outline select-none w-7 text-right">..</span>
-<span class="flex items-center gap-1.5 text-outline">
-<span class="inline-block w-2 h-4 bg-primary animate-ping"></span>
-            Awaiting process output signal...
-          </span>
-</div>
-</div>
-<!-- Container Specs Micro Footer -->
-<div class="bg-surface-container-low px-4 py-2 flex items-center justify-between text-outline font-label-code-sm text-label-code-sm">
-<div class="flex items-center gap-3">
-<span>Target Runtime: <strong class="text-on-surface">Node.js 20.11-alpine</strong></span>
-<span>•</span>
-<span>Sandbox ID: <strong class="text-on-surface">bp-scan-8f92a</strong></span>
-</div>
-<div class="flex items-center gap-2">
-<span class="text-tertiary font-mono">1.28 MB memory used</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Bottom Action Bar & Status -->
-<div class="bg-surface-container rounded-xl p-space-md shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
-<div class="flex items-center gap-4">
-<div class="flex items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-lg">
+<div class="flex items-center gap-space-md flex-shrink-0">
+<div class="px-space-md py-2 rounded bg-surface-container-low flex items-center gap-space-sm shadow-sm">
 <span class="relative flex h-2.5 w-2.5">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
 </span>
-<span class="font-label-code-md text-label-code-md text-on-surface font-semibold" id="elapsed-time">Time Elapsed: 00:36</span>
+<span class="font-label-technical text-label-technical font-semibold text-primary uppercase tracking-tight" id="status-headline">
+              SCANNING IN PROGRESS — 68% COMPLETE
+            </span>
 </div>
-<span class="text-outline font-body-sm text-body-sm hidden md:inline">
-        Scanning will auto-finalize and generate readiness badge score.
-      </span>
+<button class="font-label-technical text-label-technical px-space-md py-2 rounded bg-surface-container text-on-surface hover:bg-error-container hover:text-on-error-container transition-colors inline-flex items-center gap-1.5 shadow-sm" id="abort-btn" onclick="triggerAbortConfirmation()">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+<span>Abort Scan</span>
+</button>
 </div>
-<div class="flex items-center gap-3">
-<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-error/10 hover:bg-error/20 text-error font-body-sm text-body-sm font-medium transition-colors" id="cancel-scan-btn">
-<span class="material-symbols-outlined text-[18px]">cancel</span>
-<span>Cancel Scan</span>
-</button>
-<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-high text-outline hover:text-on-surface font-body-sm text-body-sm transition-colors">
-<span class="material-symbols-outlined text-[18px]">open_in_new</span>
-<span>View Sandbox Details</span>
-</button>
+</div>
+<!-- Telemetry Meta Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm pt-space-md">
+<div class="p-space-sm bg-surface-container-low rounded">
+<div class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Identifier</div>
+<div class="font-label-technical text-label-technical text-primary font-semibold">JOB_ID: #BP-94021</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded">
+<div class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Archive Payload</div>
+<div class="font-label-technical text-label-technical text-primary font-semibold">14.8 MB (TAR.GZ)</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded">
+<div class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Runtime Target</div>
+<div class="font-label-technical text-label-technical text-primary font-semibold">Node.js 20.12 LTS</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded">
+<div class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Environment Isolation</div>
+<div class="font-label-technical text-label-technical text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified_user</span>
+            Firecracker MicroVM
+          </div>
+</div>
+</div>
+</div>
+<!-- Active Stage & Dimensional Unbundling Visualization -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Stage Indicator & Unpack Graphic (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">[ PROCESS STAGE ]</span>
+<span class="font-label-technical text-label-technical px-2 py-0.5 rounded bg-secondary-container/20 text-secondary font-semibold">STAGE 03 / 04</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-tight">AIR-GAPPED SANDBOX TEST EXECUTION</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Deterministic compilation and runner validation under kernel-enforced ingress/egress lock.</p>
+</div>
+<!-- Radial Metric & Vector Layers -->
+<div class="my-space-md py-space-md flex flex-col items-center justify-center relative">
+<div class="relative w-48 h-48 flex items-center justify-center">
+<!-- Inline SVG Gauge -->
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 120 120">
+<circle class="text-surface-container" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary-container transition-all duration-700 ease-out" cx="60" cy="60" fill="none" id="scan-gauge" r="50" stroke="currentColor" stroke-dasharray="314.159" stroke-dashoffset="100.5" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase tracking-wider">Audit Gauge</span>
+<span class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter" id="progress-val-text">68%</span>
+<span class="font-label-technical text-label-technical text-secondary uppercase font-semibold">Step 3 of 4</span>
+</div>
+</div>
+<!-- Unbundled Layer Hierarchy -->
+<div class="w-full mt-space-md space-y-1.5 font-label-technical text-label-technical">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low text-on-surface">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">folder_zip</span>
+<span>/archive-root/manifest</span>
+</span>
+<span class="text-secondary font-semibold">UNPACKED</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low text-on-surface">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">lock</span>
+<span>/node_modules/.pnpm-lock</span>
+</span>
+<span class="text-secondary font-semibold">LOCKED</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-secondary-container/20 text-on-surface font-semibold">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary animate-spin">refresh</span>
+<span>/vitest-runner:sandbox-vm</span>
+</span>
+<span class="text-secondary">ACTIVE TEST</span>
+</div>
+</div>
+</div>
+<!-- Telemetry Indicators -->
+<div class="pt-space-sm grid grid-cols-3 gap-space-xs text-center font-label-technical text-caption-caps">
+<div class="p-2 rounded bg-surface-container">
+<div class="text-on-surface-variant">MEM BUFFER</div>
+<div class="text-primary font-semibold">184 / 512 MB</div>
+</div>
+<div class="p-2 rounded bg-surface-container">
+<div class="text-on-surface-variant">CPU ALLOC</div>
+<div class="text-primary font-semibold">42% LOAD</div>
+</div>
+<div class="p-2 rounded bg-surface-container">
+<div class="text-on-surface-variant">NET EGRESS</div>
+<div class="text-secondary font-semibold">0 KB/S [ISOLATED]</div>
+</div>
+</div>
+</div>
+<!-- Verification Check Matrix (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight">Handover Verification Matrix</h3>
+<span class="font-caption-caps text-caption-caps px-2 py-0.5 rounded bg-surface-container text-on-surface-variant uppercase">Spec ISO-25010</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Check 01: Manifest -->
+<div class="p-space-md rounded-lg bg-surface-container-low transition-colors duration-150">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-technical text-caption-caps px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">CHECK 01</span>
+<span class="font-headline-sm text-body-lg text-primary font-semibold">Manifest &amp; AST Structure</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    14/14 Rules Clean. <code class="font-label-technical text-label-technical bg-surface-container px-1 rounded">package.json</code> validated, recursive syntax scan passed with zero phantom paths or cyclic inclusions.
+                  </p>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container/20 text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-technical text-label-technical font-semibold uppercase">PASSED</span>
+</div>
+</div>
+</div>
+<!-- Check 02: Lockfile Parity -->
+<div class="p-space-md rounded-lg bg-surface-container-low transition-colors duration-150">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-technical text-caption-caps px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">CHECK 02</span>
+<span class="font-headline-sm text-body-lg text-primary font-semibold">Lockfile Parity &amp; Integrity Hashes</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    38/38 SHA-512 hashes verified identical to official registry ledger. 0 semver floating vulnerabilities flagged.
+                  </p>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container/20 text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-technical text-label-technical font-semibold uppercase">PASSED</span>
+</div>
+</div>
+</div>
+<!-- Check 03: Sandbox Execution (Running) -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest shadow-md transition-colors duration-150">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-technical text-caption-caps px-1.5 py-0.5 rounded bg-primary text-on-primary">CHECK 03</span>
+<span class="font-headline-sm text-body-lg text-primary font-semibold">Clean Sandbox Execution</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+<span class="font-label-technical text-label-technical text-on-surface-variant">pnpm install --frozen-lockfile:</span> <span class="font-semibold text-secondary">DONE (410ms)</span>. Running vitest suites in isolated non-root firecracker container...
+                  </p>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-2 overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full transition-all duration-300" style="width: 66.6%;"></div>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded bg-primary text-on-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[16px] animate-spin text-secondary-container">progress_activity</span>
+<span class="font-label-technical text-label-technical font-semibold uppercase">RUNNING</span>
+</div>
+</div>
+</div>
+<!-- Check 04: Documentation Verification -->
+<div class="p-space-md rounded-lg bg-surface-container-low opacity-80 transition-colors duration-150">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-technical text-caption-caps px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">CHECK 04</span>
+<span class="font-headline-sm text-body-lg text-on-surface-variant font-semibold">Documentation &amp; Hook Verification</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Queued: Parse README installation directives, validate CI hooks, and ensure entrypoint schema consistency.
+                  </p>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-label-technical text-label-technical font-semibold uppercase">PENDING</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-caption-caps text-caption-caps">
+<span>PARALLEL RUNNER PID: #882041</span>
+<span>ESTIMATED TIME REMAINING: ~14s</span>
+</div>
+</div>
+</div>
+<!-- Live Diagnostic Log & System Trace Console -->
+<div class="w-full bg-primary text-on-primary rounded-xl overflow-hidden shadow-xl">
+<!-- Terminal Bar -->
+<div class="bg-primary-container px-space-md py-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary-fixed"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline"></div>
+</div>
+<span class="font-label-technical text-label-technical text-on-primary-container tracking-wider uppercase">CONSOLE: FIRECRACKER-RUNNER // TTY-0</span>
+</div>
+<div class="flex items-center gap-space-md font-label-technical text-caption-caps text-on-primary-container">
+<span class="hidden sm:inline">BUFFER_STREAM: 2.4 MB/s</span>
+<span class="inline-flex items-center gap-1 text-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+            LIVE DOCK
+          </span>
+</div>
+</div>
+<!-- Log Output Surface -->
+<div class="p-space-md font-label-technical text-label-technical space-y-1 overflow-y-auto max-h-64 select-text" id="log-window">
+<div class="text-on-primary-container"><span class="text-outline">[00:00.012]</span> INFO: Decompressing 1,420 files into client memory buffer...</div>
+<div class="text-on-primary-container"><span class="text-outline">[00:00.180]</span> <span class="text-secondary-fixed">PASS</span>: AST syntax check: 18 levels, zero circular references.</div>
+<div class="text-on-primary-container"><span class="text-outline">[00:00.410]</span> <span class="text-secondary-fixed">PASS</span>: package-lock.json v3 hashes verified against registry ledger.</div>
+<div class="text-on-primary-container"><span class="text-outline">[00:01.020]</span> EXEC: Spawning ephemeral microVM container (512MB RAM, 1 vCPU, 0 egress).</div>
+<div class="text-on-primary-container"><span class="text-outline">[00:01.480]</span> EXEC: Running test suite: vitest run --reporter=verbose...</div>
+<div class="text-on-primary-container"><span class="text-outline">[00:01.910]</span> TRACE: 28/42 test suites completed successfully...</div>
+<div class="text-on-primary-container" id="streamed-log-1"><span class="text-outline">[00:02.140]</span> TRACE: suite 'checkout/card-tokenize.spec.ts' - 14 passing (28ms)</div>
+<div class="text-on-primary-container" id="streamed-log-2"><span class="text-outline">[00:02.390]</span> TRACE: suite 'checkout/inventory-mutex.spec.ts' - 9 passing (14ms)</div>
+<div class="text-secondary-fixed animate-pulse" id="cursor-line"><span class="text-outline">[00:02.502]</span> &gt; Running suite: 'checkout/idempotency.spec.ts' [ACTIVE] _</div>
+</div>
+<!-- Real-time Diagnostic Meters -->
+<div class="bg-primary-container/60 px-space-md py-space-sm grid grid-cols-2 md:grid-cols-4 gap-space-sm font-label-technical text-caption-caps text-on-primary-container">
+<div>SYS LOAD: <span class="text-on-primary font-semibold">0.42 0.38 0.19</span></div>
+<div>ISOLATION HASH: <span class="text-on-primary font-semibold">4f8a...c3e1</span></div>
+<div>VIRT ROOT: <span class="text-on-primary font-semibold">/var/sandbox/chroot</span></div>
+<div class="text-right">AIR-GAP EGRESS: <span class="text-secondary-fixed font-semibold">DENY ALL</span></div>
+</div>
+</div>
+<!-- Editorial Honest Data Clarification -->
+<div class="w-full py-space-xs flex items-center justify-between text-on-surface-variant font-caption-caps text-caption-caps">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+<span>Telemetry reflects real-time sandbox execution. Verification runs air-gapped without host credentials.</span>
+</div>
+<div class="hidden md:block">
+        ISO/IEC 25010 AUDIT SPECIFICATION VERIFIED
+      </div>
 </div>
 </div>
 </div>
 <script>
-  // Elapsed timer micro-interaction
-  let seconds = 36;
-  const elapsedElem = document.getElementById('elapsed-time');
-  if (elapsedElem) {
-    setInterval(() => {
-      seconds++;
-      const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
-      const secs = String(seconds % 60).padStart(2, '0');
-      elapsedElem.textContent = `Time Elapsed: ${mins}:${secs}`;
-    }, 1000);
-  }
-
-  // Copy Logs interaction
-  const copyBtn = document.getElementById('copy-log-btn');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      const originalText = copyBtn.innerHTML;
-      copyBtn.innerHTML = '<span class="material-symbols-outlined text-[14px] text-tertiary">done</span><span class="text-tertiary">Copied</span>';
+  function triggerAbortConfirmation() {
+    const btn = document.getElementById('abort-btn');
+    if (btn.innerText.includes('Confirm')) {
+      btn.innerText = 'Aborting...';
+      btn.classList.add('bg-error', 'text-on-error');
       setTimeout(() => {
-        copyBtn.innerHTML = originalText;
-      }, 2000);
-    });
+        window.location.reload();
+      }, 700);
+    } else {
+      btn.innerText = 'Confirm Abort?';
+      btn.classList.add('bg-error-container', 'text-on-error-container');
+    }
   }
 
-  // Cancel Scan dialog trigger
-  const cancelBtn = document.getElementById('cancel-scan-btn');
-  if (cancelBtn) {
-    cancelBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to terminate the Docker sandbox audit for api-service-handover-v2.0.zip?')) {
-        cancelBtn.disabled = true;
-        cancelBtn.textContent = 'Terminating container...';
+  // Realistic terminal trace simulation
+  (function simulateTerminalTelemetry() {
+    const logBox = document.getElementById('log-window');
+    const cursorLine = document.getElementById('cursor-line');
+    const progressVal = document.getElementById('progress-val-text');
+    const statusHeadline = document.getElementById('status-headline');
+    const gauge = document.getElementById('scan-gauge');
+    
+    let currentPct = 68;
+    const testCases = [
+      "suite 'checkout/idempotency.spec.ts' - 18 passing (32ms)",
+      "suite 'checkout/tax-calculator.spec.ts' - 11 passing (19ms)",
+      "suite 'checkout/webhook-signature.spec.ts' - 6 passing (8ms)",
+      "all 42 test suites completed with 0 errors.",
+      "STAGE 03 COMPLETED. Moving to STAGE 04: Documentation Verification..."
+    ];
+
+    let step = 0;
+    const interval = setInterval(() => {
+      if (step >= testCases.length) {
+        clearInterval(interval);
+        return;
       }
-    });
-  }
-</script></div></main></div></body></html>
+      const timeOffset = (2.600 + (step * 0.42)).toFixed(3);
+      const newEntry = document.createElement('div');
+      newEntry.className = 'text-on-primary-container';
+      newEntry.innerHTML = `<span class="text-outline">[00:0${timeOffset}]</span> TRACE: ${testCases[step]}`;
+      logBox.insertBefore(newEntry, cursorLine);
+      logBox.scrollTop = logBox.scrollHeight;
+
+      currentPct += 4;
+      if (currentPct > 84) currentPct = 84;
+      if (progressVal) progressVal.innerText = currentPct + '%';
+      if (statusHeadline) statusHeadline.innerText = `SCANNING IN PROGRESS — ${currentPct}% COMPLETE`;
+      
+      if (gauge) {
+        // Circumference is ~314.159. 
+        const offset = 314.159 * (1 - (currentPct / 100));
+        gauge.style.strokeDashoffset = offset;
+      }
+
+      step++;
+    }, 2800);
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest mt-space-xl shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-lg"><div class="md:col-span-2"><div class="flex items-center gap-2 mb-space-sm"><span class="font-headline-sm text-headline-sm text-primary uppercase">BuildProof</span><span class="font-caption-caps text-caption-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">v4.8.2-prod</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">Architectural verification and technical quality audit suite for software deliverables. Verified conformance according to ISO/IEC 25010 systems and software quality models.</p></div><div><div class="font-caption-caps text-caption-caps text-on-surface-variant mb-space-sm uppercase">Standards &amp; Specs</div><ul class="space-y-space-xs font-body-sm text-body-sm"><li class="text-on-surface-variant hover:text-on-surface">ISO/IEC 25010 Quality Model</li><li class="text-on-surface-variant hover:text-on-surface">C4 Architectural Schematics</li><li class="text-on-surface-variant hover:text-on-surface">SOC2 Type II Isolation</li><li class="text-on-surface-variant hover:text-on-surface">NIST SP 800-218 SSDF</li></ul></div><div><div class="font-caption-caps text-caption-caps text-on-surface-variant mb-space-sm uppercase">Engine Architecture</div><ul class="space-y-space-xs font-label-technical text-label-technical"><li class="text-on-surface-variant">RUN: node-v20.12.2-lts</li><li class="text-on-surface-variant">BOX: gVisor-sandboxed</li><li class="text-on-surface-variant">HASH: sha256-verified</li><li class="text-on-surface-variant">LAT: &lt;18ms deterministic</li></ul></div></div><div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm font-caption-caps text-caption-caps text-on-surface-variant"><div class="flex items-center gap-space-md"><span>© 2025 BUILDPROOF ARCHITECTURE LABS</span><span>·</span><span>ALL RIGHTS RESERVED</span></div><div class="flex items-center gap-space-md"><a class="hover:text-on-surface transition-colors" data-path="overview" href="#">TERMS OF VERIFICATION</a><a class="hover:text-on-surface transition-colors" data-path="overview" href="#">SECURITY TELEMETRY</a><a class="hover:text-on-surface transition-colors" data-path="overview" href="#">ISO AUDIT LOGS</a></div></div></div></footer></body></html>

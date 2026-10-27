@@ -2,18 +2,20 @@
  * components/ScanResult.jsx
  *
  * What this file does:
- *   Results view matching both Stitch reference designs:
- *     - "Scan result completed" for `ready`
- *     - "ScanResult Broken" for `not_ready`
- *     - Custom styled variant for `partially_verified`
+ *   BuildProof Detailed, Judge-Friendly Handover Results View.
+ *   Provides immediate executive triage for non-technical judges and
+ *   deep technical diagnostics (findings, evidence, expandable logs, commands)
+ *   for software engineers.
  *
  * Capabilities:
- *   - Displays overall verdict badge and explanation.
- *   - Summary counter pills (Passed, Failed, Not Verified).
- *   - Detailed checklist cards for static inspections and Docker sandbox runs.
- *   - Expandable log viewer per check (fetching real stdout/stderr via /api/scans/:id/logs/:checkId).
- *   - Direct download links for report.json and report.html.
- *   - "Verify another project" action to reset back to Dashboard.
+ *   - Overall verdict banner with plain-English executive assessment.
+ *   - Transparent Handover Health Score (% verified checks passed).
+ *   - Critical Blockers Callout (shown first when verdict is not ready).
+ *   - Recommended Next Action banner with copyable terminal commands.
+ *   - Status filter tabs (All, Critical Blockers, Passed, Not Verified).
+ *   - Expandable check findings with Plain-English Diagnosis & Handover Impact.
+ *   - Inline terminal logs per check (fetched on-demand from /api/scans/:id/logs/:checkId).
+ *   - Direct download links for comprehensive standalone report.html and report.json.
  */
 
 import React, { useState } from 'react';
@@ -23,17 +25,31 @@ export default function ScanResult({ scanRecord, onReset }) {
   const [expandedLogCheckId, setExpandedLogCheckId] = useState(null);
   const [checkLogs, setCheckLogs] = useState({});
   const [logLoading, setLogLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('all'); // 'all' | 'blockers' | 'passed' | 'notVerified'
 
   const scanId = scanRecord?.scanId || 'unknown-scan';
   const projectName = scanRecord?.projectName || 'Project Archive';
   const verdict = scanRecord?.verdict || 'not_ready';
   const checks = Array.isArray(scanRecord?.checks) ? scanRecord.checks : [];
   const warnings = Array.isArray(scanRecord?.warnings) ? scanRecord.warnings : [];
+  const ecosystem = scanRecord?.ecosystem || scanRecord?.scanResult?.ecosystem || 'node';
+  const isPython = ecosystem === 'python';
+  const ecosystemLabel = isPython ? 'Deterministic Python Sign-Off' : 'Deterministic Node.js Sign-Off';
+  const defaultImage = isPython ? 'python:3.11-alpine' : 'node:20-alpine';
+  const sandboxImage = scanRecord?.environment?.image || defaultImage;
+
+  // Use normalized reportData from backend when available
+  const reportData = scanRecord?.reportData;
+  const executiveSummary = reportData?.executiveSummary;
+  const remediationGuide = reportData?.remediationGuide || [];
 
   // Summary counts
   const passedCount = checks.filter((c) => c.status === 'Passed').length;
   const failedCount = checks.filter((c) => c.status === 'Failed').length;
   const notVerifiedCount = checks.filter((c) => c.status === 'Not Verified').length;
+  const blockersCount = checks.filter((c) => c.status === 'Failed' && c.critical).length;
+  const totalChecks = checks.length;
+  const score = totalChecks > 0 ? Math.round((passedCount / totalChecks) * 100) : 0;
 
   // Toggle log viewer for a check
   async function toggleLog(checkId) {
@@ -68,6 +84,7 @@ export default function ScanResult({ scanRecord, onReset }) {
       iconContainer: 'bg-tertiary/15 border-tertiary/40 text-tertiary shadow-[0_0_15px_rgba(78,222,163,0.2)]',
       icon: 'verified_user',
       description:
+        executiveSummary?.verdictExplanation ||
         'All critical project integrity and sandboxed test execution checks passed successfully. The archive is clean and reproducible.',
     },
     not_ready: {
@@ -77,6 +94,7 @@ export default function ScanResult({ scanRecord, onReset }) {
       iconContainer: 'bg-error-container/40 text-error border-error/40',
       icon: 'gpp_bad',
       description:
+        executiveSummary?.verdictExplanation ||
         'One or more critical checks failed during sandbox verification. Review the failure diagnostics and suggested actions below.',
     },
     partially_verified: {
@@ -86,11 +104,20 @@ export default function ScanResult({ scanRecord, onReset }) {
       iconContainer: 'bg-amber-400/15 border-amber-400/40 text-amber-300',
       icon: 'pending_actions',
       description:
+        executiveSummary?.verdictExplanation ||
         'Installation passed, but tests or documentation could not be fully verified (e.g. placeholder test script or missing README).',
     },
   };
 
   const vTheme = verdictThemes[verdict] || verdictThemes.not_ready;
+
+  // Filter checks according to active tab
+  const filteredChecks = checks.filter((c) => {
+    if (activeTab === 'blockers') return c.status === 'Failed';
+    if (activeTab === 'passed') return c.status === 'Passed';
+    if (activeTab === 'notVerified') return c.status === 'Not Verified';
+    return true;
+  });
 
   return (
     <div className="flex flex-col w-full gap-8 max-w-6xl mx-auto py-2">
@@ -98,12 +125,12 @@ export default function ScanResult({ scanRecord, onReset }) {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-outline-variant/30">
         <div className="flex flex-col gap-1.5 min-w-0">
           <div className="flex items-center gap-2 font-mono text-xs text-outline">
-            <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-surface-container text-primary font-medium tracking-wide">
-              SCAN-ID
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-surface-container text-primary font-medium tracking-wide uppercase">
+              {ecosystem}
             </span>
             <span className="text-on-surface font-mono">{scanId.slice(0, 8)}</span>
             <span>•</span>
-            <span>Deterministic Node.js Sign-Off</span>
+            <span>{ecosystemLabel}</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="material-symbols-outlined text-primary text-[28px]">folder_zip</span>
@@ -120,15 +147,17 @@ export default function ScanResult({ scanRecord, onReset }) {
             target="_blank"
             rel="noopener noreferrer"
             className="px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 text-on-surface text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="Open comprehensive standalone HTML report"
           >
             <span className="material-symbols-outlined text-[16px]">html</span>
-            <span>Download HTML</span>
+            <span>Open Full HTML Report</span>
           </a>
 
           <a
             href={getReportJsonUrl(scanId)}
             download
             className="px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 text-on-surface text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="Download structured machine-readable JSON report"
           >
             <span className="material-symbols-outlined text-[16px]">data_object</span>
             <span>Download JSON</span>
@@ -145,7 +174,7 @@ export default function ScanResult({ scanRecord, onReset }) {
         </div>
       </div>
 
-      {/* Primary Verdict Banner */}
+      {/* Primary Verdict Banner & Executive Assessment */}
       <div className={`relative overflow-hidden rounded-xl bg-surface-container-low p-6 md:p-8 border ${vTheme.bannerBg}`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
           <div className="flex items-start gap-5 max-w-3xl">
@@ -154,13 +183,13 @@ export default function ScanResult({ scanRecord, onReset }) {
             >
               <span className="material-symbols-outlined text-[32px]">{vTheme.icon}</span>
             </div>
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
               <div className="flex items-center gap-3 flex-wrap">
                 <span className={`font-mono text-sm px-3 py-1 rounded border font-semibold tracking-wider uppercase ${vTheme.badgeClass}`}>
                   {vTheme.title}
                 </span>
                 <span className="font-mono text-xs text-outline">
-                  Sandbox: node:20-alpine • 120s limit • 512 MB RAM • 1 CPU
+                  Sandbox: {sandboxImage} • 120s limit • 512 MB RAM • 1 CPU • Isolated Network
                 </span>
               </div>
               <p className="text-sm text-on-surface-variant leading-relaxed">
@@ -169,30 +198,75 @@ export default function ScanResult({ scanRecord, onReset }) {
             </div>
           </div>
 
-          {/* Quick Triage Stats Matrix */}
+          {/* Handover Score & Stats Matrix */}
           <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-outline-variant/20">
-            <div className="flex flex-col items-center bg-surface-container px-4 py-2.5 rounded-lg border border-outline-variant/30 min-w-[80px]">
+            <div className="flex flex-col items-center bg-surface-container px-4 py-2.5 rounded-lg border border-outline-variant/30 min-w-[90px]">
+              <span className="font-mono text-[11px] text-outline uppercase tracking-wider">Health Score</span>
+              <span className={`text-xl font-black ${verdict === 'ready' ? 'text-tertiary' : verdict === 'not_ready' ? 'text-error' : 'text-amber-300'}`}>
+                {score}%
+              </span>
+            </div>
+            <div className="flex flex-col items-center bg-surface-container px-3.5 py-2.5 rounded-lg border border-outline-variant/30 min-w-[75px]">
               <span className="font-mono text-xs text-outline">Passed</span>
               <span className="text-xl text-tertiary font-bold">{passedCount}</span>
             </div>
-            <div className="flex flex-col items-center bg-surface-container px-4 py-2.5 rounded-lg border border-outline-variant/30 min-w-[80px]">
+            <div className="flex flex-col items-center bg-surface-container px-3.5 py-2.5 rounded-lg border border-outline-variant/30 min-w-[75px]">
               <span className="font-mono text-xs text-outline">Failed</span>
               <span className="text-xl text-error font-bold">{failedCount}</span>
             </div>
-            <div className="flex flex-col items-center bg-surface-container px-4 py-2.5 rounded-lg border border-outline-variant/30 min-w-[80px]">
-              <span className="font-mono text-xs text-outline">Not Verified</span>
+            <div className="flex flex-col items-center bg-surface-container px-3.5 py-2.5 rounded-lg border border-outline-variant/30 min-w-[75px]">
+              <span className="font-mono text-xs text-outline">Unverified</span>
               <span className="text-xl text-amber-300 font-bold">{notVerifiedCount}</span>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Critical Blockers Alert Callout (shown first when failures exist) */}
+      {blockersCount > 0 && (
+        <div className="p-4 md:p-5 rounded-xl bg-error-container/20 border-2 border-error/40 flex flex-col gap-2.5 shadow-sm">
+          <div className="flex items-center gap-2 text-error font-bold text-sm">
+            <span className="material-symbols-outlined text-[20px]">error</span>
+            <span>Critical Handover Blockers ({blockersCount})</span>
+          </div>
+          <p className="text-xs text-on-surface-variant leading-relaxed">
+            The project cannot be signed off because the following critical check(s) failed. Fix these items before presenting or deploying:
+          </p>
+          <ul className="list-disc list-inside space-y-1 font-mono text-xs text-error font-medium">
+            {checks
+              .filter((c) => c.status === 'Failed' && c.critical)
+              .map((c) => (
+                <li key={c.id}>
+                  <strong>{c.title || c.name}:</strong> {c.summary}
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Recommended Next Action Banner */}
+      {executiveSummary?.nextAction && (
+        <div className="p-4 rounded-xl bg-surface-container-high border border-outline-variant/40 flex items-start gap-3 text-xs">
+          <span className="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">
+            lightbulb
+          </span>
+          <div className="flex flex-col gap-1">
+            <strong className="text-on-surface text-xs uppercase tracking-wider font-mono">
+              Recommended Next Action:
+            </strong>
+            <p className="text-on-surface-variant leading-relaxed">
+              {executiveSummary.nextAction}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Warnings & Observations Section (if present) */}
       {warnings.length > 0 && (
         <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-400/30">
           <div className="flex items-center gap-2 mb-2 text-amber-300 font-semibold text-sm">
             <span className="material-symbols-outlined text-[18px]">warning</span>
-            <span>Observations &amp; Warnings</span>
+            <span>Observations &amp; Warnings ({warnings.length})</span>
           </div>
           <ul className="list-disc list-inside space-y-1 text-xs text-amber-200/90 font-mono">
             {warnings.map((w, i) => (
@@ -202,19 +276,64 @@ export default function ScanResult({ scanRecord, onReset }) {
         </div>
       )}
 
-      {/* Main Checklist Section */}
+      {/* Main Checklist Section with Filter Tabs */}
       <section className="flex flex-col gap-4">
-        <div className="flex items-center justify-between px-1">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1 border-b border-outline-variant/20 pb-3">
           <span className="text-xs uppercase tracking-wider text-outline font-semibold">
             Inspection Suite Execution Results
           </span>
-          <span className="font-mono text-xs text-outline">
-            Total Checks: {checks.length}
-          </span>
+
+          {/* Filter Tabs */}
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <button
+              type="button"
+              onClick={() => setActiveTab('all')}
+              className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors cursor-pointer ${
+                activeTab === 'all'
+                  ? 'bg-primary text-on-primary font-bold'
+                  : 'bg-surface-container text-on-surface hover:bg-surface-container-high'
+              }`}
+            >
+              All ({checks.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('blockers')}
+              className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors cursor-pointer ${
+                activeTab === 'blockers'
+                  ? 'bg-error text-white font-bold'
+                  : 'bg-surface-container text-on-surface hover:bg-surface-container-high'
+              }`}
+            >
+              Failed ({failedCount})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('passed')}
+              className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors cursor-pointer ${
+                activeTab === 'passed'
+                  ? 'bg-tertiary text-black font-bold'
+                  : 'bg-surface-container text-on-surface hover:bg-surface-container-high'
+              }`}
+            >
+              Passed ({passedCount})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('notVerified')}
+              className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors cursor-pointer ${
+                activeTab === 'notVerified'
+                  ? 'bg-amber-400 text-black font-bold'
+                  : 'bg-surface-container text-on-surface hover:bg-surface-container-high'
+              }`}
+            >
+              Unverified ({notVerifiedCount})
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-4">
-          {checks.map((chk) => {
+          {filteredChecks.map((chk) => {
             const isFailed = chk.status === 'Failed';
             const isPassed = chk.status === 'Passed';
             const isNotVerified = chk.status === 'Not Verified';
@@ -231,7 +350,7 @@ export default function ScanResult({ scanRecord, onReset }) {
                     : 'border-outline-variant/30'
                 }`}
               >
-                <div className="flex items-center justify-between gap-3 mb-2">
+                <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                   <div className="flex items-center gap-3">
                     <span
                       className={`material-symbols-outlined text-[22px] ${
@@ -247,6 +366,11 @@ export default function ScanResult({ scanRecord, onReset }) {
                     <span className="font-semibold text-sm text-on-surface">
                       {chk.title || chk.name}
                     </span>
+                    {chk.critical && (
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container-high text-outline uppercase">
+                        Critical
+                      </span>
+                    )}
                   </div>
 
                   <span
@@ -268,7 +392,7 @@ export default function ScanResult({ scanRecord, onReset }) {
 
                 {/* Command & Execution Details */}
                 {chk.command && (
-                  <div className="flex items-center gap-3 font-mono text-xs text-outline mb-2">
+                  <div className="flex items-center gap-3 font-mono text-xs text-outline mb-2 flex-wrap">
                     <span>
                       Command: <code className="text-on-surface bg-surface-container-low px-1.5 py-0.5 rounded">{chk.command}</code>
                     </span>
@@ -300,7 +424,7 @@ export default function ScanResult({ scanRecord, onReset }) {
                   </div>
                 )}
 
-                {/* Diagnosis / Next Step */}
+                {/* Diagnosis / Plain-English Explanation */}
                 {chk.explanation && (
                   <div className="mt-2 p-2.5 rounded-lg bg-surface-container-low border border-outline-variant/30 text-xs font-mono">
                     <span className="text-error font-semibold">Diagnosis: </span>
@@ -308,6 +432,7 @@ export default function ScanResult({ scanRecord, onReset }) {
                   </div>
                 )}
 
+                {/* Suggested Action */}
                 {chk.nextStep && (
                   <div className="mt-2 p-2.5 rounded-lg bg-surface-container-low border border-outline-variant/30 text-xs font-mono">
                     <span className="text-tertiary font-semibold">Suggested Action: </span>
@@ -346,7 +471,43 @@ export default function ScanResult({ scanRecord, onReset }) {
         </div>
       </section>
 
-      {/* Disclaimer Card */}
+      {/* Remediation Guide Section (if repairs needed) */}
+      {remediationGuide.length > 0 && (
+        <section className="flex flex-col gap-3 p-5 rounded-xl bg-surface-container border border-outline-variant/30">
+          <div className="flex items-center gap-2 text-sm font-bold text-on-surface">
+            <span className="material-symbols-outlined text-[20px] text-primary">build</span>
+            <span>Step-by-Step Remediation Guide ({remediationGuide.length} Actions)</span>
+          </div>
+          <p className="text-xs text-on-surface-variant">
+            Follow these verified steps in your local repository to repair reported defects before final handover:
+          </p>
+          <div className="space-y-3 mt-1">
+            {remediationGuide.map((step) => (
+              <div key={step.step} className="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20 text-xs">
+                <div className="flex items-center gap-2 mb-1.5 font-semibold text-on-surface">
+                  <span className="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px] font-bold">
+                    {step.step}
+                  </span>
+                  <span>{step.title}</span>
+                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-surface-container uppercase text-outline">
+                    {step.affectedFile}
+                  </span>
+                </div>
+                <p className="text-on-surface-variant mb-2">{step.recommendedFix}</p>
+                {Array.isArray(step.commands) && step.commands.length > 0 && (
+                  <div className="font-mono bg-surface-container-lowest p-2 rounded border border-outline-variant/20 text-primary-fixed-dim select-all">
+                    {step.commands.map((cmd, idx) => (
+                      <div key={idx}>$ {cmd}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Auditor Notice & Disclaimer Card */}
       <footer className="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-3 text-xs text-outline">
         <span className="material-symbols-outlined text-[20px] text-outline shrink-0 mt-0.5">
           shield

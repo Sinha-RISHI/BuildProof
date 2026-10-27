@@ -36,11 +36,17 @@ import { fileURLToPath } from 'url';
 
 import { uploadMiddleware } from '../services/upload.js';
 import { extractZip } from '../services/extract.js';
-import { createScan, updateScan, getScan } from '../services/scanStore.js';
+import { createScan, updateScan, getScan, listScans } from '../services/scanStore.js';
 import { scanProject } from '../services/scanner.js';
 import { runDockerRunner } from '../services/dockerRunner.js';
 
 const router = Router();
+
+// ── GET /api/scans ───────────────────────────────────────────────────────────
+// Returns sanitized list of historical scans in reverse chronological order
+router.get('/', (req, res) => {
+  return res.json(listScans());
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -131,6 +137,7 @@ router.post('/', (req, res, next) => {
     createScan(scanId, {
       status: 'extracting',
       projectName,
+      originalFilename: req.file.originalname,
     });
 
     // ── Extract the ZIP ────────────────────────────────────────────────────
@@ -205,10 +212,12 @@ router.get('/:id', (req, res) => {
     scanId: scan.scanId,
     status: scan.status,
     stage: scan.stage ?? null,
+    ecosystem: scan.ecosystem || scan.scanResult?.ecosystem || 'node',
     projectName: scan.projectName ?? null,
     verdict: scan.verdict ?? null,
     checks: scan.checks ?? [],
     scanResult: scan.scanResult ?? null,
+    reportData: scan.reportData ?? null,
     createdAt: scan.createdAt,
   });
 });

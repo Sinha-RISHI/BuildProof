@@ -1,0 +1,2 @@
+# Core dependencies for calculator-app
+# Built using Python standard library for zero-network reproducible handover verification.

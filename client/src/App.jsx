@@ -2,28 +2,32 @@
  * App.jsx
  *
  * What this file does:
- *   Root component for the BuildProof interactive frontend.
- *   Coordinates:
- *     - Navigation between views ('dashboard', 'progress', 'result', 'how-it-works')
- *     - System health polling for real-time API and Docker reachability
- *     - Upload initiation to POST /api/scans
- *     - Progress tracking and polling transition to final scan results
- *     - Full visual integration of Google Stitch dark navy UI designs
+ *   Root application coordinator for BuildProof.
+ *   Implements the updated Google Stitch design system layout:
+ *     - Fixed top navigation header with health telemetry and quick actions
+ *     - Main view router ('dashboard', 'progress', 'result', 'how-it-works', 'history')
+ *     - Shared professional footer with ISO/IEC 25010 standards attribution
+ *     - ISO/IEC 25010 Compliance Specification modal
+ *     - System health polling for real-time Docker reachability
+ *     - Real upload workflow connecting to POST /api/scans
+ *     - Scan status polling and transitions
  */
 
-import React, { useState, useEffect } from 'react';
-import AppSidebar from './components/AppSidebar.jsx';
+import React, { useState, useEffect, useRef } from 'react';
 import AppHeader from './components/AppHeader.jsx';
+import AppFooter from './components/AppFooter.jsx';
+import ComplianceModal from './components/ComplianceModal.jsx';
 import UploadZone from './components/UploadZone.jsx';
 import ScanProgress from './components/ScanProgress.jsx';
 import ScanResult from './components/ScanResult.jsx';
 import HowItWorks from './components/HowItWorks.jsx';
-import { getHealth, uploadScan } from './api.js';
+import ScanHistoryView from './components/ScanHistoryView.jsx';
+import { getHealth, uploadScan, getScan } from './api.js';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [health, setHealth] = useState(null);
-  const [healthLoading, setHealthLoading] = useState(true);
+  const [isComplianceOpen, setIsComplianceOpen] = useState(false);
 
   // Active scan state
   const [activeScanId, setActiveScanId] = useState(null);
@@ -31,7 +35,9 @@ export default function App() {
   const [completedScanRecord, setCompletedScanRecord] = useState(null);
   const [scanErrorMessage, setScanErrorMessage] = useState(null);
 
-  // Health check on mount and interval
+  const uploadZoneRef = useRef(null);
+
+  // Health check on mount and periodic interval
   useEffect(() => {
     let mounted = true;
 
@@ -40,7 +46,6 @@ export default function App() {
         const data = await getHealth();
         if (mounted) {
           setHealth(data);
-          setHealthLoading(false);
         }
       } catch {
         if (mounted) {
@@ -50,7 +55,6 @@ export default function App() {
             time: new Date().toISOString(),
             docker: { reachable: false, version: null, error: 'Cannot connect to server' },
           });
-          setHealthLoading(false);
         }
       }
     }
@@ -94,85 +98,126 @@ export default function App() {
     setCurrentView('dashboard');
   }
 
+  // Handle viewing a report from the historical audit ledger
+  async function handleViewReportFromHistory(scanId) {
+    try {
+      const record = await getScan(scanId);
+      setCompletedScanRecord(record);
+      setActiveProjectName(record.projectName || 'Project Archive');
+      setActiveScanId(scanId);
+      setCurrentView('result');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      setScanErrorMessage(`Failed to open report for scan ${scanId}: ${err.message}`);
+    }
+  }
+
+  function handleTriggerUpload() {
+    if (uploadZoneRef.current) {
+      uploadZoneRef.current.triggerUpload();
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-surface-container-lowest text-on-surface antialiased flex">
-      {/* Fixed Left Sidebar */}
-      <AppSidebar
+    <div className="min-h-screen bg-surface font-body-md text-on-surface antialiased flex flex-col selection:bg-secondary-container selection:text-on-secondary-fixed">
+      {/* Fixed Top Header */}
+      <AppHeader
         currentView={currentView}
         onNavigate={(view) => {
           setScanErrorMessage(null);
           setCurrentView(view);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onTriggerUpload={handleTriggerUpload}
+        onOpenCompliance={() => setIsComplianceOpen(true)}
         health={health}
-        healthLoading={healthLoading}
       />
 
-      {/* Main Content Area (offset by sidebar width: 15rem / 60px) */}
-      <div className="pl-60 w-full flex flex-col min-h-screen">
-        {/* Top Header */}
-        <AppHeader
-          currentView={currentView}
-          projectName={activeProjectName}
-          onNavigate={(view) => {
-            setScanErrorMessage(null);
-            setCurrentView(view);
-          }}
-          health={health}
-        />
-
-        {/* Page Content Body (pt-16 for header clearance) */}
-        <main className="relative pt-20 p-8 min-h-screen bg-surface-container-lowest">
-          <div className="max-w-6xl mx-auto">
-            {/* Global Error Banner if scan failed */}
-            {scanErrorMessage && (
-              <div className="mb-6 p-4 rounded-xl bg-error-container/20 border border-error/30 text-error flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[20px]">error</span>
-                  <span className="text-sm font-medium">Scan Error: {scanErrorMessage}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setScanErrorMessage(null)}
-                  className="p-1 rounded hover:bg-error-container/30 text-error cursor-pointer"
-                >
-                  <span className="material-symbols-outlined text-[16px]">close</span>
-                </button>
+      {/* Main Content Stage */}
+      <main className="w-full pt-16 bg-surface min-h-[calc(100vh-16rem)] flex-1">
+        {/* Global Error Banner if scan or network failed */}
+        {scanErrorMessage && (
+          <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-6">
+            <div className="p-4 rounded-xl bg-error-container/40 border border-error/30 text-error flex items-center justify-between shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-[20px]">error</span>
+                <span className="text-sm font-medium">Scan Error: {scanErrorMessage}</span>
               </div>
-            )}
-
-            {/* View Switcher */}
-            {currentView === 'dashboard' && (
-              <UploadZone
-                onScanStarted={handleScanStarted}
-                onNavigateHowItWorks={() => setCurrentView('how-it-works')}
-                health={health}
-              />
-            )}
-
-            {currentView === 'progress' && activeScanId && (
-              <ScanProgress
-                scanId={activeScanId}
-                initialProjectName={activeProjectName}
-                onScanCompleted={handleScanCompleted}
-                onScanFailed={handleScanFailed}
-              />
-            )}
-
-            {currentView === 'result' && completedScanRecord && (
-              <ScanResult
-                scanRecord={completedScanRecord}
-                onReset={handleReset}
-              />
-            )}
-
-            {currentView === 'how-it-works' && (
-              <HowItWorks
-                onNavigateDashboard={() => setCurrentView('dashboard')}
-              />
-            )}
+              <button
+                type="button"
+                onClick={() => setScanErrorMessage(null)}
+                className="p-1 rounded hover:bg-error-container/60 text-error cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-[16px]">close</span>
+              </button>
+            </div>
           </div>
-        </main>
-      </div>
+        )}
+
+        {/* View Routing */}
+        {currentView === 'dashboard' && (
+          <UploadZone
+            ref={uploadZoneRef}
+            onScanStarted={handleScanStarted}
+            onNavigateHowItWorks={() => setCurrentView('how-it-works')}
+            health={health}
+            lastScanRecord={completedScanRecord}
+          />
+        )}
+
+        {currentView === 'progress' && activeScanId && (
+          <div className="max-w-6xl mx-auto px-6 lg:px-8 py-8">
+            <ScanProgress
+              scanId={activeScanId}
+              initialProjectName={activeProjectName}
+              onScanCompleted={handleScanCompleted}
+              onScanFailed={handleScanFailed}
+            />
+          </div>
+        )}
+
+        {currentView === 'result' && completedScanRecord && (
+          <div className="max-w-6xl mx-auto px-6 lg:px-8 py-8">
+            <ScanResult
+              scanRecord={completedScanRecord}
+              onReset={handleReset}
+            />
+          </div>
+        )}
+
+        {currentView === 'how-it-works' && (
+          <div className="max-w-6xl mx-auto px-6 lg:px-8 py-8">
+            <HowItWorks
+              onNavigateDashboard={() => setCurrentView('dashboard')}
+            />
+          </div>
+        )}
+
+        {currentView === 'history' && (
+          <ScanHistoryView
+            onNavigateDashboard={() => {
+              setCurrentView('dashboard');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onViewReport={handleViewReportFromHistory}
+          />
+        )}
+      </main>
+
+      {/* Shared Footer */}
+      <AppFooter
+        onNavigate={(view) => {
+          setCurrentView(view);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onOpenCompliance={() => setIsComplianceOpen(true)}
+      />
+
+      {/* Compliance Specification Modal */}
+      <ComplianceModal
+        isOpen={isComplianceOpen}
+        onClose={() => setIsComplianceOpen(false)}
+      />
     </div>
   );
 }

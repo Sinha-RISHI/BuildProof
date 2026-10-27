@@ -85,9 +85,34 @@ const __filename = fileURLToPath(import.meta.url);
 // They match when this IS the entry point, and differ when it is imported.
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const PORT = process.env.PORT ?? 4000;
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`BuildProof server running on http://localhost:${PORT}`);
   });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(
+        `\n[BuildProof Startup Error] Port ${PORT} is already in use by another process.\n` +
+        `Check if an existing BuildProof instance or development server is already running.\n` +
+        `To inspect the process using port ${PORT}:\n` +
+        `  Windows (PowerShell): Get-NetTCPConnection -LocalPort ${PORT} | Select-Object OwningProcess\n` +
+        `  Linux/macOS: lsof -i :${PORT}\n`
+      );
+      process.exit(1);
+    } else {
+      console.error('Server startup error:', err);
+      process.exit(1);
+    }
+  });
+
+  const shutdown = () => {
+    server.close(() => {
+      process.exit(0);
+    });
+  };
+
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
 }
 
 export default app;

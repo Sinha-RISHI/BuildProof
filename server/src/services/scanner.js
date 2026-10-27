@@ -29,6 +29,7 @@
 
 import path from 'path';
 import { readdir, lstat, open } from 'fs/promises';
+import { resolveAdapter, ECOSYSTEMS } from './adapters/index.js';
 
 // ── Resource and security limits ─────────────────────────────────────────────
 const MAX_FILE_READ_BYTES = 64 * 1024;    // 64 KB max for text files (package.json, README, .env.example)
@@ -708,8 +709,68 @@ export async function scanProject(projectDir) {
   }
 
   const rootEntries = await safeListRoot(resolvedDir);
+  const resolution = resolveAdapter(rootEntries);
 
-  // Run all static checks
+  if (resolution.ecosystem === ECOSYSTEMS.AMBIGUOUS) {
+    const check = {
+      id: 'ecosystem',
+      name: 'Project ecosystem detection',
+      critical: true,
+      status: 'Failed',
+      summary: resolution.reason,
+      evidence: [
+        `Node.js signals: ${resolution.signals.nodeManifests.join(', ') || 'none'}`,
+        `Python signals: ${resolution.signals.pythonManifests.join(', ') || 'none'}`,
+      ],
+      explanation: 'Mixed-language project indicators detected. BuildProof requires a single unambiguous project root.',
+      nextStep: 'Ensure the ZIP archive contains only one project ecosystem (Node.js or Python).',
+    };
+    return {
+      scannedAt: new Date().toISOString(),
+      ecosystem: ECOSYSTEMS.AMBIGUOUS,
+      checks: [check],
+      metadata: {
+        ecosystem: ECOSYSTEMS.AMBIGUOUS,
+        projectName: path.basename(projectDir),
+        hasTests: false,
+      },
+    };
+  }
+
+  if (resolution.ecosystem === ECOSYSTEMS.UNSUPPORTED) {
+    const check = {
+      id: 'ecosystem',
+      name: 'Project ecosystem detection',
+      critical: true,
+      status: 'Failed',
+      summary: resolution.reason,
+      evidence: ['No supported Node.js or Python manifests or source files recognized in root directory'],
+      explanation: 'BuildProof currently supports Node.js and Python project verification.',
+      nextStep: 'Provide a Node.js (package.json) or Python (pyproject.toml, requirements.txt) project.',
+    };
+    return {
+      scannedAt: new Date().toISOString(),
+      ecosystem: ECOSYSTEMS.UNSUPPORTED,
+      checks: [check],
+      metadata: {
+        ecosystem: ECOSYSTEMS.UNSUPPORTED,
+        projectName: path.basename(projectDir),
+        hasTests: false,
+      },
+    };
+  }
+
+  if (resolution.ecosystem === ECOSYSTEMS.PYTHON) {
+    const pythonResult = await resolution.adapter.inspect(resolvedDir, rootEntries);
+    return {
+      scannedAt: new Date().toISOString(),
+      ecosystem: ECOSYSTEMS.PYTHON,
+      checks: pythonResult.checks,
+      metadata: pythonResult.metadata,
+    };
+  }
+
+  // Run all static checks for Node.js
   const { check: manifestCheck, manifest } = await checkManifest(resolvedDir, rootEntries);
   const lockfileCheck = checkLockfile(rootEntries);
   const testScriptCheck = checkTestScript(manifest);
@@ -729,6 +790,7 @@ export async function scanProject(projectDir) {
   ];
 
   const metadata = {
+    ecosystem: ECOSYSTEMS.NODE,
     projectName: typeof manifest?.name === 'string' ? manifest.name : null,
     version: typeof manifest?.version === 'string' ? manifest.version : null,
     lockfile: lockfileCheck.lockfile ?? null,
@@ -742,10 +804,12 @@ export async function scanProject(projectDir) {
     devDependenciesCount: manifest?.devDependencies && typeof manifest.devDependencies === 'object'
       ? Object.keys(manifest.devDependencies).length
       : 0,
+    hasTests: testScriptCheck.status === 'Passed',
   };
 
   return {
     scannedAt: new Date().toISOString(),
+    ecosystem: ECOSYSTEMS.NODE,
     checks,
     metadata,
   };

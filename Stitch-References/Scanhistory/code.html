@@ -1,803 +1,649 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed": "#002113", "outline": "#8c909f", "on-primary-fixed": "#001a42", "secondary": "#c0c1ff", "on-primary-container": "#00285d", "surface-dim": "#0f131c", "on-primary-fixed-variant": "#004395", "primary": "#adc6ff", "primary-container": "#4d8eff", "surface-container-low": "#181c24", "on-secondary-container": "#b0b2ff", "background": "#0f131c", "on-error": "#690005", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "secondary-fixed": "#e1e0ff", "secondary-container": "#3131c0", "primary-fixed": "#d8e2ff", "error": "#ffb4ab", "tertiary-fixed": "#6ffbbe", "on-tertiary-container": "#00311f", "surface-bright": "#353942", "surface-container-lowest": "#0a0e16", "inverse-surface": "#dfe2ee", "on-tertiary-fixed-variant": "#005236", "secondary-fixed-dim": "#c0c1ff", "on-secondary-fixed-variant": "#2f2ebe", "surface": "#0f131c", "tertiary-fixed-dim": "#4edea3", "surface-container-high": "#262a33", "tertiary": "#4edea3", "on-error-container": "#ffdad6", "outline-variant": "#424754", "on-primary": "#002e6a", "on-tertiary": "#003824", "on-background": "#dfe2ee", "primary-fixed-dim": "#adc6ff", "on-surface-variant": "#c2c6d6", "surface-container": "#1c2028", "on-surface": "#dfe2ee", "on-secondary-fixed": "#07006c", "error-container": "#93000a", "tertiary-container": "#00a572", "on-secondary": "#1000a9", "surface-container-highest": "#31353e", "surface-tint": "#adc6ff", "inverse-primary": "#005ac2" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-desktop": "1.5rem", "margin-desktop": "2rem", "gutter": "1rem", "space-md": "1rem", "space-xl": "2rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "margin": "1rem" }, "fontFamily": { "headline-lg": [ "Inter" ], "label-code-md": [ "JetBrains Mono" ], "body-md": [ "Inter" ], "headline-xl": [ "Inter" ], "headline-md": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "label-ui": [ "Inter" ], "headline-xl-mobile": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-code-md": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "headline-xl": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "label-ui": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" } ], "headline-xl-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-60 bg-surface-container-lowest border-r border-outline-variant/30 z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm border-b border-outline-variant/20"><img alt="BuildProof Shield Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XG2hv5D9C8pAMcwRw1saPD9dHkU2SqTNXPJ1ZF1eKFlejRxTYN5gNMVztkMDxXfTGZaMM6K7eoYEHOFkFFxaNndhMsGHjNcNeXAOOA_slPfYllaz7GNd7DsBxmQ3KEopFJYd2gZ8Zvl1jM47x_NoHmQNOI4GrgiTHwR8prnG7cdK1P3r3MzvNsHjBmCqYzWdUkSAASM0AE3eQhVzjfszRhu4y-zUP_Z57eMW2EHgHlINaLg6OpdC3kgQA"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate leading-tight">BuildProof</span><span class="font-label-code-sm text-label-code-sm text-primary tracking-widest uppercase">Handover Checker</span></div></div><div class="px-space-md py-space-sm"><div class="font-label-ui text-label-ui uppercase tracking-wider text-outline px-space-sm py-space-xs font-semibold">Audit Suite</div><nav class="flex flex-col gap-1 mt-1" data-active-classes="bg-surface-container-high text-primary border-l-2 border-primary font-semibold"><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">terminal</span><span class="font-body-sm text-body-sm">Dashboard</span></a><a aria-current="page" class="flex items-center gap-3 px-space-sm py-2 rounded-lg transition-colors bg-surface-container-high text-primary border-l-2 border-primary font-semibold" data-path="scan-history" href="#"><span class="material-symbols-outlined text-[18px]">commit</span><span class="font-body-sm text-body-sm">Scan History</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="how-it-works" href="#"><span class="material-symbols-outlined text-[18px]">menu_book</span><span class="font-body-sm text-body-sm">How It Works</span></a></nav></div></div><div class="p-space-md border-t border-outline-variant/20 flex flex-col gap-3 bg-surface-dim/40"><div class="flex flex-col gap-2 rounded-lg bg-surface-container-low/80 p-2.5 border border-outline-variant/20"><div class="flex items-center justify-between"><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">API Status</span><div class="flex items-center gap-1.5"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">Connected</span></div></div><div class="flex items-center justify-between pt-1 border-t border-outline-variant/20"><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Runtime Engine</span><div class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-tertiary">token</span><span class="font-label-code-sm text-label-code-sm font-medium">Docker OK</span></div></div></div><div class="flex items-center justify-between px-1 text-outline font-label-code-sm text-label-code-sm"><span>BuildProof CLI</span><span class="text-on-surface-variant font-mono">v0.1.0</span></div></div></aside><div class="pl-60"><header class="fixed top-0 left-60 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 z-40 px-space-xl flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-outline text-[18px]">developer_board</span><div class="flex items-center gap-1.5 font-label-code-md text-label-code-md text-outline"><span class="hover:text-on-surface-variant transition-colors cursor-pointer">Workspace</span><span class="text-outline-variant">/</span><span class="text-on-surface font-medium">Dashboard</span></div></div><div class="flex items-center gap-4"><div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30"><span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(78,222,163,0.6)]"></span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Backend: <span class="text-tertiary">Connected :4000</span></span></div><a class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">help_outline</span></a><div class="flex items-center gap-2.5 pl-2 border-l border-outline-variant/30"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzhuoxt4GdP3Yz9HMsry82CZicwFD1nBSuAL0jCRhaKGHe95m2S3rp_TQ6faC4Qk0hyfZXP8g9Ov9fvdCZSLyZaCZ76h6RzhaMlP2GU17cL8mfywoep04rMcaUiBsF7uDaekKljpvLktGN-YhZJbDSySSQ10o3D9czkEfqqKTI76KySfjficjQ123gU8ImK6aTI5jxRW9rzwnbyOAiX0LqksILeX8yh_PgTkj3xHKBDNvSzto78o-G"/><div class="hidden md:flex flex-col"><span class="font-label-ui text-label-ui text-on-surface leading-tight font-medium">Lead Engineer</span><span class="font-label-code-sm text-label-code-sm text-outline leading-tight">node_sec</span></div></div></div></header><main class="relative pt-16 min-h-screen bg-surface-container-lowest"><div class="max-w-6xl mx-auto p-8"><div class="flex flex-col w-full gap-6">
-<!-- Overview Metrics Bar -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-<div class="bg-surface-container rounded-xl p-4 flex flex-col justify-between shadow-sm relative overflow-hidden">
-<div class="flex items-center justify-between">
-<span class="font-label-ui text-label-ui uppercase tracking-wider text-outline">Total Handover Audits</span>
-<span class="material-symbols-outlined text-outline text-[18px]">rule_folder</span>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>BuildProof // Project Handover Readiness Checker</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-variant": "#e0e2e6", "primary-container": "#1a1c1e", "inverse-primary": "#c6c6c9", "on-background": "#191c1f", "secondary-fixed-dim": "#91db2a", "on-surface-variant": "#45474a", "primary": "#000000", "surface-container-lowest": "#ffffff", "inverse-on-surface": "#eff1f5", "error": "#ba1a1a", "on-secondary-container": "#457000", "on-primary-fixed": "#1a1c1e", "tertiary": "#000000", "on-secondary-fixed-variant": "#304f00", "on-error": "#ffffff", "secondary": "#416900", "secondary-container": "#acf847", "outline": "#75777a", "primary-fixed-dim": "#c6c6c9", "surface-container-high": "#e6e8ec", "outline-variant": "#c5c6ca", "inverse-surface": "#2d3134", "on-tertiary-container": "#609126", "on-secondary": "#ffffff", "tertiary-container": "#0f2000", "surface-tint": "#5d5e61", "on-primary-fixed-variant": "#454749", "surface-container": "#eceef2", "surface-container-low": "#f2f4f8", "on-tertiary-fixed": "#0f2000", "surface-dim": "#d8dade", "tertiary-fixed-dim": "#a0d663", "surface": "#f7f9fd", "error-container": "#ffdad6", "on-surface": "#191c1f", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#2e4f00", "primary-fixed": "#e2e2e5", "on-secondary-fixed": "#102000", "surface-bright": "#f7f9fd", "tertiary-fixed": "#bbf37c", "surface-container-highest": "#e0e2e6", "on-tertiary": "#ffffff", "secondary-fixed": "#acf847", "background": "#f7f9fd", "on-primary-container": "#838486", "on-error-container": "#93000a" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "1.5rem", "space-xs": "0.25rem", "margin-mobile": "1.25rem", "margin": "3rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem", "space-md": "1rem", "space-xl": "2.5rem" }, "fontFamily": { "label-technical": [ "JetBrains Mono" ], "headline-sm": [ "Hanken Grotesk" ], "caption-caps": [ "JetBrains Mono" ], "body-sm": [ "Hanken Grotesk" ], "headline-xl": [ "Hanken Grotesk" ], "headline-lg": [ "Hanken Grotesk" ], "headline-md": [ "Hanken Grotesk" ], "body-lg": [ "Hanken Grotesk" ], "headline-lg-mobile": [ "Hanken Grotesk" ], "label-code": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Hanken Grotesk" ], "body-md": [ "Hanken Grotesk" ] }, "fontSize": { "label-technical": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-sm": [ "1.25rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "caption-caps": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.08em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "400" } ], "headline-xl": [ "3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.035em", "fontWeight": "700" } ], "headline-lg": [ "2.5rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.03em", "fontWeight": "600" } ], "headline-md": [ "1.75rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.025em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-lg-mobile": [ "1.75rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-code": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0", "fontWeight": "400" } ], "headline-xl-mobile": [ "2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.005em", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-xs" data-path="overview" href="#"><span class="font-headline-sm text-headline-sm text-primary uppercase tracking-tight">BuildProof</span><span class="font-caption-caps text-caption-caps px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">[SPEC 25010]</span></a><div class="hidden xl:flex items-center gap-2 pl-space-md"><span class="inline-block w-2 h-2 rounded-full bg-secondary-container ring-2 ring-secondary-container/30"></span><span class="font-caption-caps text-caption-caps text-on-surface-variant">Node v20 LTS · Sandbox Isolated</span></div></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-on-surface font-semibold"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="overview" href="#">Overview</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="how-it-works" href="#">How It Works</a><a aria-current="page" class="transition-colors text-on-surface font-semibold" data-path="scan-history" href="#">Scan History</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="compliance-spec" href="#">Compliance Spec</a></nav><div class="flex items-center gap-space-md"><a class="font-label-technical text-label-technical px-space-md py-2 rounded bg-primary text-on-primary hover:bg-secondary-container hover:text-on-secondary-fixed transition-colors duration-150 inline-flex items-center gap-1.5" data-path="scan-execution" href="#"><span class="material-symbols-outlined text-[16px]">terminal</span><span>Start Scan</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-16rem)]"><div class="flex flex-col w-full">
+<section class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-space-xl">
+<!-- Top Meta Context Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-sm">
+<div class="inline-flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container shadow-[0_0_8px_rgba(172,248,71,0.8)]"></span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase tracking-wider">Repositories &amp; Audit Ledger</span>
+<span class="font-label-technical text-label-technical text-outline px-1.5 py-0.5 rounded bg-surface-container">SEC-ISO:25010</span>
 </div>
-<div class="flex items-baseline gap-2 mt-3">
-<span class="font-headline-xl text-headline-xl text-on-surface">8</span>
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">+2 this week</span>
-</div>
-<div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
-<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
-</div>
-</div>
-<div class="bg-surface-container rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center justify-between">
-<span class="font-label-ui text-label-ui uppercase tracking-wider text-outline">Production Ready</span>
-<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
-</div>
-<div class="flex items-baseline gap-2 mt-3">
-<span class="font-headline-xl text-headline-xl text-tertiary">5</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">62.5% sign-off rate</span>
-</div>
-<div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
-<div class="bg-tertiary h-full rounded-full" style="width: 62.5%"></div>
+<div class="flex items-center gap-space-md font-label-technical text-label-technical text-outline">
+<span>LEDGER STATE: <strong class="text-on-surface">SYNCHRONIZED</strong></span>
+<span>•</span>
+<span>ATTESTATION KEY: <strong class="text-on-surface">ed25519:7b42...99f</strong></span>
 </div>
 </div>
-<div class="bg-surface-container rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center justify-between">
-<span class="font-label-ui text-label-ui uppercase tracking-wider text-outline">Failed Blocking Checks</span>
-<span class="material-symbols-outlined text-error text-[18px]">gpp_bad</span>
+<!-- Editorial Header Block -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg mb-space-xl">
+<div class="max-w-3xl">
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight mb-space-xs">Scan History</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          Cryptographically verified handover readiness logs for past project archives. Deterministic evaluation results under isolated sandbox execution.
+        </p>
 </div>
-<div class="flex items-baseline gap-2 mt-3">
-<span class="font-headline-xl text-headline-xl text-error">2</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">Exit code errors</span>
-</div>
-<div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
-<div class="bg-error h-full rounded-full" style="width: 25%"></div>
-</div>
-</div>
-<div class="bg-surface-container rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center justify-between">
-<span class="font-label-ui text-label-ui uppercase tracking-wider text-outline">Under Review / Warn</span>
-<span class="material-symbols-outlined text-secondary text-[18px]">pending_actions</span>
-</div>
-<div class="flex items-baseline gap-2 mt-3">
-<span class="font-headline-xl text-headline-xl text-secondary">1</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">Missing lockfile flag</span>
-</div>
-<div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
-<div class="bg-secondary h-full rounded-full" style="width: 12.5%"></div>
+<!-- Action Button -->
+<div class="flex items-center gap-space-sm shrink-0">
+<a class="inline-flex items-center gap-2 px-space-lg py-3 rounded bg-primary text-on-primary font-headline-sm text-headline-sm hover:bg-secondary-container hover:text-on-secondary-fixed transition-colors duration-150 shadow-sm group" data-path="scan-execution" href="#">
+<span>Start New Scan</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
 </div>
 </div>
+<!-- Telemetry Metric Cards Strip (Asymmetric Overview) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md mb-space-xl">
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Total Audits</span>
+<span class="material-symbols-outlined text-outline text-[18px]">verified</span>
 </div>
-<!-- Header & Primary Controls -->
-<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container-low p-5 rounded-xl">
-<div class="flex flex-col gap-1 min-w-0">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[22px]">history</span>
-<h1 class="font-headline-lg text-headline-lg text-on-surface">Scan History</h1>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary">12</span>
+<span class="font-label-technical text-label-technical text-on-surface-variant">archived builds</span>
 </div>
-<p class="font-body-sm text-body-sm text-outline">Review previous project handover checks, contract validation runs, and isolated runtime traces.</p>
-</div>
-<div class="flex items-center gap-3">
-<button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-body-sm text-body-sm" id="toggleEmptyStateBtn">
-<span class="material-symbols-outlined text-[16px]">visibility</span>
-<span>Toggle Empty View</span>
-</button>
-<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-headline-sm text-headline-sm hover:brightness-110 active:scale-[0.99] transition shadow-md shadow-primary-container/20">
-<span class="material-symbols-outlined text-[18px]">add_circle</span>
-<span>New Scan</span>
-</button>
+<div class="mt-space-xs pt-space-xs bg-surface-container-low px-2 py-1 rounded font-label-technical text-label-technical text-outline flex items-center justify-between">
+<span>Integrity Check</span>
+<span class="text-secondary font-semibold">100% Valid</span>
 </div>
 </div>
-<!-- Filtering, Search & Tab Chips -->
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Handover Passed</span>
+<span class="w-2 h-2 rounded-full bg-secondary-container ring-4 ring-secondary-container/20"></span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-secondary">8</span>
+<span class="font-label-technical text-label-technical text-on-surface-variant">66.7% success</span>
+</div>
+<div class="mt-space-xs pt-space-xs bg-surface-container-low px-2 py-1 rounded font-label-technical text-label-technical text-outline flex items-center justify-between">
+<span>Mean Score</span>
+<span class="text-primary font-semibold">97.3 / 100</span>
+</div>
+</div>
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Remediation Req.</span>
+<span class="material-symbols-outlined text-error text-[18px]">error</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-error">4</span>
+<span class="font-label-technical text-label-technical text-on-surface-variant">33.3% blocked</span>
+</div>
+<div class="mt-space-xs pt-space-xs bg-surface-container-low px-2 py-1 rounded font-label-technical text-label-technical text-outline flex items-center justify-between">
+<span>Critical Lockfile Drift</span>
+<span class="text-error font-semibold">2 instances</span>
+</div>
+</div>
+<!-- Compact Sparkline/Distribution Chart Card -->
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Determinism Pulse</span>
+<span class="font-label-technical text-label-technical text-outline">RUN TIMINGS</span>
+</div>
+<!-- Inline Telemetry SVG Graph -->
+<div class="w-full h-10 flex items-end gap-1.5 py-1">
+<div class="h-6 w-full rounded bg-surface-container flex items-end p-0.5 overflow-hidden">
+<div class="w-full bg-secondary-container h-[85%] rounded"></div>
+</div>
+<div class="h-6 w-full rounded bg-surface-container flex items-end p-0.5 overflow-hidden">
+<div class="w-full bg-error-container h-[35%] rounded"></div>
+</div>
+<div class="h-6 w-full rounded bg-surface-container flex items-end p-0.5 overflow-hidden">
+<div class="w-full bg-secondary-container h-[92%] rounded"></div>
+</div>
+<div class="h-6 w-full rounded bg-surface-container flex items-end p-0.5 overflow-hidden">
+<div class="w-full bg-error-container h-[55%] rounded"></div>
+</div>
+<div class="h-6 w-full rounded bg-surface-container flex items-end p-0.5 overflow-hidden">
+<div class="w-full bg-secondary-container h-[100%] rounded"></div>
+</div>
+<div class="h-6 w-full rounded bg-surface-container flex items-end p-0.5 overflow-hidden">
+<div class="w-full bg-secondary-container h-[94%] rounded"></div>
+</div>
+</div>
+<div class="mt-space-xs pt-space-xs bg-surface-container-low px-2 py-1 rounded font-label-technical text-label-technical text-outline flex items-center justify-between">
+<span>Avg Sandboxed Latency</span>
+<span class="text-primary font-semibold">14.8s</span>
+</div>
+</div>
+</div>
+<!-- Filter & Query Control Deck -->
+<div class="p-space-md rounded bg-surface-container-lowest shadow-sm mb-space-md">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
 <!-- Filter Pills -->
-<div class="flex flex-wrap items-center gap-1.5 p-1 bg-surface-container-low rounded-lg" id="filterContainer">
-<button class="filter-chip px-3 py-1.5 rounded bg-surface-container text-on-surface font-label-code-sm text-label-code-sm font-semibold flex items-center gap-1.5 transition-colors" data-filter="all">
+<div class="flex flex-wrap items-center gap-2">
+<button class="font-label-technical text-label-technical px-3 py-1.5 rounded bg-primary text-on-primary transition-all duration-150 inline-flex items-center gap-1.5 shadow-sm" id="filter-all">
 <span>All Scans</span>
-<span class="px-1.5 py-0.2 bg-surface-container-high rounded text-primary">8</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface font-semibold text-[10px]">12</span>
 </button>
-<button class="filter-chip px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1.5 transition-colors" data-filter="READY">
-<span class="w-2 h-2 rounded-full bg-tertiary"></span>
-<span>READY</span>
-<span class="px-1.5 py-0.2 bg-surface-container rounded text-outline font-mono">5</span>
+<button class="font-label-technical text-label-technical px-3 py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-150 inline-flex items-center gap-1.5" id="filter-passed">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Ready / Passed</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-lowest text-on-surface-variant text-[10px]">8</span>
 </button>
-<button class="filter-chip px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1.5 transition-colors" data-filter="NOT READY">
-<span class="w-2 h-2 rounded-full bg-error"></span>
-<span>NOT READY</span>
-<span class="px-1.5 py-0.2 bg-surface-container rounded text-outline font-mono">2</span>
-</button>
-<button class="filter-chip px-3 py-1.5 rounded text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1.5 transition-colors" data-filter="NEEDS REVIEW">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span>NEEDS REVIEW</span>
-<span class="px-1.5 py-0.2 bg-surface-container rounded text-outline font-mono">1</span>
+<button class="font-label-technical text-label-technical px-3 py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-150 inline-flex items-center gap-1.5" id="filter-failed">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>Not Ready / Failed</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-lowest text-on-surface-variant text-[10px]">4</span>
 </button>
 </div>
-<!-- Search Box -->
-<div class="relative w-full md:w-80">
-<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]">search</span>
-<input class="w-full bg-surface-container-low text-on-surface placeholder:text-outline text-body-sm font-body-sm pl-9 pr-8 py-2 rounded-lg focus:outline-none focus:bg-surface-container transition-all" id="searchInput" placeholder="Search project name, hash or scan ID..." type="text"/>
-<button class="hidden absolute right-2.5 top-2.5 text-outline hover:text-on-surface" id="clearSearchBtn">
-<span class="material-symbols-outlined text-[16px]">close</span>
-</button>
+<!-- Search and Sort Area -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm flex-1 lg:max-w-xl justify-end">
+<!-- Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(172,248,71,0.5)] transition-all" id="history-search-input" placeholder="Filter by archive name or SHA-256 hash..." type="text"/>
 </div>
-</div>
-<!-- Main Table Container -->
-<div class="bg-surface-container rounded-xl overflow-hidden shadow-sm flex flex-col" id="tableWrapper">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-surface-container-high/60 text-outline font-label-ui text-label-ui uppercase tracking-wider select-none">
-<th class="py-3 px-4 font-semibold">Project &amp; Node Engine</th>
-<th class="py-3 px-4 font-semibold">Scan ID</th>
-<th class="py-3 px-4 font-semibold">Timestamp</th>
-<th class="py-3 px-4 font-semibold">Verdict</th>
-<th class="py-3 px-4 font-semibold">Checks Breakdown</th>
-<th class="py-3 px-4 font-semibold">Runtime Sandbox</th>
-<th class="py-3 px-4 font-semibold text-right">Actions</th>
-</tr>
-</thead>
-<tbody class="font-body-sm text-body-sm" id="scanTableBody">
-<!-- Row 1: Ready -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="auth-token-service-v1.4.zip bp-scan-78a9c1 node 20.12.0" data-verdict="READY">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-primary">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-primary transition-colors">auth-token-service-v1.4.zip</span>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">4.2 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-primary bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v20.12.0 LTS</span>
+<!-- Sort Select Pill -->
+<div class="relative shrink-0">
+<select class="h-10 pl-3 pr-8 rounded bg-surface-container text-on-surface font-label-technical text-label-technical appearance-none cursor-pointer focus:outline-none focus:bg-surface-container-high transition-colors">
+<option>Latest Scans (Chronological)</option>
+<option>Highest Score (100 → 0)</option>
+<option>Lowest Score (0 → 100)</option>
+<option>Target: Node.js 20 LTS</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[16px]">expand_more</span>
 </div>
 </div>
 </div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-78a9c1
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
+</div>
+<!-- Editorial Audit Records Table & Visual Ledger -->
+<div class="rounded bg-surface-container-lowest shadow-sm overflow-hidden mb-space-lg">
+<!-- Table Header Bar -->
+<div class="bg-surface-container-low px-space-md py-3 grid grid-cols-12 gap-space-sm items-center font-caption-caps text-caption-caps text-on-surface-variant uppercase tracking-wider">
+<div class="col-span-12 lg:col-span-4 flex items-center gap-2">
+<span>Project Archive / Hash Verification</span>
+</div>
+<div class="hidden lg:block lg:col-span-2">
+<span>Environment &amp; Runtime</span>
+</div>
+<div class="hidden lg:block lg:col-span-2">
+<span>Audit Score</span>
+</div>
+<div class="hidden lg:block lg:col-span-3">
+<span>ISO 25010 Verification Gates</span>
+</div>
+<div class="hidden lg:block lg:col-span-1 text-right">
+<span>Action</span>
+</div>
+</div>
+<!-- Row List (Continuous without row borders, distinguished by subtle hover washes and structured blocks) -->
 <div class="flex flex-col">
-<span class="text-on-surface font-medium">Today 14:35</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
+<!-- Row 1: checkout-microservice -->
+<div class="audit-row px-space-md py-space-md hover:bg-surface-container-low/70 transition-colors duration-150 grid grid-cols-12 gap-space-sm items-center" data-query="checkout-microservice-v2.1.zip 7f31c890a node pnpm" data-status="passed">
+<div class="col-span-12 lg:col-span-4 min-w-0">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[18px]">folder_zip</span>
 </div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-tertiary-container/30 text-tertiary">
-<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>
-                READY
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
+<div class="min-w-0">
 <div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">12 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">0 Failed</span>
+<span class="font-headline-sm text-headline-sm text-primary truncate">checkout-microservice-v2.1.zip</span>
+<span class="font-caption-caps text-caption-caps px-1 py-0.2 rounded bg-surface-container text-on-surface-variant">LTS</span>
 </div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 100%"></div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-tertiary text-[14px]">token</span>
-<span>Docker OK</span>
-<span class="text-outline font-mono">(6.4s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<div class="relative group/menu inline-block">
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</div>
-</td>
-</tr>
-<!-- Row 2: Payment Gateway - NOT READY -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="payment-gateway-node.zip bp-scan-66d41b node 18.19.1 test exit code 1" data-verdict="NOT READY">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-error">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-error transition-colors">payment-gateway-node.zip</span>
 <div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">18.7 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-outline bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v18.19.1</span>
-</div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-66d41b
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
-<div class="flex flex-col">
-<span class="text-on-surface font-medium">Yesterday 18:20</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-error-container/30 text-error">
-<span class="h-1.5 w-1.5 rounded-full bg-error"></span>
-                NOT READY
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">8 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-error font-medium">2 Failed</span>
-</div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 80%"></div>
-<div class="bg-error h-full" style="width: 20%"></div>
-</div>
-<span class="font-label-code-sm text-label-code-sm text-error/80 text-[10px] leading-tight">npm test exit code 1</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-tertiary text-[14px]">token</span>
-<span>Docker OK</span>
-<span class="text-outline font-mono">(9.1s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-error hover:bg-error hover:text-on-error font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</td>
-</tr>
-<!-- Row 3: Notification Worker - NEEDS REVIEW -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="notification-worker.zip bp-scan-52e18a node 20.9.0 no lockfile warning" data-verdict="NEEDS REVIEW">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-secondary">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-secondary transition-colors">notification-worker.zip</span>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">1.8 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-outline bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v20.9.0</span>
-</div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-52e18a
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
-<div class="flex flex-col">
-<span class="text-on-surface font-medium">Oct 22 11:05</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-secondary-container/30 text-secondary">
-<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span>
-                NEEDS REVIEW
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">10 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-secondary font-medium">2 Unverified</span>
-</div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 83%"></div>
-<div class="bg-secondary h-full" style="width: 17%"></div>
-</div>
-<span class="font-label-code-sm text-label-code-sm text-secondary/80 text-[10px] leading-tight">No package-lock.json</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-outline text-[14px]">sync_problem</span>
-<span>Fallback Local</span>
-<span class="text-outline font-mono">(4.1s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface hover:bg-secondary hover:text-on-secondary font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</td>
-</tr>
-<!-- Row 4: Analytics Ingest - READY -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="analytics-ingest-v0.9.zip bp-scan-41b98f node 20.11.0" data-verdict="READY">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-primary">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-primary transition-colors">analytics-ingest-v0.9.zip</span>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">9.4 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-primary bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v20.11.0 LTS</span>
-</div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-41b98f
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
-<div class="flex flex-col">
-<span class="text-on-surface font-medium">Oct 20 16:40</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-tertiary-container/30 text-tertiary">
-<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>
-                READY
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">14 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">0 Failed</span>
-</div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 100%"></div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-tertiary text-[14px]">token</span>
-<span>Docker OK</span>
-<span class="text-outline font-mono">(5.8s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</td>
-</tr>
-<!-- Row 5: User Management Core - READY -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="user-management-core.zip bp-scan-39c811 node 20.10.0" data-verdict="READY">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-primary">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-primary transition-colors">user-management-core.zip</span>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">3.1 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-primary bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v20.10.0</span>
-</div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-39c811
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
-<div class="flex flex-col">
-<span class="text-on-surface font-medium">Oct 19 09:15</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-tertiary-container/30 text-tertiary">
-<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>
-                READY
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">12 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">0 Failed</span>
-</div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 100%"></div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-tertiary text-[14px]">token</span>
-<span>Docker OK</span>
-<span class="text-outline font-mono">(4.9s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</td>
-</tr>
-<!-- Row 6: legacy-crm-adapter.zip - NOT READY -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="legacy-crm-adapter.zip bp-scan-28f09d node 16.20.2 circular dependency" data-verdict="NOT READY">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-error">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-error transition-colors">legacy-crm-adapter.zip</span>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">12.2 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-error bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v16.20.2 (EOL)</span>
-</div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-28f09d
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
-<div class="flex flex-col">
-<span class="text-on-surface font-medium">Oct 17 22:40</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-error-container/30 text-error">
-<span class="h-1.5 w-1.5 rounded-full bg-error"></span>
-                NOT READY
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">6 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-error font-medium">4 Failed</span>
-</div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 60%"></div>
-<div class="bg-error h-full" style="width: 40%"></div>
-</div>
-<span class="font-label-code-sm text-label-code-sm text-error/80 text-[10px] leading-tight">Docker build timeout</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-error text-[14px]">error</span>
-<span>Docker Timeout</span>
-<span class="text-outline font-mono">(60s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-error hover:bg-error hover:text-on-error font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</td>
-</tr>
-<!-- Row 7: billing-webhooks.zip - READY -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="billing-webhooks.zip bp-scan-17aa88 node 20.12.0" data-verdict="READY">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-primary">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-primary transition-colors">billing-webhooks.zip</span>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">2.4 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-primary bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v20.12.0 LTS</span>
-</div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-17aa88
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
-<div class="flex flex-col">
-<span class="text-on-surface font-medium">Oct 15 13:02</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-tertiary-container/30 text-tertiary">
-<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>
-                READY
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">13 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">0 Failed</span>
-</div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 100%"></div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-tertiary text-[14px]">token</span>
-<span>Docker OK</span>
-<span class="text-outline font-mono">(5.1s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</td>
-</tr>
-<!-- Row 8: realtime-presence-hub.zip - READY -->
-<tr class="scan-row hover:bg-surface-container-high/40 transition-colors group" data-search="realtime-presence-hub.zip bp-scan-05c2e4 node 20.11.1 websocket" data-verdict="READY">
-<td class="py-3.5 px-4">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded-lg bg-surface-container-lowest text-primary">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface truncate group-hover:text-primary transition-colors">realtime-presence-hub.zip</span>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-code-sm text-label-code-sm text-outline">5.7 MB</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-primary bg-surface-container-low px-1.5 py-0.2 rounded font-mono">Node v20.11.1</span>
-</div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-mono bg-surface-container-low px-2 py-1 rounded">
-<span class="material-symbols-outlined text-[14px]">tag</span>bp-scan-05c2e4
-              </span>
-</td>
-<td class="py-3.5 px-4 font-label-code-sm text-label-code-sm text-outline">
-<div class="flex flex-col">
-<span class="text-on-surface font-medium">Oct 12 18:00</span>
-<span class="text-outline-variant text-[11px]">UTC+00:00</span>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-label-code-sm text-label-code-sm font-semibold bg-tertiary-container/30 text-tertiary">
-<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>
-                READY
-              </span>
-</td>
-<td class="py-3.5 px-4">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="font-label-code-sm text-label-code-sm text-tertiary font-medium">11 Passed</span>
-<span class="text-outline-variant font-label-code-sm">•</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">0 Failed</span>
-</div>
-<div class="flex h-1.5 w-28 rounded-full overflow-hidden bg-surface-container-lowest">
-<div class="bg-tertiary h-full" style="width: 100%"></div>
-</div>
-</div>
-</td>
-<td class="py-3.5 px-4">
-<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm">
-<span class="material-symbols-outlined text-tertiary text-[14px]">token</span>
-<span>Docker OK</span>
-<span class="text-outline font-mono">(7.2s)</span>
-</div>
-</td>
-<td class="py-3.5 px-4 text-right">
-<div class="inline-flex items-center justify-end gap-1">
-<button class="px-2.5 py-1 rounded bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary font-label-code-sm text-label-code-sm font-medium transition-colors">
-                  View Report
-                </button>
-<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Table Footer / Pagination -->
-<div class="flex items-center justify-between px-4 py-3 bg-surface-container-low text-outline font-label-code-sm text-label-code-sm">
-<div class="flex items-center gap-2">
-<span>Showing <span class="text-on-surface font-mono font-medium" id="visibleCount">8</span> of 8 scans</span>
+<span class="font-label-technical text-label-technical text-outline">SHA: 7f31c8...90a</span>
 <span class="text-outline-variant">•</span>
-<span class="text-outline">Local SQLite Cache: <span class="text-primary font-mono">1.8 MB</span></span>
-</div>
-<div class="flex items-center gap-1">
-<button class="p-1 rounded text-outline-variant cursor-not-allowed" disabled="">
-<span class="material-symbols-outlined text-[18px]">chevron_left</span>
-</button>
-<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-mono">1</span>
-<button class="p-1 rounded text-outline-variant cursor-not-allowed" disabled="">
-<span class="material-symbols-outlined text-[18px]">chevron_right</span>
-</button>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Today, 14:22 UTC</span>
 </div>
 </div>
 </div>
-<!-- Empty State Simulation Card (Initially hidden, toggled via header action) -->
-<div class="hidden bg-surface-container rounded-xl p-10 flex flex-col items-center justify-center text-center shadow-sm" id="emptyStateContainer">
-<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-outline mb-4">
-<span class="material-symbols-outlined text-[32px]">folder_off</span>
 </div>
-<h3 class="font-headline-md text-headline-md text-on-surface">No scans recorded yet</h3>
-<p class="font-body-md text-body-md text-outline max-w-md mt-2">
-      Handover validation reports and build snapshots reside securely on your local file system storage. Once you upload and scan a project zip or repository, records will display here.
-    </p>
-<div class="mt-6 flex items-center gap-3">
-<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-headline-sm text-headline-sm hover:brightness-110 transition shadow-sm">
-<span class="material-symbols-outlined text-[18px]">upload_file</span>
-<span>Upload First Project</span>
-</button>
-<button class="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface font-body-sm text-body-sm hover:bg-surface-container-highest transition" id="closeEmptyStateBtn">
-        Return to Records
-      </button>
+<div class="col-span-6 lg:col-span-2">
+<div class="font-label-technical text-label-technical text-on-surface">Node.js 20.12 LTS</div>
+<div class="font-caption-caps text-caption-caps text-outline">PM: pnpm v9.1.0 · gVisor</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container/30 text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary-container ring-2 ring-secondary-container/40"></span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">98</span>
+<span class="font-caption-caps text-caption-caps text-secondary uppercase font-semibold">/100 · READY</span>
 </div>
 </div>
-<!-- Batch & Export Utility Drawer / Strip -->
-<div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl bg-surface-container-low text-on-surface-variant">
-<div class="flex items-center gap-3">
-<div class="p-2 rounded bg-surface-container text-primary">
-<span class="material-symbols-outlined text-[20px]">download_for_offline</span>
+<div class="col-span-12 lg:col-span-3">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-technical text-label-technical">
+<span class="text-on-surface">4 / 4 Gates Passed</span>
+<span class="text-secondary font-medium">0 drift · 48/48 tests</span>
 </div>
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-on-surface">Export Handover Audit Ledger</span>
-<span class="font-label-code-sm text-label-code-sm text-outline">Download compiled verification summaries as cryptographic sign-off proofs</span>
+<!-- Gate meter bar -->
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline truncate">Lockfile pinned · Egress airgapped · Seeded determinism</span>
 </div>
 </div>
+<div class="col-span-12 lg:col-span-1 flex lg:justify-end mt-2 lg:mt-0">
+<a class="inline-flex items-center gap-1 font-label-technical text-label-technical px-2.5 py-1.5 rounded bg-surface-container hover:bg-primary hover:text-on-primary transition-all duration-150 text-on-surface" data-path="ready-report" href="#">
+<span>Report</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-container"></div>
+<!-- Row 2: broken-monolith -->
+<div class="audit-row px-space-md py-space-md hover:bg-surface-container-low/70 transition-colors duration-150 grid grid-cols-12 gap-space-sm items-center" data-query="broken-monolith-v1.4.zip 4f82a1bc2 node npm drift env missing" data-status="failed">
+<div class="col-span-12 lg:col-span-4 min-w-0">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded bg-error-container/40 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+</div>
+<div class="min-w-0">
 <div class="flex items-center gap-2">
-<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-code-sm text-label-code-sm transition">
-<span class="material-symbols-outlined text-[16px]">code</span>
+<span class="font-headline-sm text-headline-sm text-primary truncate">broken-monolith-v1.4.zip</span>
+<span class="font-caption-caps text-caption-caps px-1 py-0.2 rounded bg-error-container text-on-error-container font-semibold">BLOCKER</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-technical text-label-technical text-outline">SHA: 4f82a1...bc2</span>
+<span class="text-outline-variant">•</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">Yesterday, 18:45 UTC</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="font-label-technical text-label-technical text-on-surface">Node.js 18 LTS</div>
+<div class="font-caption-caps text-caption-caps text-outline">PM: npm v9.2.0 · gVisor</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-error-container text-error">
+<span class="w-2 h-2 rounded-full bg-error ring-2 ring-error-container"></span>
+<span class="font-headline-sm text-headline-sm font-bold">42</span>
+<span class="font-caption-caps text-caption-caps uppercase font-semibold">/100 · FAILED</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-technical text-label-technical">
+<span class="text-error font-medium">2 / 4 Gates Failed</span>
+<span class="text-on-surface-variant">lockfile drift + env missing</span>
+</div>
+<!-- Gate meter bar -->
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-error flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-error flex-1"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-error truncate">Critical: 14 dependency version mismatches detected</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-1 flex lg:justify-end mt-2 lg:mt-0">
+<a class="inline-flex items-center gap-1 font-label-technical text-label-technical px-2.5 py-1.5 rounded bg-error-container text-error hover:bg-error hover:text-on-error transition-all duration-150" data-path="remediation-report" href="#">
+<span>Remedy</span>
+<span class="material-symbols-outlined text-[14px]">build</span>
+</a>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-container"></div>
+<!-- Row 3: auth-gateway-production -->
+<div class="audit-row px-space-md py-space-md hover:bg-surface-container-low/70 transition-colors duration-150 grid grid-cols-12 gap-space-sm items-center" data-query="auth-gateway-production.zip 8e19c044d node vitest" data-status="passed">
+<div class="col-span-12 lg:col-span-4 min-w-0">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[18px]">folder_zip</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary truncate">auth-gateway-production.zip</span>
+<span class="font-caption-caps text-caption-caps px-1 py-0.2 rounded bg-surface-container text-on-surface-variant">SOC2</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-technical text-label-technical text-outline">SHA: 8e19c0...44d</span>
+<span class="text-outline-variant">•</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">May 16, 2025, 09:12 UTC</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="font-label-technical text-label-technical text-on-surface">Node.js 20.12 LTS</div>
+<div class="font-caption-caps text-caption-caps text-outline">PM: Vitest · TypeScript 5.4</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container/30 text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary-container ring-2 ring-secondary-container/40"></span>
+<span class="font-headline-sm text-headline-sm font-bold">94</span>
+<span class="font-caption-caps text-caption-caps uppercase font-semibold">/100 · READY</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-technical text-label-technical">
+<span class="text-on-surface">4 / 4 Gates Passed</span>
+<span class="text-secondary font-medium">32/32 tests pass</span>
+</div>
+<!-- Gate meter bar -->
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline truncate">Cryptographic signing pass · Isolation zero-egress</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-1 flex lg:justify-end mt-2 lg:mt-0">
+<a class="inline-flex items-center gap-1 font-label-technical text-label-technical px-2.5 py-1.5 rounded bg-surface-container hover:bg-primary hover:text-on-primary transition-all duration-150 text-on-surface" data-path="ready-report" href="#">
+<span>Report</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-container"></div>
+<!-- Row 4: payments-worker -->
+<div class="audit-row px-space-md py-space-md hover:bg-surface-container-low/70 transition-colors duration-150 grid grid-cols-12 gap-space-sm items-center" data-query="payments-worker-v3.0.zip 3b90df11a bun native binary" data-status="failed">
+<div class="col-span-12 lg:col-span-4 min-w-0">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-outline text-[18px]">build_circle</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary truncate">payments-worker-v3.0.zip</span>
+<span class="font-caption-caps text-caption-caps px-1 py-0.2 rounded bg-surface-container-highest text-on-surface-variant">NATIVE-ADDON</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-technical text-label-technical text-outline">SHA: 3b90df...11a</span>
+<span class="text-outline-variant">•</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">May 14, 2025, 11:30 UTC</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="font-label-technical text-label-technical text-on-surface">Node.js 22 LTS</div>
+<div class="font-caption-caps text-caption-caps text-outline">PM: Bun v1.1.8 · Sandbox</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-high text-on-surface">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="font-headline-sm text-headline-sm font-bold">61</span>
+<span class="font-caption-caps text-caption-caps uppercase font-semibold">/100 · NOT READY</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-technical text-label-technical">
+<span class="text-on-surface">3 / 4 Gates Passed</span>
+<span class="text-outline">1 failed: compilation egress</span>
+</div>
+<!-- Gate meter bar -->
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-outline flex-1"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline truncate">Requires pre-compiled binary glibc-2.31 compatibility</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-1 flex lg:justify-end mt-2 lg:mt-0">
+<a class="inline-flex items-center gap-1 font-label-technical text-label-technical px-2.5 py-1.5 rounded bg-surface-container hover:bg-primary hover:text-on-primary transition-all duration-150 text-on-surface" data-path="remediation-report" href="#">
+<span>Remedy</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-container"></div>
+<!-- Row 5: nextjs-marketing-site -->
+<div class="audit-row px-space-md py-space-md hover:bg-surface-container-low/70 transition-colors duration-150 grid grid-cols-12 gap-space-sm items-center" data-query="nextjs-marketing-site.zip e109aa78c node npm perfect" data-status="passed">
+<div class="col-span-12 lg:col-span-4 min-w-0">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[18px]">folder_zip</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary truncate">nextjs-marketing-site.zip</span>
+<span class="font-caption-caps text-caption-caps px-1 py-0.2 rounded bg-secondary-container/40 text-secondary font-bold">PERFECT</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-technical text-label-technical text-outline">SHA: e109aa...78c</span>
+<span class="text-outline-variant">•</span>
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">May 12, 2025, 16:04 UTC</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="font-label-technical text-label-technical text-on-surface">Node.js 20.12 LTS</div>
+<div class="font-caption-caps text-caption-caps text-outline">PM: npm v10.5.0 · Next.js 14</div>
+</div>
+<div class="col-span-6 lg:col-span-2">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container/40 text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary ring-2 ring-secondary-container"></span>
+<span class="font-headline-sm text-headline-sm font-bold">100</span>
+<span class="font-caption-caps text-caption-caps uppercase font-semibold">/100 · READY</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-technical text-label-technical">
+<span class="text-secondary font-medium">4 / 4 Gates Passed</span>
+<span class="text-secondary">100% Parity · 14/14 tests</span>
+</div>
+<!-- Gate meter bar -->
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+<div class="h-full bg-secondary-container flex-1"></div>
+</div>
+<span class="font-caption-caps text-caption-caps text-outline truncate">Zero vulnerability surface · SSR bundle pre-compiled</span>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-1 flex lg:justify-end mt-2 lg:mt-0">
+<a class="inline-flex items-center gap-1 font-label-technical text-label-technical px-2.5 py-1.5 rounded bg-surface-container hover:bg-primary hover:text-on-primary transition-all duration-150 text-on-surface" data-path="ready-report" href="#">
+<span>Report</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- No match fallback state (hidden by default) -->
+<div class="hidden p-space-xl text-center flex-col items-center justify-center" id="no-results-state">
+<span class="material-symbols-outlined text-outline text-[32px] mb-space-xs">search_off</span>
+<div class="font-headline-sm text-headline-sm text-primary mb-1">No matching archives found</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mb-space-md">
+          Verify the SHA-256 hash or filename. Search criteria are case-insensitive and query across hash strings, dependencies, and archive filenames.
+        </p>
+<button class="font-label-technical text-label-technical px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high transition-colors" id="reset-filter-btn">
+          Reset All Filters
+        </button>
+</div>
+</div>
+<!-- Architectural Verification Grid Details (Split Asymmetric Panel) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Left side: Photographic & Editorial Proof Block -->
+<div class="lg:col-span-5 rounded bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Sandbox Attestation Evidence</span>
+<span class="font-label-technical text-label-technical text-secondary">PROVENANCE VERIFIED</span>
+</div>
+<div class="relative w-full h-48 rounded overflow-hidden mb-space-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Monochromatic technical cleanroom and server architecture with clean architectural lighting, precision testing probes, minimal tactile control surface, high-end Swiss engineering aesthetic in bone white and slate graphite with subtle electric lime sensor signals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUXNsumkpYIoM3OPToU8qbTFi3XmsQLuUxDKb9h6v0DXJRuz2ziKfLEAAWIIAiM0QZiht0wiX6A6XjWYBCXqiWB-d_7wXLeJxiBg5ArCHBVt6qylBK2vgjO75ykpaBlvmWXaPAbi1yFWqB4GUuGKZymEiBWTXGWe_EZ8ZFKlxo9eIuHyC1MtvMO3w2sfZKzyjaQai6esb5dMS4EQCGBTrCTRmX7F44WADPNXSMt0TMzPHW83GOEeUe"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-primary/80 backdrop-blur-sm text-on-primary font-label-technical text-[10px]">
+              SHA256: 3a28994ec8912d...01
+            </div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Each scan runs in a kernel-isolated gVisor micro-container with strict zero-trust network egress. Historical audit reports are tamper-evident and exportable with cryptographic sign-off.
+          </p>
+</div>
+<div class="pt-space-md mt-space-md bg-surface-container-low p-space-sm rounded font-label-technical text-label-technical text-outline flex items-center justify-between">
+<span>Verification Protocol</span>
+<span class="text-primary font-semibold">ISO/IEC 25010 § 4.2.1</span>
+</div>
+</div>
+<!-- Right side: Attestation Log Snippet -->
+<div class="lg:col-span-7 rounded bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant uppercase">Immutable Ledger Stream (Recent Events)</span>
+<span class="font-label-technical text-label-technical text-outline">AUTO-REFRESH: 60s</span>
+</div>
+<div class="space-y-space-xs font-label-technical text-label-technical">
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface">RUN_EXEC_SUCCESS</span>
+<span class="text-outline">checkout-microservice-v2.1</span>
+</div>
+<span class="text-outline text-right">14:22:04 UTC</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span class="text-error">GATE_FAILED_ENV</span>
+<span class="text-outline">broken-monolith-v1.4</span>
+</div>
+<span class="text-outline text-right">YDAY 18:45:12 UTC</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface">CRYPTO_SIGN_OK</span>
+<span class="text-outline">auth-gateway-production</span>
+</div>
+<span class="text-outline text-right">MAY 16 09:12:49 UTC</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface">PERFECT_SCORE_EMITTED</span>
+<span class="text-outline">nextjs-marketing-site</span>
+</div>
+<span class="text-outline text-right">MAY 12 16:04:18 UTC</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between">
+<span class="font-caption-caps text-caption-caps text-on-surface-variant">LEDGER SIGNER: HSM-01-VLT</span>
+<a class="font-label-technical text-label-technical text-primary hover:text-secondary flex items-center gap-1 transition-colors" data-path="compliance-spec" href="#">
+<span>Read Conformance Spec</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Bulk Export & Telemetry Footer Strip -->
+<div class="p-space-lg rounded bg-surface-container-lowest shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1 max-w-xl">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary">Export Historical Records</span>
+<span class="font-caption-caps text-caption-caps px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant">RAW LEDGER</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Sample demonstration data. Persistent historical audit trails reflect client-configured ledger endpoints with multi-signature proof guarantees.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="font-label-technical text-label-technical px-3 py-2 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors inline-flex items-center gap-1.5" onclick="triggerExport('CSV')">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Export CSV</span>
+</button>
+<button class="font-label-technical text-label-technical px-3 py-2 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors inline-flex items-center gap-1.5" onclick="triggerExport('JSON')">
+<span class="material-symbols-outlined text-[16px]">data_object</span>
 <span>Export JSON</span>
 </button>
-<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-code-sm text-label-code-sm transition">
-<span class="material-symbols-outlined text-[16px]">html</span>
-<span>Export HTML Bundle</span>
-</button>
-<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-code-sm text-label-code-sm transition">
-<span class="material-symbols-outlined text-[16px]">print</span>
-<span>Print PDF</span>
-</button>
+<a class="font-label-technical text-label-technical px-4 py-2 rounded bg-primary text-on-primary hover:bg-secondary-container hover:text-on-secondary-fixed transition-colors inline-flex items-center gap-1" data-path="overview" href="#">
+<span>Back to Dashboard</span>
+<span class="material-symbols-outlined text-[16px]">dashboard</span>
+</a>
 </div>
 </div>
-</div>
+</section>
+<!-- Interactive JavaScript for Live Filter & Search Behavior -->
 <script>
-  (function () {
-    const filterButtons = document.querySelectorAll('.filter-chip');
-    const searchInput = document.getElementById('searchInput');
-    const clearSearchBtn = document.getElementById('clearSearchBtn');
-    const rows = document.querySelectorAll('.scan-row');
-    const visibleCount = document.getElementById('visibleCount');
-    const toggleEmptyBtn = document.getElementById('toggleEmptyStateBtn');
-    const closeEmptyBtn = document.getElementById('closeEmptyStateBtn');
-    const tableWrapper = document.getElementById('tableWrapper');
-    const emptyStateContainer = document.getElementById('emptyStateContainer');
+    (function initAuditLedger() {
+      const searchInput = document.getElementById('history-search-input');
+      const rows = document.querySelectorAll('.audit-row');
+      const noResults = document.getElementById('no-results-state');
+      const btnAll = document.getElementById('filter-all');
+      const btnPassed = document.getElementById('filter-passed');
+      const btnFailed = document.getElementById('filter-failed');
+      const resetBtn = document.getElementById('reset-filter-btn');
 
-    let currentFilter = 'all';
-    let currentSearch = '';
+      let currentStatusFilter = 'all';
 
-    function applyFilterAndSearch() {
-      let count = 0;
-      rows.forEach(row => {
-        const rowVerdict = row.getAttribute('data-verdict');
-        const rowSearch = row.getAttribute('data-search').toLowerCase();
+      function applyFilter() {
+        const query = (searchInput.value || '').toLowerCase().trim();
+        let visibleCount = 0;
 
-        const matchesVerdict = (currentFilter === 'all' || rowVerdict === currentFilter);
-        const matchesSearch = (!currentSearch || rowSearch.includes(currentSearch));
+        rows.forEach(row => {
+          const rowStatus = row.getAttribute('data-status');
+          const rowData = (row.getAttribute('data-query') || '').toLowerCase();
+          
+          const matchesStatus = (currentStatusFilter === 'all') || (rowStatus === currentStatusFilter);
+          const matchesQuery = !query || rowData.includes(query);
 
-        if (matchesVerdict && matchesSearch) {
-          row.classList.remove('hidden');
-          count++;
-        } else {
-          row.classList.add('hidden');
-        }
-      });
-      if (visibleCount) visibleCount.textContent = count;
-    }
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach(b => {
-          b.classList.remove('bg-surface-container', 'text-on-surface', 'font-semibold');
-          b.classList.add('text-on-surface-variant');
+          if (matchesStatus && matchesQuery) {
+            row.style.display = 'grid';
+            visibleCount++;
+          } else {
+            row.style.display = 'none';
+          }
         });
-        btn.classList.add('bg-surface-container', 'text-on-surface', 'font-semibold');
-        btn.classList.remove('text-on-surface-variant');
 
-        currentFilter = btn.getAttribute('data-filter');
-        applyFilterAndSearch();
-      });
-    });
-
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        currentSearch = e.target.value.trim().toLowerCase();
-        if (currentSearch.length > 0) {
-          clearSearchBtn.classList.remove('hidden');
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+          noResults.classList.add('flex');
         } else {
-          clearSearchBtn.classList.add('hidden');
-        }
-        applyFilterAndSearch();
-      });
-    }
-
-    if (clearSearchBtn) {
-      clearSearchBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        currentSearch = '';
-        clearSearchBtn.classList.add('hidden');
-        applyFilterAndSearch();
-      });
-    }
-
-    if (toggleEmptyBtn && closeEmptyBtn && tableWrapper && emptyStateContainer) {
-      function toggleEmpty() {
-        const isTableHidden = tableWrapper.classList.contains('hidden');
-        if (isTableHidden) {
-          tableWrapper.classList.remove('hidden');
-          emptyStateContainer.classList.add('hidden');
-          toggleEmptyBtn.querySelector('span:last-child').textContent = 'Toggle Empty View';
-        } else {
-          tableWrapper.classList.add('hidden');
-          emptyStateContainer.classList.remove('hidden');
-          toggleEmptyBtn.querySelector('span:last-child').textContent = 'Show Records';
+          noResults.classList.add('hidden');
+          noResults.classList.remove('flex');
         }
       }
 
-      toggleEmptyBtn.addEventListener('click', toggleEmpty);
-      closeEmptyBtn.addEventListener('click', toggleEmpty);
-    }
-  })();
-</script></div></main></div></body></html>
+      function setActivePill(activeBtn) {
+        [btnAll, btnPassed, btnFailed].forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        activeBtn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        activeBtn.classList.add('bg-primary', 'text-on-primary');
+      }
+
+      btnAll.addEventListener('click', () => {
+        currentStatusFilter = 'all';
+        setActivePill(btnAll);
+        applyFilter();
+      });
+
+      btnPassed.addEventListener('click', () => {
+        currentStatusFilter = 'passed';
+        setActivePill(btnPassed);
+        applyFilter();
+      });
+
+      btnFailed.addEventListener('click', () => {
+        currentStatusFilter = 'failed';
+        setActivePill(btnFailed);
+        applyFilter();
+      });
+
+      searchInput.addEventListener('input', applyFilter);
+
+      resetBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        currentStatusFilter = 'all';
+        setActivePill(btnAll);
+        applyFilter();
+      });
+
+      window.triggerExport = function(format) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded bg-primary text-on-primary font-label-technical text-label-technical shadow-lg flex items-center gap-2 animate-bounce';
+        toast.innerHTML = `<span class="material-symbols-outlined text-secondary-container text-[18px]">check_circle</span> Generated ${format} Ledger Archive`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+      };
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest mt-space-xl shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg mb-space-lg"><div class="md:col-span-2"><div class="flex items-center gap-2 mb-space-sm"><span class="font-headline-sm text-headline-sm text-primary uppercase">BuildProof</span><span class="font-caption-caps text-caption-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">v4.8.2-prod</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">Architectural verification and technical quality audit suite for software deliverables. Verified conformance according to ISO/IEC 25010 systems and software quality models.</p></div><div><div class="font-caption-caps text-caption-caps text-on-surface-variant mb-space-sm uppercase">Standards &amp; Specs</div><ul class="space-y-space-xs font-body-sm text-body-sm"><li class="text-on-surface-variant hover:text-on-surface">ISO/IEC 25010 Quality Model</li><li class="text-on-surface-variant hover:text-on-surface">C4 Architectural Schematics</li><li class="text-on-surface-variant hover:text-on-surface">SOC2 Type II Isolation</li><li class="text-on-surface-variant hover:text-on-surface">NIST SP 800-218 SSDF</li></ul></div><div><div class="font-caption-caps text-caption-caps text-on-surface-variant mb-space-sm uppercase">Engine Architecture</div><ul class="space-y-space-xs font-label-technical text-label-technical"><li class="text-on-surface-variant">RUN: node-v20.12.2-lts</li><li class="text-on-surface-variant">BOX: gVisor-sandboxed</li><li class="text-on-surface-variant">HASH: sha256-verified</li><li class="text-on-surface-variant">LAT: &lt;18ms deterministic</li></ul></div></div><div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm font-caption-caps text-caption-caps text-on-surface-variant"><div class="flex items-center gap-space-md"><span>© 2025 BUILDPROOF ARCHITECTURE LABS</span><span>·</span><span>ALL RIGHTS RESERVED</span></div><div class="flex items-center gap-space-md"><a class="hover:text-on-surface transition-colors" data-path="overview" href="#">TERMS OF VERIFICATION</a><a class="hover:text-on-surface transition-colors" data-path="overview" href="#">SECURITY TELEMETRY</a><a class="hover:text-on-surface transition-colors" data-path="overview" href="#">ISO AUDIT LOGS</a></div></div></div></footer></body></html>

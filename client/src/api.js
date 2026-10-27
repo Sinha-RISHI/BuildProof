@@ -151,3 +151,23 @@ export function getReportJsonUrl(scanId) {
 export function getReportHtmlUrl(scanId) {
   return `/api/scans/${encodeURIComponent(scanId)}/report.html`;
 }
+
+/**
+ * listScans()
+ * Fetches all historical scan summaries from GET /api/scans.
+ * @returns {Promise<Array<{ id: string, scanId: string, projectName: string, originalFilename: string, status: string, stage: string|null, verdict: string|null, createdAt: string, completedAt: string|null, hasReport: boolean, checksCount: number, passedCount: number, failedCount: number }>>}
+ */
+export async function listScans() {
+  const res = await fetch('/api/scans');
+  if (!res.ok) {
+    let errorMsg = `Failed to load scans (HTTP ${res.status})`;
+    try {
+      const data = await res.json();
+      if (data.error) errorMsg = data.error;
+    } catch {
+      // Ignore JSON parse error and use status message
+    }
+    throw new Error(errorMsg);
+  }
+  return await res.json();
+}

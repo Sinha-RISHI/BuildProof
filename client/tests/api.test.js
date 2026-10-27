@@ -29,6 +29,7 @@ import {
   getScanLog,
   getReportJsonUrl,
   getReportHtmlUrl,
+  listScans,
 } from '../src/api.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -214,6 +215,57 @@ test('getScanLog: returns raw text from backend', async () => {
   try {
     const log = await getScanLog('scan-1', 'install');
     assert.ok(log.includes('npm ci completed'));
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('listScans: fetches historical records array from /api/scans', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => {
+    assert.equal(url, '/api/scans');
+    return {
+      ok: true,
+      status: 200,
+      json: async () => [
+        {
+          id: 'scan-1',
+          scanId: 'scan-1',
+          projectName: 'good-app',
+          originalFilename: 'good-app.zip',
+          status: 'done',
+          verdict: 'ready',
+          createdAt: '2026-10-27T10:00:00.000Z',
+          completedAt: '2026-10-27T10:01:00.000Z',
+          hasReport: true,
+        },
+      ],
+    };
+  };
+
+  try {
+    const list = await listScans();
+    assert.equal(list.length, 1);
+    assert.equal(list[0].scanId, 'scan-1');
+    assert.equal(list[0].verdict, 'ready');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('listScans: handles server error gracefully', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: false,
+    status: 500,
+    json: async () => ({ error: 'Internal database error' }),
+  });
+
+  try {
+    await assert.rejects(
+      () => listScans(),
+      /Internal database error/
+    );
   } finally {
     globalThis.fetch = originalFetch;
   }

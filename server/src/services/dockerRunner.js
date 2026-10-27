@@ -33,11 +33,12 @@
 
 import { spawn } from 'child_process';
 import path from 'path';
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, readdir } from 'fs/promises';
 import { checkDocker } from './dockerCheck.js';
 import { updateScan, getScan } from './scanStore.js';
 import { checkContainment } from './scanner.js';
 import { generateReports } from './report.js';
+import { getAdapterForEcosystem, ECOSYSTEMS } from './adapters/index.js';
 
 // ── Default configuration ────────────────────────────────────────────────────
 const DEFAULT_IMAGE              = 'node:20-alpine';
@@ -162,11 +163,12 @@ export function runDockerProcess(args, containerName, timeoutMs, spawnFn = spawn
     let stderr = '';
     let timedOut = false;
     let settled = false;
+    let timer = null;
 
     function finish(result) {
       if (!settled) {
         settled = true;
-        clearTimeout(timer);
+        if (timer) clearTimeout(timer);
         resolve({
           ...result,
           durationMs: Date.now() - startTime,
@@ -203,7 +205,7 @@ export function runDockerProcess(args, containerName, timeoutMs, spawnFn = spawn
       }
     });
 
-    const timer = setTimeout(() => {
+    timer = setTimeout(() => {
       timedOut = true;
       try {
         child.kill('SIGTERM');
@@ -372,7 +374,8 @@ export async function runDockerChecks(projectDir, scanResult = {}, options = {})
     };
   }
 
-  // ── 2. Determine package manager & installation command ───────────────────
+  // ── 2. Determine ecosystem and routing ──────────────────────────────────
+  const ecosystem = scanResult.ecosystem || scanResult.metadata?.ecosystem || ECOSYSTEMS.NODE;
   const staticChecks = scanResult.checks || [];
   const manifestCheck = staticChecks.find((c) => c.id === 'manifest');
   const lockfileCheck = staticChecks.find((c) => c.id === 'lockfile');
@@ -381,6 +384,357 @@ export async function runDockerChecks(projectDir, scanResult = {}, options = {})
   let installCheck;
   let testsCheck;
 
+  // ── 2a. Ambiguous or Unsupported Ecosystem ───────────────────────────────
+  if (ecosystem === ECOSYSTEMS.AMBIGUOUS || ecosystem === ECOSYSTEMS.UNSUPPORTED) {
+    installCheck = {
+      id: 'install',
+      name: 'Install dependencies',
+      title: 'Install dependencies',
+      status: 'Not Verified',
+      critical: true,
+      command: null,
+      exitCode: null,
+      durationMs: 0,
+      logFile: null,
+      summary: `Installation skipped due to ${ecosystem} project status.`,
+      explanation: 'BuildProof requires an unambiguous single-ecosystem project root.',
+      nextStep: 'Ensure project files belong to a single supported ecosystem (Node.js or Python).',
+      evidence: [`Ecosystem status: ${ecosystem}`],
+    };
+
+    testsCheck = {
+      id: 'tests',
+      name: 'Execute tests',
+      title: 'Execute tests',
+      status: 'Not Verified',
+      critical: true,
+      command: null,
+      exitCode: null,
+      durationMs: 0,
+      logFile: null,
+      summary: `Test execution skipped due to ${ecosystem} project status.`,
+      explanation: 'Cannot execute tests for ambiguous or unsupported projects.',
+      nextStep: 'Ensure project files belong to a single supported ecosystem.',
+      evidence: [`Ecosystem status: ${ecosystem}`],
+    };
+
+    const allChecks = [...staticChecks, installCheck, testsCheck];
+    return {
+      install: installCheck,
+      tests: testsCheck,
+      checks: allChecks,
+      verdict: calculateVerdict(allChecks),
+      logs,
+      warnings: [`Container execution skipped: project ecosystem is ${ecosystem}.`],
+    };
+  }
+
+  // ── 2b. Python Ecosystem Sandbox Execution ───────────────────────────────
+  if (ecosystem === ECOSYSTEMS.PYTHON) {
+    const pythonAdapter = getAdapterForEcosystem(ECOSYSTEMS.PYTHON);
+    const pythonImage = options.image || 'python:3.11-alpine';
+    const pythonUser = '1000:1000';
+    const rootEntries = await readdir(resolvedDir, { withFileTypes: true }).then((ents) =>
+      ents.map((e) => ({
+        name: e.name,
+        isFile: e.isFile(),
+        isDir: e.isDirectory(),
+        isSymlink: e.isSymbolicLink(),
+      }))
+    ).catch(() => []);
+
+    // If Python manifest is missing or failed, installation cannot proceed
+    if (manifestCheck && manifestCheck.status === 'Failed') {
+      installCheck = {
+        id: 'install',
+        name: 'Install dependencies',
+        title: 'Install dependencies',
+        status: 'Not Verified',
+        critical: true,
+        command: null,
+        exitCode: null,
+        durationMs: 0,
+        logFile: null,
+        summary: 'Installation skipped because Python manifest is missing or invalid.',
+        explanation: 'A valid Python manifest is required to install project dependencies.',
+        nextStep: 'Ensure requirements.txt or pyproject.toml is present in the project root.',
+        evidence: ['Python manifest is missing or malformed'],
+      };
+
+      testsCheck = {
+        id: 'tests',
+        name: 'Execute tests',
+        title: 'Execute tests',
+        status: 'Not Verified',
+        critical: true,
+        command: null,
+        exitCode: null,
+        durationMs: 0,
+        logFile: null,
+        summary: 'Tests skipped because dependency installation could not be performed.',
+        explanation: 'Tests cannot run without a valid project manifest and installed dependencies.',
+        nextStep: 'Provide a valid Python manifest and dependencies.',
+        evidence: ['Manifest missing or malformed'],
+      };
+
+      const allChecks = [...staticChecks, installCheck, testsCheck];
+      return {
+        install: installCheck,
+        tests: testsCheck,
+        checks: allChecks,
+        verdict: calculateVerdict(allChecks),
+        logs,
+        warnings,
+      };
+    }
+
+    // Phase 1: Python Install
+    const installPlan = pythonAdapter.getInstallCommand(scanResult.metadata, rootEntries);
+
+    if (!installPlan.needsInstall) {
+      installCheck = {
+        id: 'install',
+        name: 'Install dependencies',
+        title: 'Install dependencies',
+        status: 'Passed',
+        critical: true,
+        command: null,
+        exitCode: 0,
+        durationMs: 0,
+        logFile: null,
+        summary: 'Standard library only. No external Python packages needed.',
+        explanation: 'All project imports rely on Python built-in standard library modules.',
+        nextStep: 'Dependencies verified. Proceed to test execution.',
+        evidence: ['No external requirements needed', `Sandbox image: ${pythonImage}`],
+      };
+    } else {
+      const installContainer = `buildproof-${scanId.slice(0, 8)}-install-${Date.now().toString(36)}`;
+      const installArgs = [
+        'run',
+        '--rm',
+        '--name', installContainer,
+        '--user', pythonUser,
+        '--memory=512m',
+        '--cpus=1',
+        '--pids-limit=256',
+        '--cap-drop=ALL',
+        '--security-opt=no-new-privileges',
+        '-v', `${resolvedDir}:/app`,
+        '-w', '/app',
+        pythonImage,
+        ...installPlan.command,
+      ];
+
+      const installResult = await runDockerProcess(
+        installArgs,
+        installContainer,
+        installTimeoutMs,
+        spawnFn
+      );
+
+      const rawInstallLog = `${installResult.stdout}\n${installResult.stderr}`.trim();
+      const sanitizedInstallLog = sanitizeLogOutput(rawInstallLog, resolvedDir);
+      logs.install = sanitizedInstallLog;
+
+      if (scanDir) {
+        try {
+          const logsDir = path.join(scanDir, 'logs');
+          await mkdir(logsDir, { recursive: true });
+          await writeFile(path.join(logsDir, 'install.log'), sanitizedInstallLog, 'utf8');
+        } catch (_) {}
+      }
+
+      if (installResult.exitCode === 0) {
+        installCheck = {
+          id: 'install',
+          name: 'Install dependencies',
+          title: 'Install dependencies',
+          status: 'Passed',
+          critical: true,
+          command: installPlan.displayCommand,
+          exitCode: 0,
+          durationMs: installResult.durationMs,
+          logFile: 'logs/install.log',
+          summary: `${installPlan.displayCommand} completed successfully with exit code 0.`,
+          explanation: 'All Python dependencies were installed cleanly inside the container sandbox.',
+          nextStep: 'Dependencies verified. Proceed to test execution.',
+          evidence: [
+            `${installPlan.displayCommand} exited with code 0`,
+            `Execution time: ${(installResult.durationMs / 1000).toFixed(2)}s`,
+            `Sandbox image: ${pythonImage}`,
+          ],
+        };
+      } else {
+        const analysis = pythonAdapter.analyzeInstallFailure(
+          rawInstallLog,
+          installResult.exitCode,
+          installResult.timedOut
+        );
+
+        installCheck = {
+          id: 'install',
+          name: 'Install dependencies',
+          title: 'Install dependencies',
+          status: 'Failed',
+          critical: true,
+          command: installPlan.displayCommand,
+          exitCode: installResult.exitCode,
+          durationMs: installResult.durationMs,
+          logFile: 'logs/install.log',
+          summary: `${installPlan.displayCommand} failed with exit code ${installResult.exitCode ?? 'TIMEOUT'}.`,
+          explanation: analysis.explanation,
+          nextStep: analysis.nextStep,
+          evidence: [
+            `${installPlan.displayCommand} exited with code ${installResult.exitCode ?? 'TIMEOUT'}`,
+            `Execution time: ${(installResult.durationMs / 1000).toFixed(2)}s`,
+          ],
+        };
+
+        testsCheck = {
+          id: 'tests',
+          name: 'Execute tests',
+          title: 'Execute tests',
+          status: 'Not Verified',
+          critical: true,
+          command: null,
+          exitCode: null,
+          durationMs: 0,
+          logFile: null,
+          summary: 'Tests were not executed because dependency installation failed.',
+          explanation: 'Test execution requires successful dependency installation.',
+          nextStep: analysis.nextStep,
+          evidence: ['Skipped due to installation failure'],
+        };
+
+        const allChecks = [...staticChecks, installCheck, testsCheck];
+        return {
+          install: installCheck,
+          tests: testsCheck,
+          checks: allChecks,
+          verdict: calculateVerdict(allChecks),
+          logs,
+          warnings,
+        };
+      }
+    }
+
+    // Phase 2: Python Tests
+    const testPlan = pythonAdapter.getTestCommand(scanResult.metadata);
+    if (!testPlan.isConfigured) {
+      testsCheck = {
+        id: 'tests',
+        name: 'Execute tests',
+        title: 'Execute tests',
+        status: 'Not Verified',
+        critical: true,
+        command: null,
+        exitCode: null,
+        durationMs: 0,
+        logFile: null,
+        summary: 'Tests were not executed because no Python test files (test_*.py) or configuration was found.',
+        explanation: 'No test suite was detected to verify project functionality.',
+        nextStep: 'Add automated tests using unittest or pytest in a tests/ directory.',
+        evidence: ['No test files discovered in project'],
+      };
+    } else {
+      const testContainer = `buildproof-${scanId.slice(0, 8)}-test-${Date.now().toString(36)}`;
+      const testArgs = [
+        'run',
+        '--rm',
+        '--name', testContainer,
+        '--user', pythonUser,
+        '--memory=512m',
+        '--cpus=1',
+        '--pids-limit=256',
+        '--cap-drop=ALL',
+        '--security-opt=no-new-privileges',
+        '--network', 'none', // MANDATORY NETWORK OFF
+        '-e', 'PYTHONPATH=/app:/app/src:/app/.deps',
+        '-v', `${resolvedDir}:/app`,
+        '-w', '/app',
+        pythonImage,
+        ...testPlan.command,
+      ];
+
+      const testResult = await runDockerProcess(
+        testArgs,
+        testContainer,
+        testTimeoutMs,
+        spawnFn
+      );
+
+      const rawTestLog = `${testResult.stdout}\n${testResult.stderr}`.trim();
+      const sanitizedTestLog = sanitizeLogOutput(rawTestLog, resolvedDir);
+      logs.tests = sanitizedTestLog;
+
+      if (scanDir) {
+        try {
+          const logsDir = path.join(scanDir, 'logs');
+          await mkdir(logsDir, { recursive: true });
+          await writeFile(path.join(logsDir, 'tests.log'), sanitizedTestLog, 'utf8');
+        } catch (_) {}
+      }
+
+      if (testResult.exitCode === 0) {
+        testsCheck = {
+          id: 'tests',
+          name: 'Execute tests',
+          title: 'Execute tests',
+          status: 'Passed',
+          critical: true,
+          command: testPlan.displayCommand,
+          exitCode: 0,
+          durationMs: testResult.durationMs,
+          logFile: 'logs/tests.log',
+          summary: `${testPlan.displayCommand} passed with exit code 0 inside isolated container sandbox.`,
+          explanation: 'All Python tests executed successfully with network access disabled.',
+          nextStep: 'Python test suite passed handover verification.',
+          evidence: [
+            `${testPlan.displayCommand} exited with code 0`,
+            'Network isolation verified (--network none)',
+            `Execution time: ${(testResult.durationMs / 1000).toFixed(2)}s`,
+          ],
+        };
+      } else {
+        const analysis = pythonAdapter.analyzeTestFailure(
+          rawTestLog,
+          testResult.exitCode,
+          testResult.timedOut
+        );
+
+        testsCheck = {
+          id: 'tests',
+          name: 'Execute tests',
+          title: 'Execute tests',
+          status: 'Failed',
+          critical: true,
+          command: testPlan.displayCommand,
+          exitCode: testResult.exitCode,
+          durationMs: testResult.durationMs,
+          logFile: 'logs/tests.log',
+          summary: `${testPlan.displayCommand} failed with exit code ${testResult.exitCode ?? 'TIMEOUT'}.`,
+          explanation: analysis.explanation,
+          nextStep: analysis.nextStep,
+          evidence: [
+            `${testPlan.displayCommand} exited with code ${testResult.exitCode ?? 'TIMEOUT'}`,
+            `Execution time: ${(testResult.durationMs / 1000).toFixed(2)}s`,
+          ],
+        };
+      }
+    }
+
+    const allChecks = [...staticChecks, installCheck, testsCheck];
+    return {
+      install: installCheck,
+      tests: testsCheck,
+      checks: allChecks,
+      verdict: calculateVerdict(allChecks),
+      logs,
+      warnings,
+    };
+  }
+
+  // ── 2c. Node.js Ecosystem Sandbox Execution ───────────────────────────────
   // If package.json is missing or invalid, installation cannot proceed
   if (manifestCheck && manifestCheck.status === 'Failed') {
     installCheck = {
@@ -734,6 +1088,7 @@ export async function runDockerRunner(scanId, projectDir, scanResult, options = 
     updateScan(scanId, {
       status: 'installing',
       stage: 'installing_dependencies',
+      ecosystem: scanResult?.ecosystem || 'node',
     });
 
     const dockerOutcome = await runDockerChecks(projectDir, scanResult, {
@@ -745,6 +1100,7 @@ export async function runDockerRunner(scanId, projectDir, scanResult, options = 
     updateScan(scanId, {
       status: 'reporting',
       stage: 'docker_complete',
+      ecosystem: scanResult?.ecosystem || 'node',
       checks: dockerOutcome.checks,
       verdict: dockerOutcome.verdict,
       logs: dockerOutcome.logs,
@@ -758,6 +1114,7 @@ export async function runDockerRunner(scanId, projectDir, scanResult, options = 
     const updatedRecord = getScan(scanId) || {
       scanId,
       projectName: scanResult?.metadata?.projectName,
+      ecosystem: scanResult?.ecosystem || 'node',
       ...dockerOutcome,
     };
 

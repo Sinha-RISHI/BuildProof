@@ -66,3 +66,31 @@ export function updateScan(scanId, updates) {
   scans.set(scanId, { ...current, ...updates });
   return true;
 }
+
+/**
+ * listScans()
+ * Returns all recorded scans in reverse chronological order (newest first).
+ * Sanitizes fields to ensure internal sensitive paths/logs are not exposed.
+ *
+ * @returns {Array<object>}
+ */
+export function listScans() {
+  return Array.from(scans.values())
+    .map((scan) => ({
+      id: scan.scanId,
+      scanId: scan.scanId,
+      projectName: scan.projectName || 'Project Archive',
+      originalFilename: scan.originalFilename || (scan.projectName ? `${scan.projectName}.zip` : 'project.zip'),
+      ecosystem: scan.ecosystem || scan.scanResult?.ecosystem || 'node',
+      status: scan.status,
+      stage: scan.stage ?? null,
+      verdict: scan.verdict ?? null,
+      createdAt: scan.createdAt,
+      completedAt: scan.completedAt ?? null,
+      hasReport: Boolean(scan.status === 'done' || (scan.reports && scan.reports.json)),
+      checksCount: Array.isArray(scan.checks) ? scan.checks.length : 0,
+      passedCount: Array.isArray(scan.checks) ? scan.checks.filter((c) => c.status === 'Passed').length : 0,
+      failedCount: Array.isArray(scan.checks) ? scan.checks.filter((c) => c.status === 'Failed').length : 0,
+    }))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
